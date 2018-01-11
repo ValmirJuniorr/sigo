@@ -1,0 +1,32 @@
+.bold{
+    font-weight:bold;
+}
+
+
+.h1{}
+.h2{}
+.h3{
+    font-size: 0.5em;
+}
+.h4{}
+.h5{}
+.h6{}
+
+
+.navbar-nav .user-menu .dropdown-menu li.user-header{
+    height:75px;
+}
+
+aside.main-sidebar{
+    height: 750px !important;
+}
+
+.center-elements{
+    text-align: center;
+}
+
+.alert-error{
+    position: absolute;
+    right: 1%;
+    top: 10%;
+}
