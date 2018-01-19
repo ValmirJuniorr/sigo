@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Expensive\Expense;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -58,6 +59,55 @@ class RolesSeeder extends Seeder
                 'name' => User::DELETE_USER,
                 'display' => 'Regra possibilita usuários removerem usuários existentes.',
                 'sub_module_id' => 1
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 5
+            ],
+            [
+                'id' => 5,
+                'name' => Expense::READ_EXPENSE,
+                'display' => '',
+                'sub_module_id' => NULL
+            ]
+        );
+
+
+        Role::updateOrCreate(
+            [
+                'id' => 6
+            ],
+            [
+                'id' => 6,
+                'name' => Expense::STORE_EXPENSE,
+                'display' => '',
+                'sub_module_id' => NULL
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 7
+            ],
+            [
+                'id' => 7,
+                'name' => Expense::UPDATE_EXPENSE,
+                'display' => '',
+                'sub_module_id' => NULL
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 8
+            ],
+            [
+                'id' => 8,
+                'name' => Expense::DELETE_EXPENSE,
+                'display' => '',
+                'sub_module_id' => NULL
             ]
         );
     }

@@ -18,13 +18,13 @@ class CreateExpensesTable extends Migration
 
             $table->date('expire_expense_date');
 
-            $table->integer('number_of_days');
-            $table->date('expire_expense_routine_date');
+            $table->integer('number_of_days')->nullable();
+            $table->date('expire_expense_routine_date')->nullable();
 
             $table->float('price');
 
             $table->integer('expense_category_id')->unsigned();
-            $table->string('description');
+            $table->string('description',5000);
 
             $table->timestamps();
         });

@@ -82,7 +82,8 @@ class User extends Authenticatable implements Crud
     {
         if(ValidatorModel::validation($this->inputs($object),$this->rules(),$this->attribute)){
             if ($object->save()){
-                $object->roles()->attach($arguments['roles']);
+                if($arguments['roles'])
+                    $object->roles()->attach($arguments['roles']);
                 return true;
             }
             return false;
@@ -97,7 +98,8 @@ class User extends Authenticatable implements Crud
         $user->email = $object->email;
         if(ValidatorModel::validation($this->inputs($user),$this->rules($user->id),$this->attribute)){
             if($user->save()){
-                $user->roles()->sync($arguments['roles'],true);
+                if($arguments['roles'])
+                    $user->roles()->sync($arguments['roles'],true);
                 return true;
             }
             return false;

@@ -25,5 +25,19 @@ class SubModulesSeeder extends Seeder
                 'sub_module_category_id' => 1
             ]
         );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 2
+            ],
+            [
+                'id' => 2,
+                'name' => 'Despesas',
+                'url' => '',
+                'icon' => '',
+                'module_id' => NULL,
+                'sub_module_category_id' => NULL
+            ]
+        );
     }
 }

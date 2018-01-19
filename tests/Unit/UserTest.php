@@ -92,19 +92,19 @@ class UserTest extends TestCase
         $user->name = "Antonio Nunes";
         $user->email = "x12-310k@gmail.com";
         $user->password = bcrypt('teste');
-        $this->assertEquals(TRUE,$user->create($user));
+        $this->assertEquals(TRUE,$user->create($user,array('roles' => '')));
     }
 
     /**
      * @expectedException App\Exceptions\Util\ValidationException
-    */
+     */
     public function test_create_user_invalid_login(){
         $user = new User();
         $user->username = User::first()->username;
         $user->name = "Antonio Nunes";
         $user->email = "x12-310k@gmail.com";
         $user->password = bcrypt('teste');
-        $user->create($user);
+        $user->create($user,array('roles' => ''));
     }
 
     /**
@@ -115,7 +115,7 @@ class UserTest extends TestCase
         $user->username = 'teste_unique_name_created';
         $user->email = "x12-310k@gmail.com";
         $user->password = bcrypt('teste');
-        $user->create($user);
+        $user->create($user,array('roles' => ''));
     }
 
     /**
@@ -125,13 +125,13 @@ class UserTest extends TestCase
         $user = new User();
         $user->username = 'teste_unique_name_created';
         $user->email = "x12-310k@gmail.com";
-        $user->create($user);
+        $user->create($user,array('roles' => ''));
     }
 
     public function test_create_edit_flow_basic(){
         $user = User::find(1);
         $user->name = "new name from user";
-        $this->assertEquals(TRUE,$user->edit($user));
+        $this->assertEquals(TRUE,$user->edit($user,array('roles' => '')));
         $this->assertEquals($user->name,User::find(1)->name);
     }
 
@@ -140,7 +140,7 @@ class UserTest extends TestCase
         $user->name = "new name from user";
         $user->username = "new name from user";
         $user->email= "caetanov120@gmail.com";
-        $this->assertEquals(TRUE,$user->edit($user));
+        $this->assertEquals(TRUE,$user->edit($user,array('roles' => '')));
         $this->assertEquals($user->username,User::find(1)->username);
         $this->assertEquals($user->email,User::find(1)->email);
     }
@@ -153,7 +153,7 @@ class UserTest extends TestCase
         $user->name = "new name from user";
         $user->username = User::find(2)->username;
         $user->email= "caetanov120@gmail.com";
-        $user->edit($user);
+        $user->edit($user,array('roles' => ''));
     }
 
     public function test_create_remove_flow_basic(){
@@ -171,7 +171,8 @@ class UserTest extends TestCase
 
     public function test_read_all_flow_basic(){
         $user = new User();
-        $this->assertEquals(count($user->read_all()),count(User::where('activated',TRUE)->get()));
+        $this->assertEquals(count($user->read_all()),count(User::where('activated',TRUE)));
     }
+
 
 }
