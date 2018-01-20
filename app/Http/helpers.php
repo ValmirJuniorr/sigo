@@ -16,7 +16,7 @@ use App\Models\SubModule;
     function show_sub_modules(){
         try {
             $sub_module = new SubModule();
-            return $sub_module->read_sub_modules_by_module_and_user(5);
+            return $sub_module->read_sub_modules_by_module_and_user(session('module_id'));
         }catch(\Exception $e){
             return null;
         }

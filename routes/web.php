@@ -12,6 +12,7 @@
 */
 
 
+use App\Models\Customer;
 use App\Models\User;
 
 Route::get('/','UserController@index');
@@ -21,6 +22,16 @@ Route::get('/recover', 'UserController@recover');
 Route::post('/login/auth','UserController@do_login');
 
 Route::post('/rpc/v1/do_login_WS','WsUserController@do_login_WS');
+
+Route::get('teste',function () {
+
+   $customer = new Customer();
+
+   return $customer->read_all()->get();
+
+});
+
+
 
 Route::group(['middleware' => ['check_login']], function () {
 
@@ -61,6 +72,28 @@ Route::group(['middleware' => ['check_login']], function () {
         Route::post('/user/update',
             ['uses' => 'UserController@update',
              'role' => User::UPDATE_USER
+            ]);
+
+        /* CLientes */
+
+        Route::get('/customer/read_customer', [
+            'uses' => 'CustomerController@read_customer',
+            'role' => Customer::READ_CUSTOMER
+        ]);
+
+        Route::post('/customer/create_customer',
+            ['uses' =>'CustomerController@create_customer',
+                'role' => Customer::STORE_CUSTOMER
+            ]);
+
+        Route::get('/customer/delete_customer',
+            ['uses' => 'CustomerController@delete_customer',
+                'role' => Customer::DELETE_CUSTOMER
+            ]);
+
+        Route::get('/customer/update_customer',
+            ['uses' => 'CustomerController@update_customer',
+                'role' => Customer::UPDATE_CUSTOMER
             ]);
     });
 

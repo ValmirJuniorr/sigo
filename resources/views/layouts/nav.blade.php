@@ -5,9 +5,9 @@
 
     <a href="{{ action('ModuleController@index') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>SIP</b></span>
+        <span class="logo-mini"><b>SIGO</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>SIP</b></span>
+        <span class="logo-lg"><b>SIGO</b></span>
     </a>
 
     <!-- Header Navbar -->

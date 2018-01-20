@@ -19,10 +19,8 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu tree" data-widget="tree">
-            <li class="header">Navegação Principal</li>
-
             @foreach(show_sub_modules() as $sub_module)
-                <li><a href="{{ action($sub_module->url) }}"><i class="{{$sub_module->icon}}"></i> <span>{{$sub_module->name}}</span></a></li>
+                <li><a class="menu-sidebar-a" href="{{ action($sub_module->url) }}"><i class="{{$sub_module->icon}}"></i> <span>{{$sub_module->name}}</span></a></li>
             @endforeach
         </ul>
     </section>

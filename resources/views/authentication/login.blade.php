@@ -8,11 +8,11 @@
 
 @section('content')
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" >
     <div class="login-box ">
         <div class="login-logo">
-            <p class="bold">SIP</p>
-            <p class="h3">Sistema de Integração Pública</p>
+            <p class="bold">SIGO</p>
+            <p class="h3">Sistema Integrado Odontologico</p>
         </div>
         <div class="login-box-body">
                 {{ Form::open(array('action' => 'UserController@do_login','method' => 'POST'))}}

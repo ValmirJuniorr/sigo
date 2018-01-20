@@ -14,10 +14,8 @@
         <section class="content-header">
             <h1>
                 Usuários
-                <small>Cadastro de Usuários</small>
             </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -80,8 +78,6 @@
                                             {{  Form::email('email', $value = $user->email,array('class' => 'form-control', 'placeholder' => 'Email'))}}
                                         </div>
                                         <div class="form-group has-feedback">
-                                            {{ Form::checkbox('termos', 'value', true) }}
-                                            {{ Form::label('termos', 'Aceito os Termos de Uso da Aplicação') }}
                                             {{ Form::submit('Editar',array('class'=> 'btn btn-primary btn-block btn-flat'))}}
                                         </div>
                                     </div>

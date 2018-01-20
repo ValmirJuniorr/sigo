@@ -18,8 +18,8 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 1,
-                'name' => 'IPTU',
-                'description' => 'Controle e gestão do IPTU do município',
+                'name' => 'Gestão de Prontuário',
+                'description' => 'Gerenciamento do atendimento ao Cliente',
                 'color' => '#ccc',
                 'icon' => '',
             ]
@@ -31,7 +31,7 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'Financeiro',
+                'name' => 'Gestão Financeira',
                 'description' => 'Controle e gestão das financeias',
                 'color' => '#ccc',
                 'icon' => '',
@@ -44,8 +44,8 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'Recursos Humanos',
-                'description' => 'Gestão de pessoas do município',
+                'name' => 'Gestão de Horários',
+                'description' => 'Gestão dos agendamentos dos horarios',
                 'color' => '#ccc',
                 'icon' => '',
             ]
@@ -57,19 +57,6 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'name' => 'Suprimentos',
-                'description' => 'Controle e gestão do recursos do município',
-                'color' => '#ccc',
-                'icon' => '',
-            ]
-        );
-
-        Module::updateOrCreate(
-            [
-                'id' => 5
-            ],
-            [
-                'id' => 5,
                 'name' => 'Utilitários',
                 'description' => 'Controler administrativo do sistema',
                 'color' => '#ccc',

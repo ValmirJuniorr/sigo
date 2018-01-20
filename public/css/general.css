@@ -30,3 +30,15 @@ aside.main-sidebar{
     right: 1%;
     top: 10%;
 }
+
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side{
+    background-color: white;
+}
+
+.sidebar ul li .menu-sidebar-a {
+    color:black;
+}
+
+body{
+    background-color: #eceff1;
+}

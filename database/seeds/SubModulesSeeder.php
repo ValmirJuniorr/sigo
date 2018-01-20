@@ -21,7 +21,21 @@ class SubModulesSeeder extends Seeder
                 'name' => 'Usuários',
                 'url' => 'UserController@read_user',
                 'icon' => 'fa fa-user',
-                'module_id' => 5,
+                'module_id' => 4,
+                'sub_module_category_id' => 1
+            ]
+        );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 2
+            ],
+            [
+                'id' => 2,
+                'name' => 'Clientes',
+                'url' => 'CustomerController@read_customer',
+                'icon' => 'people',
+                'module_id' => 1,
                 'sub_module_category_id' => 1
             ]
         );
