@@ -99,6 +99,12 @@ Route::group(['middleware' => ['check_login']], function () {
 
 });
 
+
+
+Route::get('/expense/index','ExpenseController@index');
+
+Route::get('/expense/create_expense','ExpenseController@create_expense');
+
 // Este grupo servirá para colocar as URL relacionadas ao aplicativo Android.
 //Route::group([],function (){
 //});

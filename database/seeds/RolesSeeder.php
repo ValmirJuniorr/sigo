@@ -66,6 +66,7 @@ class RolesSeeder extends Seeder
             ]
         );
 
+<<<<<<< Updated upstream
         Role::updateOrCreate(
             [
 <<<<<<< Updated upstream
@@ -156,5 +157,7 @@ class RolesSeeder extends Seeder
 >>>>>>> Stashed changes
             ]
         );
+=======
+>>>>>>> Stashed changes
     }
 }
