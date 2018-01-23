@@ -33,11 +33,27 @@
 <script src="{{asset('adminlte/bower_components/fastclick/lib/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
+<!-- data table -->
+<script type="text/javascript" src="{{asset('js/datatable.min.js')}}"></script>
+
 <script>
-    $('.dropdown-toggle').dropdown();
     $('.datepicker').datepicker({
         format: 'dd/mm/yyyy',
         startDate: '-3d'
     });
+
+    $('.dropdown-toggle').dropdown()
+    $(document).ready(function() {
+        $('#datatable_data').DataTable(
+            {
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": false,
+                "autoWidth": false
+            }
+        );
+    } );
 </script>
 </html>
