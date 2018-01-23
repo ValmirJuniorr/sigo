@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SubModuleCategoriesSeeder::class);
 
+        $this->call(SubModulesSeeder::class);
 
         $this->call(RolesSeeder::class);
 
