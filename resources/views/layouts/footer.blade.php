@@ -34,7 +34,7 @@
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 <!-- data table -->
-<script type="text/javascript" src="{{asset('js/datatable.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/datatable/datatable.min.js')}}"></script>
 
 <script>
     $('.datepicker').datepicker({

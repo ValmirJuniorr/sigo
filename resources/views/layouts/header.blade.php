@@ -30,7 +30,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <!--Data tables -->
-    <link rel="stylesheet" type="text/css" href="{{asset('css/datatable.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/datatable/datatable.min.css')}}">
     @yield('custom-css')
 </head>
 <!-- Main Header -->
