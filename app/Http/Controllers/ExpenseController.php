@@ -44,19 +44,33 @@ class ExpenseController extends Controller
             $this->expense->expire_expense_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_date'));
             $this->expense->price = $request->input('price');
             $this->expense->description = $request->input('description');
-            $this->expense->expire_expense_routine_date =Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_routine_date'))    ;
+            $this->expense->expense_category_id = $request->input('expense_category_id');
+            $this->expense->expire_expense_routine_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_routine_date'));
             $this->expense->number_of_days = $request->input('number_of_days');
             if ($this->expense->create($this->expense)){
-                return back()->with('success','asdasdasda');
+                return redirect('/expense/index')->with('success','asdasdasda');
             }
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
         }
-
         return $this->expense;
     }
 
 
+    public function show_expense(Request $request){
+
+        $expense_id = base64_decode($request->input('id'));
+
+        $categories = $this->expense_category->read_all();
+
+        $expense = $this->expense->read($expense_id);
+
+        return view('expense.show')->with(array('categories' => $categories,'expense' => $expense));
+    }
+
+    public function edit_expense(){
+
+    }
 
 
 }
