@@ -46,14 +46,24 @@
     });
 
     $(document).ready(function() {
-        $('#datatable_data').DataTable(
+        $('.datatable_data').DataTable(
             {
                 "paging": true,
                 "lengthChange": false,
                 "searching": true,
                 "ordering": true,
                 "info": false,
-                "autoWidth": false
+                "autoWidth": false,
+                "language": {
+                    "next": "Proximo",
+                    "zeroRecords": "Nenhum resultado encontrado",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "search": "Procurar",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Proximo",
+                    }
+                }
             }
         );
     } );

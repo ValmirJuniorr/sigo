@@ -3,7 +3,6 @@
 @section('custom-css')
     <link rel="stylesheet" href="{{asset('css/module.css')}}">
 @endsection
-
 @section('content')
     <body class="skin-blue" style="height: auto; min-height: 100%;">
     @include('layouts.nav')
@@ -18,7 +17,7 @@
                             <h3 class="box-title">Clientes</h3>
                             <div class="box-tools pull-right" style="margin-top:2px;">
                                 @role('store_customer')
-                                <a href="{{ action('UserController@create_user') }}" class="btn btn-success btn-sm ad-click-event">
+                                <a href="{{ action('CustomerController@create_customer') }}" class="btn btn-success btn-sm ad-click-event">
                                     Cadastrar Cliente
                                 </a>
                                 @endrole
@@ -30,7 +29,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="box-body">
-                                            <table id="datatable_data" class="table table-striped table-bordered">
+                                            <table class="table table-striped table-bordered datatable_data">
                                                 <thead>
                                                 <tr>
                                                     <th>Id</th>

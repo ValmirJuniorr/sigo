@@ -81,8 +81,13 @@ Route::group(['middleware' => ['check_login']], function () {
             'role' => Customer::READ_CUSTOMER
         ]);
 
-        Route::post('/customer/create_customer',
+        Route::get('/customer/create_customer',
             ['uses' =>'CustomerController@create_customer',
+                'role' => Customer::STORE_CUSTOMER
+            ]);
+
+        Route::post('/customer/store',
+            ['uses' =>'CustomerController@store',
                 'role' => Customer::STORE_CUSTOMER
             ]);
 
@@ -93,6 +98,11 @@ Route::group(['middleware' => ['check_login']], function () {
 
         Route::get('/customer/update_customer',
             ['uses' => 'CustomerController@update_customer',
+                'role' => Customer::UPDATE_CUSTOMER
+            ]);
+
+        Route::get('/customer/update',
+            ['uses' => 'CustomerController@update',
                 'role' => Customer::UPDATE_CUSTOMER
             ]);
     });

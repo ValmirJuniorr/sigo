@@ -39,7 +39,7 @@ class Customer extends Model implements Crud
 
     public function read($object_id, $arguments = [])
     {
-        // TODO: Implement read() method.
+        return Customer::where('activated',true)->where('id',$object_id)->first();
     }
 
     public function filter($input)
