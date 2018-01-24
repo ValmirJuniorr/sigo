@@ -116,7 +116,7 @@ class User extends Authenticatable implements Crud
         return User::where('activated',TRUE)->orderBy('name');
     }
 
-    public function filter($input)
+    public function filter($input = [])
     {
         // TODO: Implement filter() method.
     }

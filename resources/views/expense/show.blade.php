@@ -14,10 +14,9 @@
         <section class="content-header">
             <h1>
                 Despesas
-                <small>Cadastro de Despesas</small>
+                <small>Detalhes de Despesas</small>
             </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -25,7 +24,7 @@
                     <div class="box">
                         <!-- /.box-header -->
                         <div class="box-body">
-                            {{ Form::open(array('action' => 'ExpenseController@store_expense','method' => 'POST'))}}
+                            {{ Form::open(array('action' => array('ExpenseController@edit_expense','method' => 'POST','id' => $expense->id)))}}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="box-body">
@@ -35,20 +34,18 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                {{  Form::text('expire_expense_date', $value = null,array('class' => 'form-control pull-right datepicker', 'placeholder' => 'Vencimento'))}}
+                                                {{  Form::text('expire_expense_date', $value = Carbon\Carbon::parse($expense->expire_expense_date)->format('d-m-Y'),array('class' => 'form-control pull-right datepicker', 'placeholder' => 'Vencimento'))}}
                                             </div>
                                         </div>
-
                                         <div class="form-group date col-md-6">
                                             {{  Form::label('price', 'Valor') }}
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-money"></i>
                                                 </div>
-                                                {{  Form::number('price', $value = null,array('class' => 'form-control pull-right' ,"step" => "0.01", 'placeholder' => 'Valor','max' => '1000000'))}}
+                                                {{  Form::number('price', $expense->price,array('class' => 'form-control pull-right',"step" => "0.01", 'placeholder' => 'Valor','max' => '1000000'))}}
                                             </div>
                                         </div>
-
                                         <div class="form-group date col-md-12">
                                             {{  Form::label('expense_category_id', 'Categoria') }}
                                             <div class="input-group date">
@@ -56,6 +53,7 @@
                                                     <i class="fa fa-align-justify"></i>
                                                 </div>
                                                 <select name="expense_category_id" class="form-control select2 select2-hidden-accessible">
+                                                    <option value="{{$expense->expense_category_id}}">{{$expense->expense_category->name}}</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                                     @endforeach
@@ -64,11 +62,21 @@
                                         </div>
                                         <div class="form-group date col-md-12">
                                             {{  Form::label('description', 'Descrição') }}
-                                            {{  Form::textarea('description', $value = null,array('class' => 'form-control pull-right',    'placeholder' => 'Descrição'))}}
+                                            {{  Form::textarea('description', $expense->description,array('class' => 'form-control pull-right',    'placeholder' => 'Descrição'))}}
                                         </div>
                                     </div>
-                                    <div class="form-group has-feedback role-checkbox">
-                                        {{ Form::submit('Cadastrar',array('class'=> 'btn btn-primary btn-block btn-flat'))}}
+                                    <div class="form-group">
+
+                                        @if(!Calendar::before_today($expense->expire_expense_date))
+
+                                        <div class="col-md-6">
+                                                {{ Form::submit('Salvar',array('class'=> 'btn btn-primary btn-block btn-flat'))}}
+                                        </div>
+                                        <div class="col-md-6">
+                                                <a href="{{action("ExpenseController@remove_expense", ['id' => $expense->id])}}" class="btn btn-block btn-flat btn-danger">
+                                                    Remover</a>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -77,23 +85,23 @@
                                             <h3 class="box-title">Despesa em Rotina</h3>
                                         </div>
                                         <div class="box-body">
-
                                             <div class="form-group date col-md-6">
                                                 {{  Form::label('expire_expense_routine_date', 'Próximo Lançamento') }}
                                                 <div class="input-group date">
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    {{  Form::text('expire_expense_routine_date', $value = null,array('class' => 'form-control pull-right datepicker' , 'placeholder' => 'Lançamento'))}}
+                                                    {{  Form::text('expire_expense_routine_date', $expense->expire_expense_routine_date ? Carbon\Carbon::parse($expense->expire_expense_routine_date)->format('d-m-Y') : null,array('class' => 'form-control pull-right datepicker' , 'placeholder' => 'Lançamento'))}}
                                                 </div>
                                             </div>
+
                                             <div class="form-group date col-md-6">
                                                 {{  Form::label('number_of_days', 'Período (Dias)') }}
                                                 <div class="input-group date">
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-sort-numeric-desc"></i>
                                                     </div>
-                                                    {{  Form::number('number_of_days', $value = null,array('class' => 'form-control pull-right', 'placeholder' => 'Perído (Dias)'))}}
+                                                    {{  Form::number('number_of_days', $value = $expense->number_of_days,array('class' => 'form-control pull-right', 'placeholder' => 'Perído (Dias)'))}}
                                                 </div>
                                             </div>
                                         </div>

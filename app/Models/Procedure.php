@@ -40,7 +40,7 @@ class Procedure extends Model implements Crud
         // TODO: Implement read_all() method.
     }
 
-    public function filter($input)
+    public function filter($input = [])
     {
         // TODO: Implement filter() method.
     }

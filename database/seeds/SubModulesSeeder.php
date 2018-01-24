@@ -42,15 +42,15 @@ class SubModulesSeeder extends Seeder
 
         SubModule::updateOrCreate(
             [
-                'id' => 2
+                'id' => 3
             ],
             [
-                'id' => 2,
+                'id' => 3,
                 'name' => 'Despesas',
-                'url' => '',
-                'icon' => '',
-                'module_id' => NULL,
-                'sub_module_category_id' => NULL
+                'url' => 'ExpenseController@index',
+                'icon' => 'people',
+                'module_id' => 2,
+                'sub_module_category_id' => 1
             ]
         );
     }

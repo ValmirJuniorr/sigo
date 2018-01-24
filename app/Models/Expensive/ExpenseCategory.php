@@ -37,7 +37,7 @@ class ExpenseCategory extends Model implements Crud
         return ExpenseCategory::all();
     }
 
-    public function filter($input)
+    public function filter($input = [])
     {
         // TODO: Implement filter() method.
     }

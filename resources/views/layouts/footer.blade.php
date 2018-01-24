@@ -42,7 +42,7 @@
 
         $('.datepicker').datepicker({
         format: 'dd-mm-yyyy',
-        startDate: '-3d'
+        startDate: '-1d'
     });
 
     $(document).ready(function() {

@@ -23,15 +23,6 @@ Route::post('/login/auth','UserController@do_login');
 
 Route::post('/rpc/v1/do_login_WS','WsUserController@do_login_WS');
 
-Route::get('teste',function () {
-
-   $customer = new Customer();
-
-   return $customer->read_all()->get();
-
-});
-
-
 
 Route::group(['middleware' => ['check_login']], function () {
 
@@ -114,7 +105,15 @@ Route::get('/expense/index','ExpenseController@index');
 
 Route::get('/expense/create_expense','ExpenseController@create_expense');
 
+Route::get('/expense/show_expense','ExpenseController@show_expense');
+
+Route::get('/expense/remove_expense','ExpenseController@remove_expense');
+
 Route::post('/expense/store_expense','ExpenseController@store_expense');
+
+Route::post('/expense/edit_expense','ExpenseController@edit_expense');
+
+
 
 // Este grupo servirá para colocar as URL relacionadas ao aplicativo Android.
 //Route::group([],function (){

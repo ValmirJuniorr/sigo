@@ -18,4 +18,9 @@ class Calendar
         if(!empty($date))
             return Carbon::parse($date)->format('Y-m-d');
     }
+
+
+    public static function before_today($date){
+        return $date < Carbon::now()->format('Y-m-d');
+    }
 }

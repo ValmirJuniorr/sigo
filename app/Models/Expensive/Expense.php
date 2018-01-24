@@ -105,8 +105,9 @@ class Expense extends Model implements Crud
         return Expense::orderBy('id');
     }
 
-    public function filter($input)
+    public function filter($input = [])
     {
+
     }
 
     public function inputs($object)

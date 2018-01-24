@@ -10,6 +10,8 @@ return [
 
     'no_permission_user' => 'Usuário sem permissão de acesso',
 
-    'invalid_operation' => 'Operação Inválida'
+    'invalid_operation' => 'Operação Inválida',
+
+    'success' => 'Operação realizada com sucesso'
 
 ];

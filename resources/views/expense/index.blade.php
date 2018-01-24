@@ -19,7 +19,7 @@
                             <h3 class="box-title">Despesas</h3>
 
                             <div class="box-tools pull-right">
-                                @role('store_user')
+                                @role('store_expense')
                                 <a href="{{ action('ExpenseController@create_expense') }}" class="btn btn-success btn-sm ad-click-event">
                                     Cadastrar de Despesa
                                 </a>
@@ -31,7 +31,7 @@
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="example" class="table table-bordered table-hover dataTable" cellspacing="0" width="100%">
+                                        <table class="table table-bordered table-hover dataTable datatable_data" cellspacing="0" width="100%">
                                             <thead>
                                             <tr role="row">
                                                 <th>Transação</th>
@@ -44,14 +44,14 @@
                                             </thead>
                                             <tbody>
                                             @foreach ($expenses as $expense)
-                                                <tr role="row" class="even">
+                                                <tr role="row" class="even {{ $expense->expire_expense_date < \Carbon\Carbon::now()->format('Y-m-d') ? 'bg-danger' : '' }}" >
                                                     <td>{{ $expense->id }}</td>
                                                     <td>{{ $expense->expense_category->name}}</td>
                                                     <td>{{ $expense->price }}</td>
-                                                    <td>{{ $expense->expire_expense_date }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($expense->expire_expense_date)->format('d-m-Y') }}</td>
                                                     <td>{{ $expense->description }}</td>
                                                     <td class="center-elements">
-                                                        <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("UserController@update_user", ['id' => base64_encode($expense->id)])}}">Editar</a>
+                                                        <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ExpenseController@show_expense", ['id' => base64_encode($expense->id)])}}">Editar</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

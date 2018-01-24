@@ -11,8 +11,6 @@ use Illuminate\Http\Request;
 class ExpenseController extends Controller
 {
 
-
-
     private $expense;
     private $expense_category;
 
@@ -48,14 +46,12 @@ class ExpenseController extends Controller
             $this->expense->expire_expense_routine_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_routine_date'));
             $this->expense->number_of_days = $request->input('number_of_days');
             if ($this->expense->create($this->expense)){
-                return redirect('/expense/index')->with('success','asdasdasda');
+                return redirect('/expense/index')->with('success',__('messages.success'));
             }
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
         }
-        return $this->expense;
     }
-
 
     public function show_expense(Request $request){
 
@@ -68,8 +64,32 @@ class ExpenseController extends Controller
         return view('expense.show')->with(array('categories' => $categories,'expense' => $expense));
     }
 
-    public function edit_expense(){
+    public function edit_expense(Request $request){
+        try{
+            $this->expense->expire_expense_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_date'));
+            $this->expense->id = $request->input('id');
+            $this->expense->price = $request->input('price');
+            $this->expense->description = $request->input('description');
+            $this->expense->expense_category_id = $request->input('expense_category_id');
+            $this->expense->expire_expense_routine_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_routine_date'));
+            $this->expense->number_of_days = $request->input('number_of_days');
+            if ($this->expense->edit($this->expense)){
+                return redirect('/expense/index')->with('success',__('messages.success'));
+            }
+        }catch (ValidationException $e){
+            return back()->withErrors($e->getMessage());
+        }
+    }
 
+    public function remove_expense(Request $request){
+        try{
+            $expense_id = $request->input('id');
+            if ($this->expense->remove($expense_id)){
+                return redirect('/expense/index')->with('success',__('messages.success'));
+            }
+        }catch (ValidationException $e){
+            return back()->withErrors($e->getMessage());
+        }
     }
 
 

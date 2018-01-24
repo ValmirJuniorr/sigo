@@ -42,7 +42,7 @@ class Customer extends Model implements Crud
         return Customer::where('activated',true)->where('id',$object_id)->first();
     }
 
-    public function filter($input)
+    public function filter($input = [])
     {
         // TODO: Implement filter() method.
     }
