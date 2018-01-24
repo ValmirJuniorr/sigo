@@ -94,7 +94,7 @@
                                                     <option value="1">M</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group has-feedback role-checkbox col-sm-12 col-md-3 col-lg-3 pull-right" style="margin-top: 20px;">
+                                            <div class="form-group has-feedback role-checkbox col-sm-12 col-md-2 col-lg-2 pull-right" style="margin-top: 20px;">
                                                 {{ Form::submit('Cadastrar',array('class'=> 'btn btn-primary btn-block btn-flat'))}}
                                             </div>
                                         </div>

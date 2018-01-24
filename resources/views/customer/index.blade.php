@@ -18,7 +18,7 @@
                             <div class="box-tools pull-right" style="margin-top:2px;">
                                 @role('store_customer')
                                 <a href="{{ action('CustomerController@create_customer') }}" class="btn btn-success btn-sm ad-click-event">
-                                    Cadastrar Cliente
+                                        Novo Cliente
                                 </a>
                                 @endrole
                             </div>
@@ -34,6 +34,10 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Nome</th>
+                                                    <th>Cidade</th>
+                                                    <th>Bairro</th>
+                                                    <th>Rua</th>
+                                                    <th>Data de Nascimento</th>
                                                     <th>Editar</th>
                                                     <th>Excluir</th>
                                                 </tr>
@@ -43,6 +47,10 @@
                                                     <tr>
                                                         <td>{{$customer->id}}</td>
                                                         <td>{{$customer->name}}</td>
+                                                        <td>{{$customer->city}}</td>
+                                                        <td>{{$customer->neighborhood}}</td>
+                                                        <td>{{$customer->address}}</td>
+                                                        <td>{{$customer->birth_date}}</td>
                                                         @role('update_customer')
                                                         <td class="center-elements">
                                                             <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("CustomerController@update_customer", ['id' => base64_encode($customer->id)])}}">Editar</a>
