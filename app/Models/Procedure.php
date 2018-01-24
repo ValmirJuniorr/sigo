@@ -13,7 +13,7 @@ class Procedure extends Model implements Crud
         ProcedureContract::COLUMN_PROCEDURE_TIME
     );
 
-    protected $table = \ProcedureContract::TABLE_NAME;
+    protected $table = ProcedureContract::TABLE_NAME;
 
     public function create($object, $arguments = [])
     {

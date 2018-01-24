@@ -14,7 +14,7 @@ class Staff extends Model implements Crud {
         StaffContract::COLUMN_UF
     );
 
-    protected $table = \StaffContract::TABLE_NAME;
+    protected $table = StaffContract::TABLE_NAME;
 
     public function create($object, $arguments = [])
     {

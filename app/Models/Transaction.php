@@ -14,7 +14,7 @@ class Transaction extends Model implements Crud
         TransactionContract::COLUMN_DESCRIPTION
     );
 
-    protected $table = \TransactionContract::TABLE_NAME;
+    protected $table = TransactionContract::TABLE_NAME;
 
     public function create($object, $arguments = [])
     {
