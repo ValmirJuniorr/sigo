@@ -25,7 +25,7 @@
                     <div class="box">
                         <!-- /.box-header -->
                         <div class="box-body">
-                            {{ Form::open(array('action' => 'UserController@store','method' => 'POST'))}}
+                            {{ Form::open(array('action' => 'ExpenseController@store_expense','method' => 'POST'))}}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="box-body">
@@ -35,7 +35,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                {{  Form::text('expire_expense_date', $value = null,array('class' => 'form-control pull-right datepicker' , 'placeholder' => 'Vencimento'))}}
+                                                {{  Form::text('expire_expense_date', $value = null,array('class' => 'form-control pull-right datepicker', 'placeholder' => 'Vencimento'))}}
                                             </div>
                                         </div>
 
@@ -45,7 +45,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-money"></i>
                                                 </div>
-                                                {{  Form::number('price', $value = null,array('class' => 'form-control pull-right' ,"step" => "0.10", 'placeholder' => 'Valor'))}}
+                                                {{  Form::number('price', $value = null,array('class' => 'form-control pull-right' ,"step" => "0.01", 'placeholder' => 'Valor'))}}
                                             </div>
                                         </div>
 
@@ -56,15 +56,15 @@
                                                     <i class="fa fa-align-justify"></i>
                                                 </div>
                                                 <select class="form-control select2 select2-hidden-accessible">
-                                                    <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-                                                    <option data-tokens="mustard">Burger, Shake and a Smile</option>
-                                                    <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group date col-md-12">
                                             {{  Form::label('description', 'Descrição') }}
-                                            {{  Form::textarea('price', $value = null,array('class' => 'form-control pull-right', 'placeholder' => 'Descrição'))}}
+                                            {{  Form::textarea('description', $value = null,array('class' => 'form-control pull-right',    'placeholder' => 'Descrição'))}}
                                         </div>
                                     </div>
                                     <div class="form-group has-feedback role-checkbox">
@@ -97,8 +97,6 @@
                                                     {{  Form::number('number_of_days', $value = null,array('class' => 'form-control pull-right', 'placeholder' => 'Perído (Dias)'))}}
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>

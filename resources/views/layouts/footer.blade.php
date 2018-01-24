@@ -23,6 +23,8 @@
 <!-- daterangepicker -->
 <script src="{{asset('adminlte/bower_components/moment/min/moment.min.js')}}"></script>
 <script src="{{asset('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+<!-- data table -->
+<script type="text/javascript" src="{{asset('js/datatable/datatable.min.js')}}"></script>
 <!-- datepicker -->
 <script src="{{asset('adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
@@ -33,16 +35,16 @@
 <script src="{{asset('adminlte/bower_components/fastclick/lib/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
-<!-- data table -->
-<script type="text/javascript" src="{{asset('js/datatable/datatable.min.js')}}"></script>
 
 <script>
-    $('.datepicker').datepicker({
-        format: 'dd/mm/yyyy',
+
+    $('.dropdown-toggle').dropdown();
+
+        $('.datepicker').datepicker({
+        format: 'dd-mm-yyyy',
         startDate: '-3d'
     });
 
-    $('.dropdown-toggle').dropdown()
     $(document).ready(function() {
         $('#datatable_data').DataTable(
             {
