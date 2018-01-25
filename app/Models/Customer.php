@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Util\Crud;
+use App\Models\Util\ValidatorModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model implements Crud
@@ -17,6 +18,55 @@ class Customer extends Model implements Crud
     const READ_CUSTOMER = 'read_customer';
 
 
+    /**
+     * Nome do modelo para serem gerados os logs.
+     * @constant String
+     */
+    const LOG_NAME = "Cliente";
+
+    /**
+     * Atributos da classes que podem ser preenchidos
+     *
+     * @var array
+     */
+    protected $fillable = array(
+        'name', 'addres', 'email','cpf','rg','phone','cell_phone','birth_date','city','neighborhood','cep','uf','gender'
+    );
+
+    /**
+     * Atributos invisíveis da classe.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'activated'
+    ];
+
+
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Tradução dos atributos da classe
+     * @var array
+     */
+    private $attribute = array(
+        'name' => 'Nome',
+        'address' => 'Endereço',
+        'email' => 'E-mai',
+        'cpf' => 'CPF',
+        'rg' => 'RG',
+        'phone' => 'Telefone',
+        'cell_phone' => 'Celular',
+        'birth_date' => 'Data de Aniversario',
+        'city' => 'Cidade',
+        'neighborhood' => 'Bairro',
+        'cep' => 'Cep',
+        'uf' => 'UF',
+        'gender' => 'Gênero',
+    );
+
     public function read_all($arguments = [])
     {
         return Customer::where('activated',TRUE)->orderBy('name');
@@ -24,7 +74,9 @@ class Customer extends Model implements Crud
 
     public function create($object, $arguments = [])
     {
-        // TODO: Implement create() method.
+       if(ValidatorModel::validation($this->inputs($object),$this->rules(),$this->attribute)){
+            return $object->save();
+        }
     }
 
     public function remove($object_id, $arguments = [])
@@ -34,7 +86,23 @@ class Customer extends Model implements Crud
 
     public function edit($object, $arguments = [])
     {
-        // TODO: Implement edit() method.
+        $customer_edit = Customer::findorFail($object->id);
+        $customer_edit->name = $object->name;
+        $customer_edit->address = $object->address;
+        $customer_edit->email = $object->email;
+        $customer_edit->cpf = $object->cpf;
+        $customer_edit->rg = $object->rg;
+        $customer_edit->phone = $object->phone;
+        $customer_edit->cell_phone = $object->cell_phone;
+        $customer_edit->birth_date = $object->birth_date;
+        $customer_edit->city = $object->city;
+        $customer_edit->neighborhood = $object->neighborhood;
+        $customer_edit->cep = $object->cep;
+        $customer_edit->uf = $object->uf;
+        $customer_edit->gender = $object->gender;
+        if(ValidatorModel::validation($this->inputs($customer_edit),$this->rules($customer_edit->id),$this->attribute)){
+            return $customer_edit->save();
+        }
     }
 
     public function read($object_id, $arguments = [])
@@ -49,11 +117,39 @@ class Customer extends Model implements Crud
 
     public function inputs($object)
     {
-        // TODO: Implement inputs() method.
+        return [
+            'name' => $object->name,
+            'address' => $object->address,
+            'email' => $object->email,
+            'cpf' => $object->cpf,
+            'rg' => $object->rg,
+            'phone' => $object->phone,
+            'cell_phone' => $object->cell_phone,
+            'birth_date' => $object->birth_date,
+            'neighborhood' => $object->neighborhood,
+            'city' => $object->city,
+            'cep' => $object->cep,
+            'uf' => $object->uf,
+            'gender' => $object->gender,
+        ];
     }
 
     public function rules($id = 0)
     {
-        // TODO: Implement rules() method.
+        return [
+            'name' => 'required',
+            'address' => 'required|max:200|min:0',
+            'email' => 'required',
+            'cpf' => 'required|unique:customers,cpf,'.$id,
+            'rg' => 'required|unique:customers,rg,'.$id,
+            'phone' => 'required',
+            'cell_phone' => 'required',
+            'birth_date' => 'required',
+            'city' => 'required',
+            'neighborhood' => 'required',
+            'cep' => 'required',
+            'uf' => 'required',
+            'gender' => 'required',
+        ];
     }
 }

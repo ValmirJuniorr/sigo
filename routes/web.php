@@ -92,7 +92,7 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Customer::UPDATE_CUSTOMER
             ]);
 
-        Route::get('/customer/update',
+        Route::post('/customer/update',
             ['uses' => 'CustomerController@update',
                 'role' => Customer::UPDATE_CUSTOMER
             ]);
@@ -114,11 +114,9 @@ Route::post('/expense/store_expense','ExpenseController@store_expense');
 Route::post('/expense/edit_expense','ExpenseController@edit_expense');
 
 
-
-// Este grupo servirá para colocar as URL relacionadas ao aplicativo Android.
-//Route::group([],function (){
-//});
+Route::get('teste',function (){
 
 
+});
 
 

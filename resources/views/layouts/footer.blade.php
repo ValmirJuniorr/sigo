@@ -37,7 +37,6 @@
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 
 <script>
-
     $('.dropdown-toggle').dropdown();
 
         $('.datepicker').datepicker({

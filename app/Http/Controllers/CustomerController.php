@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\Util\ValidationException;
 use App\Models\Customer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    private $pag = 7;
-
     public function read_customer(){
         try{
             $customer = new Customer();
-            $customers = $customer->read_all()->paginate($this->pag);
+            $customers = $customer->read_all()->get();
             return view('customer.index', ['customers' => $customers]);
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
@@ -21,33 +21,34 @@ class CustomerController extends Controller
         }
     }
 
-
     public function create_customer(){
         return view('customer.create');
     }
 
     public function store(Request $request){
-
-        return $request;
         try{
             $customer = new Customer();
             $customer->name = $request->input('name');
-            $customer->username = $request->input('username');
+            $customer->address = $request->input('address');
             $customer->email = $request->input('email');
-            $customer->password = bcrypt($request->input('password'));
+            $customer->cpf = $request->input('cpf');
+            $customer->rg = $request->input('rg');
+            $customer->phone = $request->input('phone');
+            $customer->cell_phone = $request->input('cell_phone');
+            $customer->birth_date = Carbon::parse($request->input('birth_date'))->format('Y-m-d');
+            $customer->city = $request->input('city');
+            $customer->neighborhood = $request->input('neighborhood');
+            $customer->cep = $request->input('cep');
+            $customer->uf = $request->input('uf');
+            $customer->gender = $request->input('gender');
             $customer->create($customer);
             return redirect('/customer/read_customer');
         }catch (ValidationException $ve){
-            return back()->withErrors($ve->getMessage());
+            return back()->withErrors($ve->getMessage())->withInput();
         }catch (Exception $e){
-            return back()->withErrors("Erro Interno");
+            return back()->withErrors($e->getMessage());
         }
     }
-
-
-
-
-
 
     public function update_customer(Request $request){
         try{
@@ -67,15 +68,24 @@ class CustomerController extends Controller
             $customer = new Customer();
             $customer->id = $request->input('id');
             $customer->name = $request->input('name');
-            $customer->username = $request->input('username');
+            $customer->address = $request->input('address');
             $customer->email = $request->input('email');
-
+            $customer->cpf = $request->input('cpf');
+            $customer->rg = $request->input('rg');
+            $customer->phone = $request->input('phone');
+            $customer->cell_phone = $request->input('cell_phone');
+            $customer->birth_date = $request->input('birth_date');
+            $customer->city = $request->input('city');
+            $customer->neighborhood = $request->input('neighborhood');
+            $customer->cep = $request->input('cep');
+            $customer->uf = $request->input('uf');
+            $customer->gender = $request->input('gender');
             $customer->edit($customer);
             return redirect('/customer/read_customer');
         }catch (ValidationException $ve){
             return back()->withErrors($ve->getMessage());
-        }catch (Exception $e){
-            return back()->withErrors("Erro Interno");
+        }catch (\Exception $e){
+            return back()->withErrors($e->getMessage());
         }
     }
 
