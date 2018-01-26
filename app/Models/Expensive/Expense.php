@@ -6,7 +6,9 @@ use App\Exceptions\Util\ValidationException;
 use App\Models\Util\Crud;
 use App\Models\Util\ValidatorModel;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Expense extends Model implements Crud
 {
@@ -102,13 +104,48 @@ class Expense extends Model implements Crud
 
     public function read_all($arguments = [])
     {
-        return Expense::orderBy('id');
+        return Expense::orderBy('id','desc');
     }
 
     public function filter($input = [])
     {
 
     }
+
+
+    public function last_expenses(){
+        return $this->read_all()->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get();
+    }
+
+    public function report_expense_by_cateogry(){
+
+        $results = Expense::with('expense_category')->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get()->groupBy('expense_category.name');
+
+        $pie_chart = new Collection();
+
+        foreach ($results as $key => $value){
+            $result['name'] =  $key;
+            $result['y'] = $value->count();
+            $pie_chart->push($result);
+        }
+
+        return $pie_chart;
+    }
+
+
+    public function expense_by_day(){
+
+        $line_chart = new Collection();
+
+//        $results = Expense::with('expense_category')->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get()->groupBy('expire_expense_date')->sortBy('created_at',);
+
+
+        $results = DB::table('expenses')->selectRaw('sum(price) as price , expire_expense_date')->groupBy('expire_expense_date')->get();
+
+        return $results;
+    }
+
+
 
     public function inputs($object)
     {

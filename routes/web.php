@@ -113,6 +113,11 @@ Route::post('/expense/store_expense','ExpenseController@store_expense');
 
 Route::post('/expense/edit_expense','ExpenseController@edit_expense');
 
+Route::get('/expense/report_expense_by_cateogry', 'ExpenseController@report_expense_by_cateogry');
+
+Route::get('/expense/last_expenses', 'ExpenseController@last_expenses');
+
+Route::get('/expense/expense_by_day', 'ExpenseController@expense_by_day');
 
 
 // Este grupo servirá para colocar as URL relacionadas ao aplicativo Android.

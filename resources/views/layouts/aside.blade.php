@@ -19,6 +19,7 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu tree" data-widget="tree">
+            <li><a class="menu-sidebar-a center-elements" href="" style="padding-left: 0px;border-left-width: 0px;">Dashboard</a></li>
             @foreach(show_sub_modules() as $sub_module)
                 <li><a class="menu-sidebar-a" href="{{ action($sub_module->url) }}"><i class="{{$sub_module->icon}}"></i> <span>{{$sub_module->name}}</span></a></li>
             @endforeach
