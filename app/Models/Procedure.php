@@ -2,18 +2,15 @@
 
 namespace App\Model;
 
-use App\Models\Contracts\ProcedureContract;
 use App\Models\Util\Crud;
 use Illuminate\Database\Eloquent\Model;
 
 class Procedure extends Model implements Crud
 {
     protected $fillable = array(
-        ProcedureContract::COLUMN_NAME,
-        ProcedureContract::COLUMN_PROCEDURE_TIME
+        'name',
+        'procedure_time'
     );
-
-    protected $table = ProcedureContract::TABLE_NAME;
 
     public function create($object, $arguments = [])
     {

@@ -2,16 +2,15 @@
 
 namespace App\Model;
 
-use App\Models\Contracts\TransactionContract;
 use App\Models\Util\Crud;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model implements Crud
 {
     protected $fillable = array(
-        TransactionContract::COLUMN_PRICE,
-        TransactionContract::COLUMN_PAID,
-        TransactionContract::COLUMN_DESCRIPTION
+        'price',
+        'paid',
+        'description'
     );
 
     protected $table = TransactionContract::TABLE_NAME;
