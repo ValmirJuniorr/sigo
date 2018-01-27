@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\Contracts\StaffContract;
+use App\Models\Contracts\StaffContract as SC;
 use App\Models\Util\Crud;
 use Illuminate\Database\Eloquent\Model;
 
 class Staff extends Model implements Crud {
 
     protected $fillable = array(
-        StaffContract::COLUMN_NAME,
-        StaffContract::COLUMN_DOCUMENT,
-        StaffContract::COLUMN_UF
+        SC::COLUMN_NAME,
+        SC::COLUMN_DOCUMENT,
+        SC::COLUMN_UF
     );
 
-    protected $table = StaffContract::TABLE_NAME;
+    protected $table = SC::TABLE_NAME;
 
     public function create($object, $arguments = [])
     {
@@ -53,6 +53,8 @@ class Staff extends Model implements Crud {
 
     public function rules($id = 0)
     {
-        // TODO: Implement rules() method.
+        return array(
+
+        );
     }
 }

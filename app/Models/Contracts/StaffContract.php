@@ -13,6 +13,6 @@ class StaffContract{
 
     const TABLE_NAME = "staff";
     const COLUMN_NAME = "name";
-    const COLUMN_UF = "name";
-    const COLUMN_DOCUMENT = "name";
+    const COLUMN_UF = "uf";
+    const COLUMN_DOCUMENT = "document";
 }
