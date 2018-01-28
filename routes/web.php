@@ -120,3 +120,18 @@ Route::get('teste',function (){
 });
 
 
+/* Staff */
+
+Route::get('/staff/read_staff'   , 'StaffController@read_staff');
+
+Route::get('/staff/create_staff' , 'StaffController@create_staff');
+
+Route::post('/staff/store'       , 'StaffController@store');
+
+Route::get('/staff/delete_staff' , 'StaffController@delete_staff');
+
+Route::get('/staff/update_staff' , 'StaffController@update_staff');
+
+Route::post('/staff/update'      , 'StaffController@update');
+
+
