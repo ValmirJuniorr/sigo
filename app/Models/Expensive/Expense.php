@@ -104,7 +104,7 @@ class Expense extends Model implements Crud
 
     public function read_all($arguments = [])
     {
-        return Expense::orderBy('id','desc');
+        return Expense::orderBy('id','desc')->limit(100);
     }
 
     public function filter($input = [])
@@ -114,7 +114,7 @@ class Expense extends Model implements Crud
 
 
     public function last_expenses(){
-        return $this->read_all()->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get();
+        return $this->read_all()->with('expense_category')->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get();
     }
 
     public function report_expense_by_cateogry(){
@@ -138,11 +138,14 @@ class Expense extends Model implements Crud
         $line_chart = new Collection();
 
 //        $results = Expense::with('expense_category')->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get()->groupBy('expire_expense_date')->sortBy('created_at',);
+        $parcial_result = DB::table('expenses')->selectRaw('sum(price) as price , expire_expense_date')->groupBy('expire_expense_date')->limit(25)->get();
 
+        $final_result = array();
 
-        $results = DB::table('expenses')->selectRaw('sum(price) as price , expire_expense_date')->groupBy('expire_expense_date')->get();
-
-        return $results;
+        foreach ($parcial_result as $item){
+            array_push($final_result,array(Carbon::parse($item->expire_expense_date)->timestamp * 1000,$item->price));
+        }
+        return $final_result;
     }
 
 

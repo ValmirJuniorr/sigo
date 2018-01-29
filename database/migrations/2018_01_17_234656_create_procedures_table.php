@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Contracts\ModelContract;
 use App\Models\Contracts\ProcedureContract;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;

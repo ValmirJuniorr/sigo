@@ -45,38 +45,71 @@ $(document).ready(function () {
         }
     });
 
-    Highcharts.chart('line_chart_resume_expense_per_day', {
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Monthly Average Temperature'
-        },
-        subtitle: {
-            text: 'Source: WorldClimate.com'
-        },
-        xAxis: {
-            categories: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12','13','14','15']
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
+
+    $.ajax({
+        type: 'GET',
+        url: '/expense/expense_by_day',
+        data: {},
+        success: function( data ){
+
+            Highcharts.chart('line_chart_resume_expense_per_day', {
+                chart: {
+                    type: 'spline'
                 },
-                enableMouseTracking: false
-            }
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.4, 0, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6,2,3,4]
-        }   ]
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    dateTimeLabelFormats: { // don't display the dummy year
+                        month: '%e. %b',
+                        year: '%b'
+                    },
+                    title: {
+                        text: 'Date'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Valor Total (R$)'
+                    },
+                    min: 0
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x:%e. %b}: {point.y:.2f} R$'
+                },
+
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            enabled: true
+                        }
+                    }
+                },
+
+                series: [{
+                    name: 'Gasto Total (dia)',
+                    // Define the data points. All series have a dummy year
+                    // of 1970/71 in order to be compared on the same x axis. Note
+                    // that in JavaScript, months start at 0 for January, 1 for February etc.
+                    data: data
+                }]
+            });
+
+
+            console.log(data);
+        }
     });
 
+
+
+
+
+    //Add row to table
 
     $.ajax({
         type: 'GET',
@@ -84,16 +117,11 @@ $(document).ready(function () {
         data: {},
         success: function( data ){
             jQuery.each(data, function(i, val) {
-                $('#table_lasts_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description +'</td> <td><span class="label label-success">Aprovado</span></td> </tr>');
-                $('#table_lasts_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description +'</td> <td><span class="label label-success">Aprovado</span></td> </tr>');
-                $('#table_lasts_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description +'</td> <td><span class="label label-success">Aprovado</span></td> </tr>');
-                $('#table_lasts_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description +'</td> <td><span class="label label-success">Aprovado</span></td> </tr>');
+                $('#table_lasts_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description +'</td> <td><span class="label label-success">'+val.expense_category.name+'</span></td> </tr>');
             });
             console.log(data);
         }
     });
-
-    //Add row to table
 
 
 

@@ -42,7 +42,7 @@
                                                                 <th>Vencimento</th>
                                                                 <th>Valor</th>
                                                                 <th>Descrição</th>
-                                                                <th>Status</th>
+                                                                <th>Categoria</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
