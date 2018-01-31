@@ -34,12 +34,12 @@
                                                 <div class="panel box box-primary">
                                                     <div class="box-header with-border">
                                                         <h5>
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" class="collapsed">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#{{$submodule->name}}" aria-expanded="false" class="collapsed">
                                                                 {{$submodule->name}}
                                                             </a>
                                                         </h5>
                                                     </div>
-                                                    <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                                    <div id="{{$submodule->name}}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                                         <div class="box-body">
                                                             @foreach($submodule->roles as $role)
                                                                 <p class="role-checkbox">

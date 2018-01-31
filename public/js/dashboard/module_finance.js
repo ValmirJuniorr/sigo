@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     $.ajax({
         type: 'GET',
         url: '/expense/report_expense_by_cateogry',
@@ -99,9 +98,7 @@ $(document).ready(function () {
                     data: data
                 }]
             });
-
-
-            console.log(data);
+            // console.log(data);
         }
     });
 
@@ -117,9 +114,15 @@ $(document).ready(function () {
         data: {},
         success: function( data ){
             jQuery.each(data, function(i, val) {
-                $('#table_lasts_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description +'</td> <td><span class="label label-success">'+val.expense_category.name+'</span></td> </tr>');
+                date = new Date(val.expire_expense_date);
+                date_now = new Date();
+                if(date.getTime() < date_now.getTime()){
+                    $('#table_lasts_expenses').append('<tr style="background-color: #f2dede;"> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description.substring(1,20) +'</td> <td><span style="font-weight: bold;">'+val.expense_category.name+'</span></td> </tr>');
+                }else{
+                    $('#table_lasts_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description.substring(1,10) +"..."+'</td> <td><span style="font-weight: bold;">'+val.expense_category.name+'</span></td> </tr>');
+                }
             });
-            console.log(data);
+            // console.log(data);
         }
     });
 

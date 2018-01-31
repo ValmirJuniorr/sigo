@@ -70,7 +70,7 @@ class RolesSeeder extends Seeder
             [
                 'id' => 5,
                 'name' => Expense::READ_EXPENSE,
-                'display' => '',
+                'display' => 'Regra possibilita usuários ter acesso as despesas do sistema.',
                 'sub_module_id' => 3
             ]
         );
@@ -83,7 +83,7 @@ class RolesSeeder extends Seeder
             [
                 'id' => 6,
                 'name' => Expense::STORE_EXPENSE,
-                'display' => '',
+                'display' => 'Regra possibilita usuários criar novas despesas',
                 'sub_module_id' => 3
             ]
         );
@@ -95,7 +95,7 @@ class RolesSeeder extends Seeder
             [
                 'id' => 7,
                 'name' => Expense::UPDATE_EXPENSE,
-                'display' => '',
+                'display' => 'Regra possibilita usuários atualizar despesas existentes',
                 'sub_module_id' => 3
             ]
         );
@@ -107,7 +107,7 @@ class RolesSeeder extends Seeder
             [
                 'id' => 8,
                 'name' => Expense::DELETE_EXPENSE,
-                'display' => '',
+                'display' => 'Regra possibilita usuários removerem despesas existentes.',
                 'sub_module_id' => 3
             ]
         );

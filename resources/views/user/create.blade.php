@@ -30,28 +30,26 @@
                                     <div class="col-md-6">
                                         <div class="box-body">
                                             @foreach($submodules as $submodule)
-
                                             <div class="box-group" id="accordion">
                                                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                                                 <div class="panel box box-primary">
                                                     <div class="box-header with-border">
                                                         <h5>
-                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" class="collapsed">
+                                                            <a data-toggle="collapse" href="#{{$submodule->name}}" aria-expanded="fal se" class="collapsed">
                                                                 {{$submodule->name}}
                                                             </a>
                                                         </h5>
                                                     </div>
-                                                    <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                                        <div class="box-body">
-                                                            @foreach($submodule->roles as $role)
-                                                                <p class="role-checkbox">
-                                                                    {{--{{ Form::checkbox('roles['.$role->id.']') }}--}}
-                                                                    {{ Form::checkbox('roles[]', $role->id, false) }}
-                                                                    <label>{{ $role->display }}</label>
-                                                                </p>
-                                                            @endforeach
+                                                        <div id="{{$submodule->name}}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                                            <div class="box-body">
+                                                                @foreach($submodule->roles as $role)
+                                                                    <p class="role-checkbox">
+                                                                            {{ Form::checkbox('roles[]', $role->id, false) }}
+                                                                        <label>{{ $role->display }}</label>
+                                                                    </p>
+                                                                @endforeach
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             @endforeach

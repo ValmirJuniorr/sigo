@@ -8,7 +8,6 @@
         @include('layouts.aside')
 
         <div class="content-wrapper">
-
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
@@ -16,7 +15,11 @@
                             <div class="box">
                                 <div class="box-header with-border">
                                     <h3 class="box-title">Dashboard</h3>
+
+
                                     <small>Últimos 15 dias</small>
+
+
                                 </div>
                                 <div class="box-body">
 

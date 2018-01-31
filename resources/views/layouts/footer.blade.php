@@ -74,6 +74,8 @@
                 }
             }
         );
+        $(".aparence").removeClass('hide');
+
     } );
 </script>
 

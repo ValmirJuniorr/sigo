@@ -135,10 +135,9 @@ class Expense extends Model implements Crud
 
     public function expense_by_day(){
 
-        $line_chart = new Collection();
+        $date = Carbon::now()->subDays(15)->format('Y-m-d');
 
-//        $results = Expense::with('expense_category')->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get()->groupBy('expire_expense_date')->sortBy('created_at',);
-        $parcial_result = DB::table('expenses')->selectRaw('sum(price) as price , expire_expense_date')->groupBy('expire_expense_date')->limit(25)->get();
+        $parcial_result = DB::table('expenses')->selectRaw('sum(price) as price , expire_expense_date')->where('expire_expense_date' ,'>=', $date)->groupBy('expire_expense_date')->get();
 
         $final_result = array();
 

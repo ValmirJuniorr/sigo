@@ -3,7 +3,7 @@
 
     <!-- Logo -->
 
-    <a href="{{ action('ModuleController@index') }}" class="logo">
+    <a href="{{ action('ModuleController@index') }}" class="logo" style="background-color: {{session('module_color')}};">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>SIGO</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -11,7 +11,7 @@
     </a>
 
     <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="navbar navbar-static-top" style="background-color: {{session('module_color')}}; opacity: 0.9" role="navigation">
 
 
         <!-- Navbar Right Menu -->
@@ -20,7 +20,7 @@
 
 
                 <!-- Notifications Menu -->
-                <li class="dropdown notifications-menu">
+                {{--<li class="dropdown notifications-menu">
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
@@ -45,7 +45,7 @@
                         </li>
                         <li class="footer"><a href="#">Ver todas</a></li>
                     </ul>
-                </li>
+                </li>--}}
 
 
 

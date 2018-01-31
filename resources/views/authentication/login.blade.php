@@ -8,11 +8,11 @@
 
 @section('content')
 
-<body class="hold-transition login-page" >
+<body class="hold-transition login-page" style="background-color: #3c8dbc" >
     <div class="login-box ">
         <div class="login-logo">
-            <p class="bold">SIGO</p>
-            <p class="h3">Sistema Integrado Odontológico</p>
+            <p class="bold white_text">SIGO</p>
+            <p class="h3 white_text">Sistema Integrado Odontológico</p>
         </div>
         <div class="login-box-body">
                 {{ Form::open(array('action' => 'UserController@do_login','method' => 'POST'))}}
@@ -24,9 +24,9 @@
                     {{ Form::password('password',array('class' => 'form-control secure', 'required' => "required",'placeholder' => 'Senha')) }}
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                {{  Form::submit('Entrar',array('class'=> 'btn btn-primary btn-block btn-flat'))}}
+                {{  Form::submit('Entrar',array('class'=> 'btn btn-block btn-flat white_text' ,'style' => 'background-color: #3c8dbc'))}}
                 {{ Form::close() }}
-            <a href="#">Esqueceu sua senha?</a>
+            {{--<a href="#">Esqueceu sua senha?</a>--}}
         </div>
     </div>
 
