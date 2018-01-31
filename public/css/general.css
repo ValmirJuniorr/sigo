@@ -36,9 +36,29 @@ aside.main-sidebar{
 }
 
 .sidebar ul li .menu-sidebar-a {
-    color:black;
+    color:white;
 }
 
 body{
     background-color: #eceff1;
 }
+
+input.secure {
+    text-security: disc;
+    -webkit-text-security: disc;
+}
+
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+.menu-sidebar-a:hover {
+    opacity: 1 !important;
+}
+
+.white_text {
+    color: white;
+}
+

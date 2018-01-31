@@ -13,6 +13,7 @@
 
 
 use App\Models\Customer;
+use App\Models\Expensive\Expense;
 use App\Models\User;
 
 Route::get('/','UserController@index');
@@ -96,23 +97,41 @@ Route::group(['middleware' => ['check_login']], function () {
             ['uses' => 'CustomerController@update',
                 'role' => Customer::UPDATE_CUSTOMER
             ]);
-    });
 
+        Route::get('/expense/index',
+            ['uses' => 'ExpenseController@index',
+            'role' => Expense::READ_EXPENSE]);
+
+        Route::get('/expense/create_expense',
+            ['uses' => 'ExpenseController@create_expense',
+             'role' => Expense::STORE_EXPENSE
+            ]);
+
+        Route::get('/expense/show_expense',[
+            'uses' => 'ExpenseController@show_expense',
+            'role' => Expense::UPDATE_EXPENSE]);
+
+        Route::get('/expense/remove_expense',[
+            'uses' => 'ExpenseController@remove_expense',
+            'role' => Expense::DELETE_EXPENSE]);
+
+        Route::post('/expense/store_expense',[
+            'uses' => 'ExpenseController@store_expense',
+            'role' => Expense::STORE_EXPENSE]);
+
+        Route::post('/expense/edit_expense',[
+            'uses' => 'ExpenseController@edit_expense',
+            'role' => Expense::UPDATE_EXPENSE]);
+
+    });
 });
 
 
-Route::get('/expense/index','ExpenseController@index');
+Route::get('/expense/report_expense_by_cateogry', 'ExpenseController@report_expense_by_cateogry');
 
-Route::get('/expense/create_expense','ExpenseController@create_expense');
+Route::get('/expense/last_expenses', 'ExpenseController@last_expenses');
 
-Route::get('/expense/show_expense','ExpenseController@show_expense');
-
-Route::get('/expense/remove_expense','ExpenseController@remove_expense');
-
-Route::post('/expense/store_expense','ExpenseController@store_expense');
-
-Route::post('/expense/edit_expense','ExpenseController@edit_expense');
-
+Route::get('/expense/expense_by_day', 'ExpenseController@expense_by_day');
 
 Route::get('teste',function (){
 

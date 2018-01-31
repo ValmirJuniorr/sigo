@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Contracts\ModelContract;
+use App\Models\Contracts\StaffContract;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

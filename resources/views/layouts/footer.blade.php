@@ -36,6 +36,14 @@
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 
+<script src="{{asset('js/highcharts/drilldown.js')}}"></script>
+
+<script src="{{asset('js/highcharts/exporting.js')}}"></script>
+
+<script src="{{asset('js/highcharts/highcharts.js')}}"></script>
+
+<script src="{{asset('js/highcharts/highcharts-more.js')}}"></script>
+
 <script>
     $('.dropdown-toggle').dropdown();
 
@@ -65,6 +73,11 @@
                 }
             }
         );
+        $(".aparence").removeClass('hide');
+
     } );
 </script>
+
+@yield('custom-js')
+
 </html>

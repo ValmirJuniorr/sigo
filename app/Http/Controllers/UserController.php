@@ -13,7 +13,10 @@ class UserController extends Controller
 {
     private $pag = 5;
 
-    public function index(){
+    public function index(Request $request){
+        if($request->session()->get('user_id')){
+            return redirect()->action('ModuleController@index');
+        }
         return view('authentication.login');
     }
 

@@ -93,4 +93,22 @@ class ExpenseController extends Controller
     }
 
 
+
+    public function last_expenses(){
+        $expenses = $this->expense->last_expenses();
+        return $expenses;
+    }
+
+
+    public function expense_by_day(){
+        $expenses = $this->expense->expense_by_day();
+        return $expenses;
+    }
+
+    public function report_expense_by_cateogry(){
+        $expenses = $this->expense->report_expense_by_cateogry();
+        return $expenses;
+    }
+
+
 }

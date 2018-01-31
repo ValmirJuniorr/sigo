@@ -2,6 +2,7 @@
 
 @section('custom-css')
     <link rel="stylesheet" href="{{asset('css/module.css')}}">
+
     @endsection
 
 @section('content')
@@ -42,14 +43,14 @@
                                                 <th>Detalhes</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="aparence hide">
                                             @foreach ($expenses as $expense)
                                                 <tr role="row" class="even {{ $expense->expire_expense_date < \Carbon\Carbon::now()->format('Y-m-d') ? 'bg-danger' : '' }}" >
                                                     <td>{{ $expense->id }}</td>
                                                     <td>{{ $expense->expense_category->name}}</td>
                                                     <td>{{ $expense->price }}</td>
                                                     <td>{{ Carbon\Carbon::parse($expense->expire_expense_date)->format('d-m-Y') }}</td>
-                                                    <td>{{ $expense->description }}</td>
+                                                    <td>{{ str_limit($expense->description,30) }}</td>
                                                     <td class="center-elements">
                                                         <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ExpenseController@show_expense", ['id' => base64_encode($expense->id)])}}">Editar</a>
                                                     </td>
@@ -66,6 +67,7 @@
             </div>
         </section>
     </div>
+
     </body>
 @endsection
 
