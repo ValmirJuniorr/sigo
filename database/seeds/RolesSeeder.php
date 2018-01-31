@@ -75,7 +75,6 @@ class RolesSeeder extends Seeder
             ]
         );
 
-
         Role::updateOrCreate(
             [
                 'id' => 6
