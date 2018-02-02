@@ -7,8 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Procedure extends Model implements Crud
 {
+    const STORE_PROCEDURE = 'read_procedure';
+
+    const UPDATE_PROCEDURE = 'update_procedure';
+
+    const DELETE_PROCEDURE = 'delete_procedure';
+
+    const READ_PROCEDURE = 'read_procedure';
+
+
     protected $fillable = array(
         'name',
+        'price',
         'procedure_time'
     );
 

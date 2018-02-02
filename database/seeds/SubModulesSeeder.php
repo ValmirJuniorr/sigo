@@ -53,5 +53,19 @@ class SubModulesSeeder extends Seeder
                 'sub_module_category_id' => 1
             ]
         );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 4
+            ],
+            [
+                'id' => 4,
+                'name' => 'Procedimentos',
+                'url' => 'ProcedureController@read_procedure',
+                'icon' => 'people',
+                'module_id' => 1,
+                'sub_module_category_id' => 1
+            ]
+        );
     }
 }

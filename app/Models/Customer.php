@@ -81,7 +81,9 @@ class Customer extends Model implements Crud
 
     public function remove($object_id, $arguments = [])
     {
-        // TODO: Implement remove() method.
+        $customer = Customer::findOrFail($object_id);
+        $customer->activated = false;
+        return $customer->save();
     }
 
     public function edit($object, $arguments = [])
@@ -139,16 +141,16 @@ class Customer extends Model implements Crud
         return [
             'name' => 'required',
             'address' => 'required|max:200|min:0',
-            'email' => 'required',
+            'email' => '',
             'cpf' => 'required|unique:customers,cpf,'.$id,
             'rg' => 'required|unique:customers,rg,'.$id,
-            'phone' => 'required',
-            'cell_phone' => 'required',
+            'phone' => '',
+            'cell_phone' => '',
             'birth_date' => 'required',
             'city' => 'required',
-            'neighborhood' => 'required',
+            'neighborhood' => '',
             'cep' => 'required',
-            'uf' => 'required',
+            'uf' => '',
             'gender' => 'required',
         ];
     }

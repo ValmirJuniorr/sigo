@@ -12,9 +12,17 @@ class ProcedureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function read_procedure()
     {
-        //
+        try{
+            $customer = new Customer();
+            $customers = $customer->read_all()->get();
+            return view('customer.index', ['customers' => $customers]);
+        }catch (GeneralException $ge){
+            return back()->withErrors($ge->getMessage());
+        } catch (Exception $e){
+            return back()->withErrors("Erro Interno");
+        }
     }
 
     /**

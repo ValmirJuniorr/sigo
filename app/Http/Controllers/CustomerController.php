@@ -93,7 +93,9 @@ class CustomerController extends Controller
     public function delete_customer(Request $request){
         try{
             $id = base64_decode($request->input('id'));
-
+            $customer = new Customer();
+            $customer->remove($id);
+            return redirect('/customer/read_customer');
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
         }catch (Exception $e){

@@ -97,6 +97,42 @@ Route::group(['middleware' => ['check_login']], function () {
             ['uses' => 'CustomerController@update',
                 'role' => Customer::UPDATE_CUSTOMER
             ]);
+<<<<<<< Updated upstream
+=======
+
+        /* Procedimentos */
+
+        Route::get('/procedures/read_procedure', [
+            'uses' => 'ProcedureController@read_procedure',
+            'role' => Customer::READ_PROCEDURE
+        ]);
+
+        Route::get('/procedures/create_procedure',
+            ['uses' =>'ProcedureController@create_procedure',
+                'role' => Customer::STORE_PROCEDURE
+            ]);
+
+        Route::post('/procedures/store',
+            ['uses' =>'ProcedureController@store',
+                'role' => Customer::STORE_PROCEDURE
+            ]);
+
+        Route::get('/procedures/delete_procedure',
+            ['uses' => 'ProcedureController@delete_procedure',
+                'role' => Customer::DELETE_PROCEDURE
+            ]);
+
+        Route::get('/procedures/update_procedure',
+            ['uses' => 'ProcedureController@update_procedure',
+                'role' => Customer::UPDATE_PROCEDURE
+            ]);
+
+        Route::post('/procedures/update',
+            ['uses' => 'ProcedureController@update',
+                'role' => Customer::UPDATE_PROCEDURE
+            ]);
+    });
+>>>>>>> Stashed changes
 
         Route::get('/expense/index',
             ['uses' => 'ExpenseController@index',

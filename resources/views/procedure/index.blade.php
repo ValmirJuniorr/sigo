@@ -14,11 +14,11 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Clientes</h3>
+                            <h3 class="box-title">Procedimentos</h3>
                             <div class="box-tools pull-right">
                                 @role('store_customer')
                                 <a href="{{ action('CustomerController@create_customer') }}" class="btn btn-success btn-block ad-click-event">
-                                        Novo Cliente
+                                        Novo Procedimento
                                 </a>
                                 @endrole
                             </div>
@@ -34,26 +34,20 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Nome</th>
-                                                    <th>Cidade</th>
-                                                    <th>Bairro</th>
-                                                    <th>Rua</th>
-                                                    <th>Data de Nascimento</th>
-                                                    <th>Editar</th>
-                                                    <th>Excluir</th>
+                                                    <th>Tempo</th>
+                                                    <th>Preço</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($customers as $customer)
+                                                @foreach($procedures as $procedure)
                                                     <tr>
                                                         <td>{{$customer->id}}</td>
                                                         <td>{{$customer->name}}</td>
-                                                        <td>{{$customer->city}}</td>
-                                                        <td>{{$customer->neighborhood}}</td>
-                                                        <td>{{$customer->address}}</td>
-                                                        <td>{{$customer->birth_date}}</td>
+                                                        <td>{{$customer->price}}</td>
+                                                        <td>{{$customer->procedure_time}}</td>
                                                         @role('update_customer')
                                                         <td class="center-elements">
-                                                            <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("CustomerController@update_customer", ['id' => base64_encode($customer->id)])}}">Editar</a>
+                                                            <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("CustomerController@update_customer", ['id' => base64_encode($procedure->id)])}}">Editar</a>
                                                         </td>
                                                         @endrole
                                                         @role('delete_customer')

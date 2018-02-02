@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Procedure;
 use App\Models\Expensive\Expense;
 use App\Models\Customer;
 use App\Models\Role;
@@ -156,6 +157,54 @@ class RolesSeeder extends Seeder
                 'name' => Customer::DELETE_CUSTOMER,
                 'display' => 'Regra possibilita usuários criar novos clientes',
                 'sub_module_id' => 2
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 13
+            ],
+            [
+                'id' => 13,
+                'name' => Procedure::READ_PROCEDURE,
+                'display' => 'Regra possibilita usuários ter acesso aos procedimentos do sistema.',
+                'sub_module_id' => 3
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 14
+            ],
+            [
+                'id' => 14,
+                'name' => Procedure::STORE_PROCEDURE,
+                'display' => 'Regra possibilita usuários criar novos procedimentos',
+                'sub_module_id' => 3
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 15
+            ],
+            [
+                'id' => 15,
+                'name' => Procedure::UPDATE_PROCEDURE,
+                'display' => 'Regra possibilita usuários atualizar novos procedimentos',
+                'sub_module_id' => 3
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 16
+            ],
+            [
+                'id' => 16,
+                'name' => Procedure::DELETE_PROCEDURE,
+                'display' => 'Regra possibilita usuários criar novos procedimentos',
+                'sub_module_id' => 3
             ]
         );
     }

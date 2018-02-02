@@ -36,6 +36,7 @@
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 
+<<<<<<< Updated upstream
 <script src="{{asset('js/highcharts/drilldown.js')}}"></script>
 
 <script src="{{asset('js/highcharts/exporting.js')}}"></script>
@@ -43,6 +44,9 @@
 <script src="{{asset('js/highcharts/highcharts.js')}}"></script>
 
 <script src="{{asset('js/highcharts/highcharts-more.js')}}"></script>
+=======
+<script src="{{asset('js/validation/mask.js')}}"></script>
+>>>>>>> Stashed changes
 
 <script>
     $('.dropdown-toggle').dropdown();
@@ -73,8 +77,13 @@
                 }
             }
         );
+<<<<<<< Updated upstream
         $(".aparence").removeClass('hide');
 
+=======
+
+        $('#cpf ').mask('00000-000');
+>>>>>>> Stashed changes
     } );
 </script>
 
