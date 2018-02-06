@@ -34,7 +34,7 @@ class SubModulesSeeder extends Seeder
                 'id' => 2,
                 'name' => 'Clientes',
                 'url' => 'CustomerController@read_customer',
-                'icon' => 'people',
+                'icon' => 'fa fa-user',
                 'module_id' => 1,
                 'sub_module_category_id' => 1
             ]
@@ -48,7 +48,7 @@ class SubModulesSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Despesas',
                 'url' => 'ExpenseController@index',
-                'icon' => 'people',
+                'icon' => 'fa fa-money',
                 'module_id' => 2,
                 'sub_module_category_id' => 1
             ]

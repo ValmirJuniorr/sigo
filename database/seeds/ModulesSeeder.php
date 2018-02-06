@@ -20,7 +20,7 @@ class ModulesSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Gestão de Prontuário',
                 'description' => 'Gerenciamento do atendimento ao Cliente',
-                'color' => '#ccc',
+                'color' => '#3498db',
                 'icon' => '',
             ]
         );
