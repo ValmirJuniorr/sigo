@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Procedure extends Model implements Crud
 {
-    const STORE_PROCEDURE = 'read_procedure';
+    const STORE_PROCEDURE = 'store_procedure';
 
     const UPDATE_PROCEDURE = 'update_procedure';
 
@@ -24,41 +24,33 @@ class Procedure extends Model implements Crud
 
     public function create($object, $arguments = [])
     {
-        // TODO: Implement create() method.
     }
 
     public function remove($object_id, $arguments = [])
     {
-        // TODO: Implement remove() method.
     }
 
     public function edit($object, $arguments = [])
     {
-        // TODO: Implement edit() method.
     }
 
     public function read($object_id, $arguments = [])
     {
-        // TODO: Implement read() method.
     }
 
     public function read_all($arguments = [])
     {
-        // TODO: Implement read_all() method.
     }
 
     public function filter($input = [])
     {
-        // TODO: Implement filter() method.
     }
 
     public function inputs($object)
     {
-        // TODO: Implement inputs() method.
     }
 
     public function rules($id = 0)
     {
-        // TODO: Implement rules() method.
     }
 }
