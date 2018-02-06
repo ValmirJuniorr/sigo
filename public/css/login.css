@@ -64,3 +64,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .login-page{
     background-color: #8CBBAD;
 }
+
+.login-box{
+    margin: 0px auto;
+}

@@ -78,7 +78,7 @@
 
         $(".aparence").removeClass('hide');
 
-        $('#cpf ').mask('00000-000');
+        //$('#cpf').mask('00000-000');
     } );
 </script>
 
