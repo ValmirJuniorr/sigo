@@ -33,7 +33,7 @@ class ModulesSeeder extends Seeder
                 'id' => 2,
                 'name' => 'Gestão Financeira',
                 'description' => 'Controle e gestão das financeias',
-                'color' => '#ccc',
+                'color' => '#27ae60',
                 'icon' => '',
             ]
         );
@@ -46,7 +46,7 @@ class ModulesSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Gestão de Horários',
                 'description' => 'Gestão dos agendamentos dos horarios',
-                'color' => '#ccc',
+                'color' => '#34495e',
                 'icon' => '',
             ]
         );
@@ -59,7 +59,7 @@ class ModulesSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Utilitários',
                 'description' => 'Controler administrativo do sistema',
-                'color' => '#ccc',
+                'color' => '#34495e',
                 'icon' => '',
             ]
         );
