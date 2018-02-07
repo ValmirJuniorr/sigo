@@ -2,11 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\Util\ValidationException;
 use App\Model\Procedure;
+use App\Models\Customer;
+use App\Models\StaffCategory;
 use Illuminate\Http\Request;
 
 class ProcedureController extends Controller
 {
+
+    private $procedure;
+    private $staff_category;
+
+    /**
+     * ProcedureController constructor.
+     */
+    public function __construct()
+    {
+        $this->procedure = new Procedure();
+        $this->staff_category = new StaffCategory();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +31,8 @@ class ProcedureController extends Controller
     public function read_procedure()
     {
         try{
-            $customer = new Customer();
-            $customers = $customer->read_all()->get();
-            return view('customer.index', ['customers' => $customers]);
+            $procedures = $this->procedure->read_all()->get();
+            return view('procedure.index', ['procedures' => $procedures]);
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
         } catch (Exception $e){
@@ -30,9 +45,10 @@ class ProcedureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create_procedure()
     {
-        //
+        $staff_categories = $this->staff_category->read_all();
+        return view('procedure.create',['staff_categories' => $staff_categories]);
     }
 
     /**
@@ -43,7 +59,17 @@ class ProcedureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $this->procedure->name = $request->input('name');
+            $this->procedure->price = $request->input('price');
+            $this->procedure->procedure_time = $request->input('timer');
+            $this->procedure->staff_category_id = $request->input('staff_category_id');
+            if($this->procedure->create($this->procedure)){
+                return redirect('/procedure/read_procedure')->with('success',__('messages.success'));
+            }
+        }catch (ValidationException $e){
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
@@ -52,7 +78,7 @@ class ProcedureController extends Controller
      * @param  \App\Model\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
-    public function show(Procedure $procedure)
+    public function show(Request $request)
     {
         //
     }
@@ -63,7 +89,7 @@ class ProcedureController extends Controller
      * @param  \App\Model\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
-    public function edit(Procedure $procedure)
+    public function update_procedure(Request $request)
     {
         //
     }
@@ -75,7 +101,7 @@ class ProcedureController extends Controller
      * @param  \App\Model\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Procedure $procedure)
+    public function update(Request $request)
     {
         //
     }
@@ -86,7 +112,7 @@ class ProcedureController extends Controller
      * @param  \App\Model\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Procedure $procedure)
+    public function delete(Request $request)
     {
         //
     }

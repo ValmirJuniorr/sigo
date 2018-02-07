@@ -5,9 +5,12 @@
 
     <a href="{{ action('ModuleController@index') }}" class="logo" style="background-color: {{session('module_color')}};">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>SIGO</b></span>
+        {{--<span class="logo-mini"><b>SIGO</b></span>--}}
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>SIGO</b></span>
+        {{--<span class="logo-lg"><b>SIGO</b></span>--}}
+
+        <img src="{{asset('img/logo.png')}}" style="width:48px;">
+
     </a>
 
     <!-- Header Navbar -->

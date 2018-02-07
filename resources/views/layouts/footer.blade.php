@@ -79,6 +79,11 @@
         $(".aparence").removeClass('hide');
 
         //$('#cpf').mask('00000-000');
+
+
+        $('#datetimepicker3').datetimepicker({
+            format: 'LT'
+        });
     } );
 </script>
 

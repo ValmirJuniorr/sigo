@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Models\Util\Crud;
+use App\Models\Util\ValidatorModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Procedure extends Model implements Crud
@@ -16,14 +17,20 @@ class Procedure extends Model implements Crud
     const READ_PROCEDURE = 'read_procedure';
 
 
-    protected $fillable = array(
-        'name',
-        'price',
-        'procedure_time'
+    private $attribute = array(
+        'name' => 'Nome',
+        'price' => 'Preço',
+        'procedure_time' => 'Tempo',
+        'staff_category_id' => 'Categoria'
     );
+
+
 
     public function create($object, $arguments = [])
     {
+        if(ValidatorModel::validation($this->inputs($object),$this->rules(),$this->attribute)){
+            return $object->save();
+        }
     }
 
     public function remove($object_id, $arguments = [])
@@ -40,6 +47,7 @@ class Procedure extends Model implements Crud
 
     public function read_all($arguments = [])
     {
+        return Procedure::where('activated',true)->orderBy('name','desc');
     }
 
     public function filter($input = [])
@@ -48,9 +56,21 @@ class Procedure extends Model implements Crud
 
     public function inputs($object)
     {
+        return [
+            'name' => $object->name,
+            'price' => $object->price,
+            'procedure_time' => $object->procedure_time,
+            'staff_category_id' => $object->staff_category_id,
+        ];
     }
 
     public function rules($id = 0)
     {
+        return [
+            'name' => 'required',
+            'procedure_time' => 'required',
+            'price' => 'required|numeric|min:0',
+            'staff_category_id' => 'required',
+        ];
     }
 }

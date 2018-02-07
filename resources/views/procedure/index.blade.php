@@ -16,8 +16,8 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Procedimentos</h3>
                             <div class="box-tools pull-right">
-                                @role('store_customer')
-                                <a href="{{ action('CustomerController@create_customer') }}" class="btn btn-success btn-block ad-click-event">
+                                @role('store_procedure')
+                                <a href="{{ action('ProcedureController@create_procedure') }}" class="btn btn-success btn-block ad-click-event">
                                         Novo Procedimento
                                 </a>
                                 @endrole
@@ -36,23 +36,25 @@
                                                     <th>Nome</th>
                                                     <th>Tempo</th>
                                                     <th>Preço</th>
+                                                    <th>Editar</th>
+                                                    <th>Deletar</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 @foreach($procedures as $procedure)
                                                     <tr>
-                                                        <td>{{$customer->id}}</td>
-                                                        <td>{{$customer->name}}</td>
-                                                        <td>{{$customer->price}}</td>
-                                                        <td>{{$customer->procedure_time}}</td>
-                                                        @role('update_customer')
+                                                        <td>{{$procedure->id}}</td>
+                                                        <td>{{$procedure->name}}</td>
+                                                        <td>{{$procedure->procedure_time}}</td>
+                                                        <td>{{$procedure->price}}</td>
+                                                        @role('update_procedure')
                                                         <td class="center-elements">
-                                                            <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("CustomerController@update_customer", ['id' => base64_encode($procedure->id)])}}">Editar</a>
+                                                            <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ProcedureController@update_procedure", ['id' => base64_encode($procedure->id)])}}">Editar</a>
                                                         </td>
                                                         @endrole
-                                                        @role('delete_customer')
+                                                        @role('delete_procedure')
                                                         <td class="center-elements">
-                                                            <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Cliente?')" href="{{action("CustomerController@delete_customer", ['id' => base64_encode($customer->id)])}}">Excluir</a>
+                                                            <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Cliente?')" href="{{action("ProcedureController@delete_procedure", ['id' => base64_encode($procedure->id)])}}">Excluir</a>
                                                         </td>
                                                         @endrole()
                                                     </tr>
