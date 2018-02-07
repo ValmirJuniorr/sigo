@@ -102,32 +102,32 @@ Route::group(['middleware' => ['check_login']], function () {
 
         /* Procedimentos */
 
-        Route::get('/procedures/read_procedure', [
+        Route::get('/procedure/read_procedure', [
             'uses' => 'ProcedureController@read_procedure',
             'role' => Procedure::READ_PROCEDURE
         ]);
 
-        Route::get('/procedures/create_procedure',
+        Route::get('/procedure/create_procedure',
             ['uses' =>'ProcedureController@create_procedure',
                 'role' => Procedure::STORE_PROCEDURE
             ]);
 
-        Route::post('/procedures/store',
+        Route::post('/procedure/store',
             ['uses' =>'ProcedureController@store',
                 'role' => Procedure::STORE_PROCEDURE
             ]);
 
-        Route::get('/procedures/delete_procedure',
+        Route::get('/procedure/delete_procedure',
             ['uses' => 'ProcedureController@delete_procedure',
                 'role' => Procedure::DELETE_PROCEDURE
             ]);
 
-        Route::get('/procedures/update_procedure',
+        Route::get('/procedure/update_procedure',
             ['uses' => 'ProcedureController@update_procedure',
                 'role' => Procedure::UPDATE_PROCEDURE
             ]);
 
-        Route::post('/procedures/update',
+        Route::post('/procedure/update',
             ['uses' => 'ProcedureController@update',
                 'role' => Procedure::UPDATE_PROCEDURE
             ]);
