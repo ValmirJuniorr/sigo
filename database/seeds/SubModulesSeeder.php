@@ -67,5 +67,19 @@ class SubModulesSeeder extends Seeder
                 'sub_module_category_id' => 1
             ]
         );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 5
+            ],
+            [
+                'id' => 5,
+                'name' => 'Prontuários',
+                'url' => 'TransactionController@read_transaction',
+                'icon' => 'far fa-tasks',
+                'module_id' => 1,
+                'sub_module_category_id' => 1
+            ]
+        );
     }
 }

@@ -13,6 +13,7 @@
 
 
 use App\Model\Procedure;
+use App\Model\Transaction;
 use App\Models\Customer;
 use App\Models\Expensive\Expense;
 use App\Models\User;
@@ -156,6 +157,40 @@ Route::group(['middleware' => ['check_login']], function () {
         Route::post('/expense/edit_expense',[
             'uses' => 'ExpenseController@edit_expense',
             'role' => Expense::UPDATE_EXPENSE]);
+
+
+        /* Transações */
+
+        Route::get('/transaction/read_transaction', [
+            'uses' => 'TransactionController@read_transaction',
+            'role' => Transaction::READ_TRANSACTION
+        ]);
+
+        Route::get('/transaction/create_transaction',
+            ['uses' =>'TransactionController@create_transaction',
+                'role' => Transaction::STORE_TRANSACTION
+            ]);
+
+        Route::post('/transaction/transaction',
+            ['uses' =>'TransactionController@transaction',
+                'role' => Transaction::STORE_TRANSACTION
+            ]);
+
+        Route::get('/transaction/delete_transaction',
+            ['uses' => 'TransactionController@delete_transaction',
+                'role' => Transaction::DELETE_TRANSACTION
+            ]);
+
+        Route::get('/transaction/update_transaction',
+            ['uses' => 'TransactionController@update_transaction',
+                'role' => Transaction::UPDATE_TRANSACTION
+            ]);
+
+        Route::post('/transaction/update',
+            ['uses' => 'TransactionController@update',
+                'role' => Transaction::UPDATE_TRANSACTION
+            ]);
+
     });
 
 });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Model\Procedure;
+use App\Model\Transaction;
 use App\Models\Expensive\Expense;
 use App\Models\Customer;
 use App\Models\Role;
@@ -168,7 +169,7 @@ class RolesSeeder extends Seeder
                 'id' => 13,
                 'name' => Procedure::READ_PROCEDURE,
                 'display' => 'Regra possibilita usuários ter acesso aos procedimentos do sistema.',
-                'sub_module_id' => 3
+                'sub_module_id' => 4
             ]
         );
 
@@ -180,7 +181,7 @@ class RolesSeeder extends Seeder
                 'id' => 14,
                 'name' => Procedure::STORE_PROCEDURE,
                 'display' => 'Regra possibilita usuários criar novos procedimentos',
-                'sub_module_id' => 3
+                'sub_module_id' => 4
             ]
         );
 
@@ -192,7 +193,7 @@ class RolesSeeder extends Seeder
                 'id' => 15,
                 'name' => Procedure::UPDATE_PROCEDURE,
                 'display' => 'Regra possibilita usuários atualizar novos procedimentos',
-                'sub_module_id' => 3
+                'sub_module_id' => 4
             ]
         );
 
@@ -203,8 +204,56 @@ class RolesSeeder extends Seeder
             [
                 'id' => 16,
                 'name' => Procedure::DELETE_PROCEDURE,
-                'display' => 'Regra possibilita usuários criar novos procedimentos',
-                'sub_module_id' => 3
+                'display' => 'Regra possibilita usuários deletar os clientes',
+                'sub_module_id' => 4
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 17
+            ],
+            [
+                'id' => 17,
+                'name' => Transaction::READ_TRANSACTION,
+                'display' => 'Regra possibilita usuários ter acesso as transações dos clientes.',
+                'sub_module_id' => 5
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 18
+            ],
+            [
+                'id' => 18,
+                'name' => Transaction::STORE_TRANSACTION,
+                'display' => 'Regra possibilita usuários adicionar novas transações para os clientes',
+                'sub_module_id' => 5
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 19
+            ],
+            [
+                'id' => 19,
+                'name' => Transaction::UPDATE_TRANSACTION,
+                'display' => 'Regra possibilita usuários atualizar os tratamentos dos clientes',
+                'sub_module_id' => 5
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 20
+            ],
+            [
+                'id' => 20,
+                'name' => Transaction::DELETE_TRANSACTION,
+                'display' => 'Regra possibilita usuários deletar as transações dos clientes',
+                'sub_module_id' => 5
             ]
         );
     }

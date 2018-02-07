@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Transaction;
+use App\Model\Transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -12,9 +12,17 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function read_transaction()
     {
-        //
+        try{
+            $transaction = new Transaction();
+          //  $transactions = $transaction->read_all()->get();
+            return view('transaction.index', ['transactions' => '']);
+        }catch (GeneralException $ge){
+            return back()->withErrors($ge->getMessage());
+        } catch (Exception $e){
+            return back()->withErrors("Erro Interno");
+        }
     }
 
     /**
@@ -22,7 +30,7 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create_customer()
     {
         //
     }
@@ -55,7 +63,7 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function update(Transaction $transaction)
     {
         //
     }
@@ -67,7 +75,7 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update_customer(Request $request, Transaction $transaction)
     {
         //
     }
@@ -78,7 +86,7 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function delete_customer(Transaction $transaction)
     {
         //
     }

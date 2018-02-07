@@ -13,7 +13,14 @@ class Transaction extends Model implements Crud
         'description'
     );
 
-    protected $table = TransactionContract::TABLE_NAME;
+    const STORE_TRANSACTION = 'store_transaction';
+
+    const UPDATE_TRANSACTION = 'update_transaction';
+
+    const DELETE_TRANSACTION = 'delete_transaction';
+
+    const READ_TRANSACTION = 'read_transaction';
+
 
     public function create($object, $arguments = [])
     {
