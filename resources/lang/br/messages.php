@@ -12,6 +12,8 @@ return [
 
     'invalid_operation' => 'Operação Inválida',
 
-    'success' => 'Operação realizada com sucesso'
+    'success' => 'Operação realizada com sucesso',
+
+    'internal_error' => "Erro Interno"
 
 ];

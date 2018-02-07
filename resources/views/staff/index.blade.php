@@ -14,10 +14,10 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Especialistas</h3>
-                            <div class="box-tools pull-right" style="margin-top:2px;">
-                                <a href="{{ action('StaffController@create_staff') }}" class="btn btn-success btn-sm ad-click-event">
-                                        Novo Especialista
+                            <h3 class="box-title">Funcionários</h3>
+                            <div class="box-tools pull-right">
+                                <a href="{{ action('StaffController@create_staff') }}" class="btn btn-success btn-block ad-click-event">
+                                    Novo Funcionário
                                 </a>
                             </div>
                         </div>
@@ -34,6 +34,8 @@
                                                     <th>Nome</th>
                                                     <th>Documento</th>
                                                     <th>UF</th>
+                                                    <th>Editar</th>
+                                                    <th>Excluir</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -43,11 +45,12 @@
                                                         <td>{{$staff->name}}</td>
                                                         <td>{{$staff->document}}</td>
                                                         <td>{{$staff->uf}}</td>
+
                                                         <td class="center-elements">
                                                             <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("StaffController@update_staff", ['id' => base64_encode($staff->id)])}}">Editar</a>
                                                         </td>
                                                         <td class="center-elements">
-                                                            <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Especialista?')" href="{{action("StaffController@delete_staff", ['id' => base64_encode($staff->id)])}}">Excluir</a>
+                                                            <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Funcionário?')" href="{{action("StaffController@delete_staff", ['id' => base64_encode($staff->id)])}}">Excluir</a>
                                                         </td>
                                                     </tr>
 

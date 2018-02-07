@@ -1,5 +1,6 @@
 <label>UF</label>
 <select name="uf" class="form-control">
+    <option value="{{$value}}" selected>{{$value}}</option>
     <option value="">Selecione</option>
     <option value="AC">AC</option>
     <option value="AL">AL</option>
