@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Util\ValidationException;
-use App\Models\Staff;
+use App\Models\StaffCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 
-class StaffController extends Controller
+
+class StaffCategoryController extends Controller
 {
-
-    private $staff;
+    private $staff_category;
 
     /**
      * StaffController constructor.
      */
     public function __construct()
     {
-        $this->staff = new Staff();
+        $this->staff_category = new StaffCategory();
     }
 
 
-    public function read_staff(){
+    public function read_staff_category(){
         try{
-            return view('staff.index', ['staffs' => $this->staff->read_all()->get()]);
+            return view('staff_category.index', ['staff_categories' => $this->staff_category->read_all()->get()]);
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
         } catch (Exception $e){
@@ -31,17 +32,15 @@ class StaffController extends Controller
     }
 
 
-    public function create_staff(){
-        return view('staff.create',['staff' => $this->staff]);
+    public function create_staff_category(){
+        return view('staff_category.create',['staff_category' => $this->staff_category]);
     }
 
     public function store(Request $request){
         try{
-            $this->staff->name = $request->input('name');
-            $this->staff->document = $request->input('document');
-            $this->staff->uf = $request->input('uf');
-            $this->staff->create($this->staff);
-            return redirect('/staff/read_staff');
+            $this->staff_category->name = $request->input('name');
+            $this->staff_category->create($this->staff_category);
+            return redirect('/staff_category/read_staff_category');
         }catch (ValidationException $ve){
             return back()->withErrors($ve->getMessage())->withInput();
         }catch (Exception $e){
@@ -50,10 +49,10 @@ class StaffController extends Controller
     }
 
 
-    public function update_staff(Request $request){
+    public function update_staff_category(Request $request){
         try{
             $id = base64_decode($request->input('id'));
-            return view('staff.update', ['staff' => $this->staff->read($id)]);
+            return view('staff_category.update', ['staff_category' => $this->staff_category->read($id)]);
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
         }catch (Exception $e){
@@ -63,12 +62,10 @@ class StaffController extends Controller
 
     public function update(Request $request){
         try{
-            $this->staff->id = $request->input('id');
-            $this->staff->name = $request->input('name');
-            $this->staff->document = $request->input('document');
-            $this->staff->uf = $request->input('uf');
-            $this->staff->edit($this->staff);
-            return redirect('/staff/read_staff');
+            $this->staff_category->id = $request->input('id');
+            $this->staff_category->name = $request->input('name');
+            $this->staff_category->edit($this->staff_category);
+            return redirect('/staff_category/read_staff_category');
         }catch (ValidationException $ve){
             return back()->withErrors($ve->getMessage());
         }catch (\Exception $e){
@@ -76,11 +73,11 @@ class StaffController extends Controller
         }
     }
 
-    public function delete_staff(Request $request){
+    public function delete_staff_category(Request $request){
         try{
-            $staff_id = base64_decode($request->input('id'));
-            if ($this->staff->remove($staff_id)){
-                return redirect('/staff/read_staff')->with('success',__('messages.success'));
+            $staff_category_id = base64_decode($request->input('id'));
+            if ($this->staff_category->remove($staff_category_id)){
+                return redirect('/staff_category/read_staff_category')->with('success',__('messages.success'));
             }
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
@@ -88,4 +85,5 @@ class StaffController extends Controller
             return back()->withErrors(Lang::get('messages.internal_error'));
         }
     }
+
 }

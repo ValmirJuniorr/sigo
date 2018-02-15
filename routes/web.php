@@ -223,3 +223,17 @@ Route::get('/staff/update_staff' , 'StaffController@update_staff');
 Route::post('/staff/update'      , 'StaffController@update');
 
 
+
+Route::get('/staff_category/read_staff_category'   , 'StaffCategoryController@read_staff_category');
+
+Route::get('/staff_category/create_staff_category' , 'StaffCategoryController@create_staff_category');
+
+Route::post('/staff_category/store'                , 'StaffCategoryController@store');
+
+Route::get('/staff_category/delete_staff_category' , 'StaffCategoryController@delete_staff_category');
+
+Route::get('/staff_category/update_staff_category' , 'StaffCategoryController@update_staff_category');
+
+Route::post('/staff_category/update'               , 'StaffCategoryController@update');
+
+

@@ -7,6 +7,6 @@
  */
 
 return [
-    'Staffs' => 'Especialistas'
-
+    'staffs' => 'Especialistas',
+    'new_staff' => 'Novo Funcionário'
 ];

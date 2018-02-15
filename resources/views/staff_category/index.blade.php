@@ -14,10 +14,10 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">{{Lang::get('staff.staffs')}}</h3>
+                            <h3 class="box-title">{{Lang::get('staff_category.staff_categories')}}</h3>
                             <div class="box-tools pull-right">
-                                <a href="{{ action('StaffController@create_staff') }}" class="btn btn-success btn-block ad-click-event">
-                                    {{Lang::get('staff.new_staff')}}
+                                <a href="{{ action('StaffCategoryController@create_staff_category') }}" class="btn btn-success btn-block ad-click-event">
+                                    {{Lang::get('staff_category.new_staff_categories')}}
                                 </a>
                             </div>
                         </div>
@@ -32,28 +32,23 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Nome</th>
-                                                    <th>Documento</th>
-                                                    <th>UF</th>
                                                     <th>Editar</th>
                                                     <th>Excluir</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($staffs as $staff)
+                                                @foreach($staff_categories as $staff_category)
                                                     <tr>
-                                                        <td>{{$staff->id}}</td>
-                                                        <td>{{$staff->name}}</td>
-                                                        <td>{{$staff->document}}</td>
-                                                        <td>{{$staff->uf}}</td>
+                                                        <td>{{$staff_category->id}}</td>
+                                                        <td>{{$staff_category->name}}</td>
 
                                                         <td class="center-elements">
-                                                            <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("StaffController@update_staff", ['id' => base64_encode($staff->id)])}}">Editar</a>
+                                                            <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("StaffCategoryController@update_staff_category", ['id' => base64_encode($staff_category->id)])}}">Editar</a>
                                                         </td>
                                                         <td class="center-elements">
-                                                            <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Funcionário?')" href="{{action("StaffController@delete_staff", ['id' => base64_encode($staff->id)])}}">Excluir</a>
+                                                            <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir a Categoria de  funcionário?')" href="{{action("StaffCategoryController@delete_staff_category", ['id' => base64_encode($staff_category->id)])}}">Excluir</a>
                                                         </td>
                                                     </tr>
-
                                                 @endforeach
                                                 </tbody>
                                             </table>

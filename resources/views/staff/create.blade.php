@@ -1,1 +1,1 @@
-@include('staff.form',['staff' => $staff , 'action' => 'StaffController@store' , 'actionName' => Lang::get('crud.create')])
+@include('staff.form',['staff' => $staff , 'action' => 'StaffController@store' , 'actionName' => Lang::get('crud.Create')])
