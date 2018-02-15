@@ -6,6 +6,7 @@ use App\Exceptions\Util\ValidationException;
 use App\Model\Procedure;
 use App\Models\Customer;
 use App\Models\StaffCategory;
+use App\Models\Util\Constants;
 use Illuminate\Http\Request;
 
 class ProcedureController extends Controller
@@ -48,7 +49,8 @@ class ProcedureController extends Controller
     public function create_procedure()
     {
         $staff_categories = $this->staff_category->read_all();
-        return view('procedure.create',['staff_categories' => $staff_categories]);
+        $procedure = new Procedure();
+        return view('procedure.create',['staff_categories' => $staff_categories, 'procedure' => $procedure]);
     }
 
     /**
@@ -78,9 +80,16 @@ class ProcedureController extends Controller
      * @param  \App\Model\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show_procedure(Request $request)
     {
-        //
+        try{
+            $id = base64_decode($request->input('id'));
+            $procedure = $this->procedure->read($id);
+            $staff_categories = $this->staff_category->read_all();
+            return view('procedure.update')->with(array('procedure' => $procedure,'staff_categories' => $staff_categories));
+        }catch (\Exception $e){
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
@@ -89,21 +98,14 @@ class ProcedureController extends Controller
      * @param  \App\Model\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
-    public function update_procedure(Request $request)
+    public function edit_procedure(Request $request)
     {
-        //
-    }
+        try{
+            $id = base64_decode($request->input('id'));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Procedure  $procedure
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        //
+        }catch (\Exception $e){
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
@@ -112,8 +114,14 @@ class ProcedureController extends Controller
      * @param  \App\Model\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request)
+    public function delete_procedure(Request $request)
     {
-        //
+        try{
+            $this->procedure->remove(base64_decode($request->input('id')));
+            return back()->with(Constants::SUCCESS ,__('messages.success'));
+        }catch (\Exception $e){
+            return back()->withErrors($e->getMessage());
+        }
+
     }
 }

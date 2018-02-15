@@ -123,12 +123,12 @@ Route::group(['middleware' => ['check_login']], function () {
             ]);
 
         Route::get('/procedure/update_procedure',
-            ['uses' => 'ProcedureController@update_procedure',
+            ['uses' => 'ProcedureController@show_procedure',
                 'role' => Procedure::UPDATE_PROCEDURE
             ]);
 
         Route::post('/procedure/update',
-            ['uses' => 'ProcedureController@update',
+            ['uses' => 'ProcedureController@edit_procedure',
                 'role' => Procedure::UPDATE_PROCEDURE
             ]);
 

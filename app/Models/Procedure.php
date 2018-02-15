@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Models\StaffCategory;
 use App\Models\Util\Crud;
 use App\Models\Util\ValidatorModel;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +25,9 @@ class Procedure extends Model implements Crud
         'staff_category_id' => 'Categoria'
     );
 
-
+    public function staff_category(){
+        return  $this->belongsTo(StaffCategory::class);
+    }
 
     public function create($object, $arguments = [])
     {
@@ -35,14 +38,19 @@ class Procedure extends Model implements Crud
 
     public function remove($object_id, $arguments = [])
     {
+        $procedure = Procedure::findorFail($object_id);
+        $procedure->activated = false;
+        return $procedure->save();
     }
 
     public function edit($object, $arguments = [])
     {
+
     }
 
     public function read($object_id, $arguments = [])
     {
+        return Procedure::findOrFail($object_id);
     }
 
     public function read_all($arguments = [])

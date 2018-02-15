@@ -18,4 +18,6 @@ class Constants
     CONST ERROR = "ERROR";
 
     CONST MESSAGE = "MESSAGE";
+
+    CONST SUCCESS = 'success';
 }

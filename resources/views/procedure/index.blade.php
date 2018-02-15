@@ -49,12 +49,12 @@
                                                         <td>{{$procedure->price}}</td>
                                                         @role('update_procedure')
                                                         <td class="center-elements">
-                                                            <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ProcedureController@update_procedure", ['id' => base64_encode($procedure->id)])}}">Editar</a>
+                                                            <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ProcedureController@show_procedure", ['id' => base64_encode($procedure->id)])}}">Editar</a>
                                                         </td>
                                                         @endrole
                                                         @role('delete_procedure')
                                                         <td class="center-elements">
-                                                            <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Cliente?')" href="{{action("ProcedureController@delete_procedure", ['id' => base64_encode($procedure->id)])}}">Excluir</a>
+                                                            <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Procedimento?')" href="{{action("ProcedureController@delete_procedure", ['id' => base64_encode($procedure->id)])}}">Excluir</a>
                                                         </td>
                                                         @endrole()
                                                     </tr>
