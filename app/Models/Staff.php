@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Model\Transaction;
 use App\Models\Util\Crud;
 use App\Models\Util\ValidatorModel;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,9 @@ class Staff extends Model implements Crud {
 
     const READ_STAFF = 'read_staff';
 
+    public function transaction(){
+        return $this->belongsToMany(Transaction::class);
+    }
 
     /**
      * Nome do modelo para serem gerados os logs.

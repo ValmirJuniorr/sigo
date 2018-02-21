@@ -36,7 +36,7 @@
                                                     <th>Cliente</th>
                                                     <th>Cpf</th>
                                                     <th>Cidade</th>
-                                                    <th>Detalhes</th>
+                                                    <th>Prontuário</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>

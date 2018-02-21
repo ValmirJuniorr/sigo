@@ -204,6 +204,15 @@ Route::get('/expense/expense_by_day', 'ExpenseController@expense_by_day');
 
 Route::get('teste',function (){
 
+    $transaction = new Transaction();
+    $customer = new Customer();
+
+    return $customer->read_customer_by_transaction(1);
+
+    $t = $transaction->read(1);
+
+    return $t->transactionStatus;
+
 
 });
 

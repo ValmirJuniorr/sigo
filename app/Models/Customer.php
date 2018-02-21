@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Model\Transaction;
 use App\Models\Util\Crud;
 use App\Models\Util\ValidatorModel;
 use Illuminate\Database\Eloquent\Model;
@@ -45,6 +46,10 @@ class Customer extends Model implements Crud
 
     public function roles(){
         return $this->belongsToMany(Role::class);
+    }
+
+    public function transaction(){
+        return $this->belongsToMany(Transaction::class);
     }
 
     /**
@@ -110,6 +115,11 @@ class Customer extends Model implements Crud
     public function read($object_id, $arguments = [])
     {
         return Customer::where('activated',true)->where('id',$object_id)->first();
+    }
+
+    public function read_customer_by_transaction($arguments = []){
+        return Customer::join('transactions','transactions.customer_id','=','customers.id')->get();
+
     }
 
     public function filter($input = [])

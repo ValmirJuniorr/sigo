@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +17,8 @@ class TransactionController extends Controller
     {
         try{
             $transaction = new Transaction();
-          //  $transactions = $transaction->read_all()->get();
+            //  $customers
+            //  $transactions = $transaction->read_all()->get();
             return view('transaction.index', ['transactions' => '']);
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());

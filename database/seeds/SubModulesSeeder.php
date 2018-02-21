@@ -62,7 +62,7 @@ class SubModulesSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Procedimentos',
                 'url' => 'ProcedureController@read_procedure',
-                'icon' => 'people',
+                'icon' => 'fa fa-list',
                 'module_id' => 1,
                 'sub_module_category_id' => 1
             ]
@@ -76,7 +76,7 @@ class SubModulesSeeder extends Seeder
                 'id' => 5,
                 'name' => 'Prontuários',
                 'url' => 'TransactionController@read_transaction',
-                'icon' => 'far fa-tasks',
+                'icon' => 'fa fa-tasks',
                 'module_id' => 1,
                 'sub_module_category_id' => 1
             ]

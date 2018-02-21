@@ -29,6 +29,10 @@ class Procedure extends Model implements Crud
         return  $this->belongsTo(StaffCategory::class);
     }
 
+    public function transaction(){
+        return $this->belongsToMany(Transaction::class);
+    }
+
     public function create($object, $arguments = [])
     {
         if(ValidatorModel::validation($this->inputs($object),$this->rules(),$this->attribute)){
