@@ -5,6 +5,8 @@ use App\Model\Transaction;
 use App\Models\Expensive\Expense;
 use App\Models\Customer;
 use App\Models\Role;
+use App\Models\Staff;
+use App\Models\StaffCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -256,5 +258,103 @@ class RolesSeeder extends Seeder
                 'sub_module_id' => 5
             ]
         );
+
+        Role::updateOrCreate(
+            [
+                'id' => 21
+            ],
+            [
+                'id' => 21,
+                'name' => Staff::READ_STAFF,
+                'display' => 'Regra possibilita usuários ter acesso as informações dos funcionários',
+                'sub_module_id' => 6
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 22
+            ],
+            [
+                'id' => 22,
+                'name' => Staff::STORE_STAFF,
+                'display' => 'Regra possibilita usuários adcionar novos funcionários',
+                'sub_module_id' => 6
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 23
+            ],
+            [
+                'id' => 23,
+                'name' => Staff::UPDATE_STAFF,
+                'display' => 'Regra possibilita usuários atualizar as informações dos funcionários',
+                'sub_module_id' => 6
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 24
+            ],
+            [
+                'id' => 24,
+                'name' => Staff::DELETE_STAFF,
+                'display' => 'Regra possibilita usuários deletar os funcionários',
+                'sub_module_id' => 6
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 25
+            ],
+            [
+                'id' => 25,
+                'name' => StaffCategory::READ_STAFF_CATEGORY,
+                'display' => 'Regra possibilita usuários ter acesso as informações das categorias de funcionários',
+                'sub_module_id' => 7
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 26
+            ],
+            [
+                'id' => 26,
+                'name' => StaffCategory::STORE_STAFF_CATEGORY,
+                'display' => 'Regra possibilita usuários adcionar novas categorias de funcionários',
+                'sub_module_id' => 7
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 27
+            ],
+            [
+                'id' => 27,
+                'name' => StaffCategory::UPDATE_STAFF_CATEGORY,
+                'display' => 'Regra possibilita usuários atualizar as informações das categorias de funcionários',
+                'sub_module_id' => 7
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 28
+            ],
+            [
+                'id' => 28,
+                'name' => StaffCategory::DELETE_STAFF_CATEGORY,
+                'display' => 'Regra possibilita usuários deletar as categorias de funcionários',
+                'sub_module_id' => 7
+            ]
+        );
+
+
     }
 }

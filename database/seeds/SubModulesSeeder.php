@@ -81,5 +81,33 @@ class SubModulesSeeder extends Seeder
                 'sub_module_category_id' => 1
             ]
         );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 6
+            ],
+            [
+                'id' => 6,
+                'name' => 'Funcionários',
+                'url' => 'StaffController@read_staff',
+                'icon' => 'fa fa-user-md',
+                'module_id' => 4,
+                'sub_module_category_id' => 1
+            ]
+        );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 7
+            ],
+            [
+                'id' => 7,
+                'name' => 'Categoria de Funcionários',
+                'url' => 'StaffCategoryController@read_staff_category',
+                'icon' => 'fa fa-sticky-note',
+                'module_id' => 4,
+                'sub_module_category_id' => 1
+            ]
+        );
     }
 }

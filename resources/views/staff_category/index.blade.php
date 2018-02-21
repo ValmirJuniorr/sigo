@@ -16,9 +16,11 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">{{Lang::get('staff_category.staff_categories')}}</h3>
                             <div class="box-tools pull-right">
+                                @role('store_staff_category')
                                 <a href="{{ action('StaffCategoryController@create_staff_category') }}" class="btn btn-success btn-block ad-click-event">
                                     {{Lang::get('staff_category.new_staff_categories')}}
                                 </a>
+                                @endrole
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -43,10 +45,14 @@
                                                         <td>{{$staff_category->name}}</td>
 
                                                         <td class="center-elements">
+                                                            @role('update_staff_category')
                                                             <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("StaffCategoryController@update_staff_category", ['id' => base64_encode($staff_category->id)])}}">Editar</a>
+                                                            @endrole
                                                         </td>
                                                         <td class="center-elements">
+                                                            @role('delete_staff_category')
                                                             <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir a Categoria de  funcionário?')" href="{{action("StaffCategoryController@delete_staff_category", ['id' => base64_encode($staff_category->id)])}}">Excluir</a>
+                                                            @endrole
                                                         </td>
                                                     </tr>
                                                 @endforeach

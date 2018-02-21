@@ -16,6 +16,8 @@ use App\Model\Procedure;
 use App\Model\Transaction;
 use App\Models\Customer;
 use App\Models\Expensive\Expense;
+use App\Models\Staff;
+use App\Models\StaffCategory;
 use App\Models\User;
 
 Route::get('/','UserController@index');
@@ -191,6 +193,71 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Transaction::UPDATE_TRANSACTION
             ]);
 
+        /*Staffs */
+
+        Route::get('/staff/read_staff',[
+            'uses' => 'StaffController@read_staff',
+            'role' => Staff::READ_STAFF
+        ]);
+
+
+        Route::get('/staff/create_staff',[
+            'uses' => 'StaffController@create_staff',
+            'role' => Staff::STORE_STAFF
+        ]);
+
+
+        Route::post('/staff/store',[
+            'uses' => 'StaffController@store',
+            'role' => Staff::STORE_STAFF
+        ]);
+
+        Route::get('/staff/delete_staff',[
+            'uses' => 'StaffController@delete_staff',
+            'role' => Staff::DELETE_STAFF
+        ]);
+
+        Route::get('/staff/update_staff',[
+            'uses' => 'StaffController@update_staff',
+            'role' => Staff::UPDATE_STAFF
+        ]);
+
+        Route::post('/staff/update',[
+            'uses' => 'StaffController@update',
+            'role' =>Staff::UPDATE_STAFF
+        ]);
+
+        /* Staff category*/
+        Route::get('/staff_category/read_staff_category',[
+            'uses' => 'StaffCategoryController@read_staff_category',
+            'role' => StaffCategory::READ_STAFF_CATEGORY
+        ]);
+
+        Route::get('/staff_category/create_staff_category',[
+            'uses' => 'StaffCategoryController@create_staff_category',
+            'role' => StaffCategory::STORE_STAFF_CATEGORY
+        ]);
+
+        Route::post('/staff_category/store',[
+            'uses' => 'StaffCategoryController@store',
+            'role' => StaffCategory::STORE_STAFF_CATEGORY
+        ]);
+
+        Route::get('/staff_category/delete_staff_category',[
+            'uses' => 'StaffCategoryController@delete_staff_category',
+            'role' => StaffCategory::DELETE_STAFF_CATEGORY
+        ]);
+
+        Route::get('/staff_category/update_staff_category',[
+            'uses' => 'StaffCategoryController@update_staff_category',
+            'role' => StaffCategory::UPDATE_STAFF_CATEGORY
+        ]);
+
+        Route::post('/staff_category/update',[
+            'uses' => 'StaffCategoryController@update',
+            'role' => StaffCategory::UPDATE_STAFF_CATEGORY
+        ]);
+
     });
 
 });
@@ -212,37 +279,4 @@ Route::get('teste',function (){
     $t = $transaction->read(1);
 
     return $t->transactionStatus;
-
-
 });
-
-
-/* Staff */
-
-Route::get('/staff/read_staff'   , 'StaffController@read_staff');
-
-Route::get('/staff/create_staff' , 'StaffController@create_staff');
-
-Route::post('/staff/store'       , 'StaffController@store');
-
-Route::get('/staff/delete_staff' , 'StaffController@delete_staff');
-
-Route::get('/staff/update_staff' , 'StaffController@update_staff');
-
-Route::post('/staff/update'      , 'StaffController@update');
-
-
-
-Route::get('/staff_category/read_staff_category'   , 'StaffCategoryController@read_staff_category');
-
-Route::get('/staff_category/create_staff_category' , 'StaffCategoryController@create_staff_category');
-
-Route::post('/staff_category/store'                , 'StaffCategoryController@store');
-
-Route::get('/staff_category/delete_staff_category' , 'StaffCategoryController@delete_staff_category');
-
-Route::get('/staff_category/update_staff_category' , 'StaffCategoryController@update_staff_category');
-
-Route::post('/staff_category/update'               , 'StaffCategoryController@update');
-
-
