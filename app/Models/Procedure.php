@@ -49,7 +49,15 @@ class Procedure extends Model implements Crud
 
     public function edit($object, $arguments = [])
     {
+        $procedure_edit = Procedure::findorFail($object->id);
+        $procedure_edit->name = $object->name;
+        $procedure_edit->price = $object->price;
+        $procedure_edit->procedure_time = $object->procedure_time;
+        $procedure_edit->staff_category_id = $object->staff_category_id;
 
+        if(ValidatorModel::validation($this->inputs($procedure_edit),$this->rules($procedure_edit->id),$this->attribute)){
+            return $procedure_edit->save();
+        }
     }
 
     public function read($object_id, $arguments = [])

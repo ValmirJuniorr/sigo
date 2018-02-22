@@ -51,16 +51,18 @@
                                                         <td>{{$customer->neighborhood}}</td>
                                                         <td>{{$customer->address}}</td>
                                                         <td>{{$customer->birth_date}}</td>
-                                                        @role('update_customer')
+
                                                         <td class="center-elements">
+                                                            @role('update_customer')
                                                             <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("CustomerController@update_customer", ['id' => base64_encode($customer->id)])}}">Editar</a>
+                                                            @endrole
                                                         </td>
-                                                        @endrole
-                                                        @role('delete_customer')
                                                         <td class="center-elements">
+                                                            @role('delete_customer')
                                                             <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Cliente?')" href="{{action("CustomerController@delete_customer", ['id' => base64_encode($customer->id)])}}">Excluir</a>
+                                                            @endrole()
                                                         </td>
-                                                        @endrole()
+
                                                     </tr>
 
                                                 @endforeach

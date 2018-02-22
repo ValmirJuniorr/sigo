@@ -52,13 +52,12 @@
                                                             <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ProcedureController@show_procedure", ['id' => base64_encode($procedure->id)])}}">Editar</a>
                                                         </td>
                                                         @endrole
-                                                        @role('delete_procedure')
                                                         <td class="center-elements">
+                                                            @role('delete_procedure')
                                                             <a class="btn btn-danger btn-sm ad-click-event" onclick="return confirm('Você deseja excluir o Procedimento?')" href="{{action("ProcedureController@delete_procedure", ['id' => base64_encode($procedure->id)])}}">Excluir</a>
+                                                            @endrole()
                                                         </td>
-                                                        @endrole()
                                                     </tr>
-
                                                 @endforeach
                                                 </tbody>
                                             </table>

@@ -112,7 +112,6 @@ class Expense extends Model implements Crud
 
     }
 
-
     public function last_expenses(){
         return $this->read_all()->with('expense_category')->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get();
     }
@@ -132,7 +131,6 @@ class Expense extends Model implements Crud
         return $pie_chart;
     }
 
-
     public function expense_by_day(){
 
         $date = Carbon::now()->subDays(15)->format('Y-m-d');
@@ -147,7 +145,10 @@ class Expense extends Model implements Crud
         return $final_result;
     }
 
-
+    public function launch_expenses(){
+        $today = Carbon::now()->format('Y-m-d');
+        return Expense::where('expire_expense_date',$today);
+    }
 
     public function inputs($object)
     {
