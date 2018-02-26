@@ -13,7 +13,7 @@ class StaffCategoryController extends Controller
     private $staff_category;
 
     /**
-     * StaffController constructor.
+     * Constructor.
      */
     public function __construct()
     {

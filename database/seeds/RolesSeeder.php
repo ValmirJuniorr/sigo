@@ -4,6 +4,7 @@ use App\Model\Procedure;
 use App\Model\Transaction;
 use App\Models\Expensive\Expense;
 use App\Models\Customer;
+use App\Models\Expensive\ExpenseCategory;
 use App\Models\Role;
 use App\Models\Staff;
 use App\Models\StaffCategory;
@@ -351,6 +352,56 @@ class RolesSeeder extends Seeder
                 'id' => 28,
                 'name' => StaffCategory::DELETE_STAFF_CATEGORY,
                 'display' => 'Regra possibilita usuários deletar as categorias de funcionários',
+                'sub_module_id' => 7
+            ]
+        );
+
+        /***init here*/
+
+        Role::updateOrCreate(
+            [
+                'id' => 29
+            ],
+            [
+                'id' => 29,
+                'name' => ExpenseCategory::READ_EXPENSE_CATEGORY,
+                'display' => 'Regra possibilita usuários ter acesso as informações das categorias de Despesas',
+                'sub_module_id' => 7
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 30
+            ],
+            [
+                'id' => 30,
+                'name' => ExpenseCategory::STORE_EXPENSE_CATEGORY,
+                'display' => 'Regra possibilita usuários adcionar novas categorias de Despesas',
+                'sub_module_id' => 7
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 31
+            ],
+            [
+                'id' => 31,
+                'name' => ExpenseCategory::UPDATE_EXPENSE_CATEGORY,
+                'display' => 'Regra possibilita usuários atualizar as informações das categorias de Despesas',
+                'sub_module_id' => 7
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 32
+            ],
+            [
+                'id' => 32,
+                'name' => ExpenseCategory::DELETE_EXPENSE_CATEGORY,
+                'display' => 'Regra possibilita usuários deletar as categorias de Despesas',
                 'sub_module_id' => 7
             ]
         );

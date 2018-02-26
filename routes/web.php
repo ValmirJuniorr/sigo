@@ -16,6 +16,7 @@ use App\Model\Procedure;
 use App\Model\Transaction;
 use App\Models\Customer;
 use App\Models\Expensive\Expense;
+use App\Models\Expensive\ExpenseCategory;
 use App\Models\Staff;
 use App\Models\StaffCategory;
 use App\Models\User;
@@ -256,6 +257,38 @@ Route::group(['middleware' => ['check_login']], function () {
         Route::post('/staff_category/update',[
             'uses' => 'StaffCategoryController@update',
             'role' => StaffCategory::UPDATE_STAFF_CATEGORY
+        ]);
+
+        /** Expense Category*/
+
+        Route::get('/expense_category/read_expense_category',[
+            'uses' => 'ExpenseCategoryController@read_expense_category',
+            'role' => ExpenseCategory::READ_EXPENSE_CATEGORY
+        ]);
+
+        Route::get('/expense_category/create_expense_category',[
+            'uses' => 'ExpenseCategoryController@create_expense_category',
+            'role' => ExpenseCategory::STORE_EXPENSE_CATEGORY
+        ]);
+
+        Route::post('/expense_category/store',[
+            'uses' => 'ExpenseCategoryController@store',
+            'role' => ExpenseCategory::STORE_EXPENSE_CATEGORY
+        ]);
+
+        Route::get('/expense_category/delete_expense_category',[
+            'uses' => 'ExpenseCategoryController@delete_expense_category',
+            'role' => ExpenseCategory::DELETE_EXPENSE_CATEGORY
+        ]);
+
+        Route::get('/expense_category/update_expense_category',[
+            'uses' => 'ExpenseCategoryController@update_expense_category',
+            'role' => ExpenseCategory::UPDATE_EXPENSE_CATEGORY
+        ]);
+
+        Route::post('/expense_category/update',[
+            'uses' => 'ExpenseCategoryController@update',
+            'role' => ExpenseCategory::UPDATE_EXPENSE_CATEGORY
         ]);
 
     });

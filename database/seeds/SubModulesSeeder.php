@@ -109,5 +109,19 @@ class SubModulesSeeder extends Seeder
                 'sub_module_category_id' => 1
             ]
         );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 8
+            ],
+            [
+                'id' => 8,
+                'name' => 'Categoria de Despesas',
+                'url' => 'ExpenseCategoryController@read_expense_category',
+                'icon' => 'fa fa-sticky-note',
+                'module_id' => 2,
+                'sub_module_category_id' => 1
+            ]
+        );
     }
 }
