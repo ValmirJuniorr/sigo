@@ -107,6 +107,10 @@ class Expense extends Model implements Crud
         return Expense::orderBy('id','desc')->limit(100);
     }
 
+    public function read_all_routine_expenses(){
+        return Expense::whereNotNull('number_of_days')->whereNotNull('expire_expense_routine_date')->get();
+    }
+
     public function filter($input = [])
     {
 
@@ -146,8 +150,31 @@ class Expense extends Model implements Crud
     }
 
     public function launch_expenses(){
+
         $today = Carbon::now()->format('Y-m-d');
-        return Expense::where('expire_expense_date',$today);
+
+        $expenses = Expense::where('expire_expense_routine_date',$today)->get();
+
+        foreach ($expenses as $expense){
+
+            $object = new Expense();
+
+            $object->expire_expense_date = $expense->expire_expense_routine_date;
+            $object->price = $expense->price;
+            $object->expense_category_id = $expense->expense_category_id;
+            $object->description = $expense->description;
+
+            if(!$object->save())
+                return FALSE;
+
+            $next_date = Carbon::parse($expense->expire_expense_routine_date)->addDays($expense->number_of_days)->format('Y-m-d');
+            $expense->expire_expense_routine_date = $next_date;
+
+            if(!$expense->save())
+                return FALSE;
+
+        }
+        return TRUE;
     }
 
     public function inputs($object)

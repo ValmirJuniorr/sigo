@@ -45,7 +45,7 @@
                                             </thead>
                                             <tbody class="aparence hide">
                                             @foreach ($expenses as $expense)
-                                                <tr role="row" class="even {{ $expense->expire_expense_date < \Carbon\Carbon::now()->format('Y-m-d') ? 'bg-danger' : '' }}" >
+                                                <tr role="row" class="even {{ $expense->expire_expense_date == \Carbon\Carbon::now()->format('Y-m-d') ? 'bg-info' : '' }}" >
                                                     <td>{{ $expense->id }}</td>
                                                     <td>{{ $expense->expense_category->name}}</td>
                                                     <td>{{ $expense->price }}</td>

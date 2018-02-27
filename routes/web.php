@@ -303,7 +303,6 @@ Route::get('/expense/last_expenses', 'ExpenseController@last_expenses');
 Route::get('/expense/expense_by_day', 'ExpenseController@expense_by_day');
 
 Route::get('teste',function (){
-
     $expense = new Expense();
-    return $expense->launch_expenses()->get();
+    return $expense->read_all_routine_expenses();
 });

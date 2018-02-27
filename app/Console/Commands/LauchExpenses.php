@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Expensive\Expense;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class LauchExpenses extends Command
@@ -19,16 +20,21 @@ class LauchExpenses extends Command
      *
      * @var string
      */
-    protected $description = 'Comando irá atualizar todos os registros de gastos considerados rotineira';
+    protected $description = 'Comando atualiza as despesas cadastradas como rotinas';
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
+
+    private $expense;
+
+
     public function __construct()
     {
         parent::__construct();
+        $this->expense = new Expense();
     }
 
     /**
@@ -38,7 +44,7 @@ class LauchExpenses extends Command
      */
     public function handle()
     {
-        $expense = new Expense();
-        return $expense->launch_expenses();
+        $this->expense->launch_expenses();
+        print('desp_sinc - '.Carbon::parse()."\n");
     }
 }

@@ -102,12 +102,7 @@ $(document).ready(function () {
         }
     });
 
-
-
-
-
     //Add row to table
-
     $.ajax({
         type: 'GET',
         url: '/expense/last_expenses',
