@@ -116,10 +116,10 @@ class SubModulesSeeder extends Seeder
             ],
             [
                 'id' => 8,
-                'name' => 'Categoria de Despesas',
+                'name' => 'Centro de Custos',
                 'url' => 'ExpenseCategoryController@read_expense_category',
                 'icon' => 'fa fa-sticky-note',
-                'module_id' => 2,
+                'module_id' => 4,
                 'sub_module_category_id' => 1
             ]
         );

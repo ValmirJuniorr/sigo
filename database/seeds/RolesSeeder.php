@@ -366,7 +366,7 @@ class RolesSeeder extends Seeder
                 'id' => 29,
                 'name' => ExpenseCategory::READ_EXPENSE_CATEGORY,
                 'display' => 'Regra possibilita usuários ter acesso as informações das categorias de Despesas',
-                'sub_module_id' => 7
+                'sub_module_id' => 8
             ]
         );
 
@@ -378,7 +378,7 @@ class RolesSeeder extends Seeder
                 'id' => 30,
                 'name' => ExpenseCategory::STORE_EXPENSE_CATEGORY,
                 'display' => 'Regra possibilita usuários adcionar novas categorias de Despesas',
-                'sub_module_id' => 7
+                'sub_module_id' => 8
             ]
         );
 
@@ -390,7 +390,7 @@ class RolesSeeder extends Seeder
                 'id' => 31,
                 'name' => ExpenseCategory::UPDATE_EXPENSE_CATEGORY,
                 'display' => 'Regra possibilita usuários atualizar as informações das categorias de Despesas',
-                'sub_module_id' => 7
+                'sub_module_id' => 8
             ]
         );
 
@@ -402,7 +402,7 @@ class RolesSeeder extends Seeder
                 'id' => 32,
                 'name' => ExpenseCategory::DELETE_EXPENSE_CATEGORY,
                 'display' => 'Regra possibilita usuários deletar as categorias de Despesas',
-                'sub_module_id' => 7
+                'sub_module_id' => 8
             ]
         );
 
