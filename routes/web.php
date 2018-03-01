@@ -161,7 +161,6 @@ Route::group(['middleware' => ['check_login']], function () {
             'uses' => 'ExpenseController@edit_expense',
             'role' => Expense::UPDATE_EXPENSE]);
 
-
         /* Transações */
 
         Route::get('/transaction/read_transaction', [
@@ -201,12 +200,10 @@ Route::group(['middleware' => ['check_login']], function () {
             'role' => Staff::READ_STAFF
         ]);
 
-
         Route::get('/staff/create_staff',[
             'uses' => 'StaffController@create_staff',
             'role' => Staff::STORE_STAFF
         ]);
-
 
         Route::post('/staff/store',[
             'uses' => 'StaffController@store',
@@ -306,3 +303,20 @@ Route::get('teste',function (){
     $expense = new Expense();
     return $expense->read_all_routine_expenses();
 });
+
+
+Route::get('/expense/index_routine_expenses',[
+    'uses' => 'ExpenseController@index_routine_expenses'
+]);
+
+Route::get('/expense/show_routine_expense',[
+    'uses' => 'ExpenseController@show_routine_expense'
+]);
+
+Route::post('/expense/update_routine_expense',[
+    'uses' => 'ExpenseController@update_routine_expense'
+]);
+
+Route::get('/expense/remove_routine_expense',[
+    'uses' => 'ExpenseController@remove_routine_expense'
+]);

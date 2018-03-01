@@ -63,7 +63,7 @@ class ExpenseCategory extends Model implements Crud
 
     public function read_all($arguments = [])
     {
-        return ExpenseCategory::where('activated',TRUE)->orderBy('name');
+        return ExpenseCategory::orderBy('name');
     }
 
     public function filter($input = [])

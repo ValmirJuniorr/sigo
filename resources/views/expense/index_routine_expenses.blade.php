@@ -17,51 +17,41 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Despesas</h3>
+                            <h3 class="box-title">Despesas Agendadas</h3>
+
                             <div class="box-tools pull-right">
                                 @role('store_expense')
-                                <a href="{{ action('ExpenseController@create_expense') }}" class="btn btn-success btn-sm ad-click-event">
-                                    Cadastrar de Despesa
+                                <a href="{{ action('ExpenseController@index') }}" class="btn btn-primary btn-sm ad-click-event">
+                                    Voltar
                                 </a>
                                 @endrole
-                                <a href="{{ action('ExpenseController@index_routine_expenses') }}" class="btn btn-primary btn-sm ad-click-event">
-                                    Rotina
-                                </a>
                             </div>
+
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table class="table table-bordered table-hover dataTable datatable_data" cellspacing="0" width="100%">
+                                        <table class="table table-bordered table-hover  dataTable datatable_data" cellspacing="0" width="100%">
                                             <thead>
                                             <tr role="row">
                                                 <th>Transação</th>
                                                 <th>Categoria</th>
                                                 <th>Valor</th>
-                                                <th>Vencimento</th>
-                                                <th>Descrição</th>
+                                                <th>Próximo Lançamento</th>
                                                 <th>Detalhes</th>
                                             </tr>
                                             </thead>
                                             <tbody class="aparence hide">
                                             @foreach ($expenses as $expense)
                                                 <tr role="row" class="even {{ $expense->expire_expense_date == \Carbon\Carbon::now()->format('Y-m-d') ? 'bg-info' : '' }}" >
-                                                    <td>
-                                                        {{ $expense->id }}
-
-                                                    </td>
+                                                    <td>{{ $expense->id }}</td>
                                                     <td>{{ $expense->expense_category->name}}</td>
                                                     <td>{{ $expense->price }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($expense->expire_expense_date)->format('d-m-Y') }}</td>
-                                                    <td>{{ str_limit($expense->description,30) }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($expense->expire_expense_routine_date)->format('d-m-Y') . ' (' . \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($expense->expire_expense_routine_date)) . ')'}}</td>
                                                     <td class="center-elements">
-                                                        <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ExpenseController@show_expense", ['id' => base64_encode($expense->id)])}}">Editar</a>
-                                                        @if($expense->expire_expense_routine_date)
-                                                            <span class="badge bg-teal btn_badge">R</span>
-                                                        @endif
-
+                                                        <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ExpenseController@show_routine_expense", ['id' => base64_encode($expense->id)])}}">Editar</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

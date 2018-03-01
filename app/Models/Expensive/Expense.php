@@ -94,7 +94,7 @@ class Expense extends Model implements Crud
             $expense->description = $object->description;
             return $expense->save();
         }
-
+        return false;
     }
 
     public function read($object_id, $arguments = [])
@@ -111,13 +111,41 @@ class Expense extends Model implements Crud
         return Expense::whereNotNull('number_of_days')->whereNotNull('expire_expense_routine_date')->get();
     }
 
+    public function update_routine_expense($object)
+    {
+        $rules = [
+            'number_of_days' => 'nullable|sometimes|integer|min:1',
+            'expire_expense_routine_date' => 'nullable|sometimes|date|date_format:Y-m-d|after_or_equal:today',
+        ];
+
+        if(ValidatorModel::validation($this->inputs($object),$rules,$this->attribute)){
+            $expense = Expense::findOrFail($object->id);
+            $expense->number_of_days = $object->number_of_days;
+            $expense->expire_expense_routine_date = $object->expire_expense_routine_date;
+            return $expense->save();
+        }
+        return false;
+    }
+
+    public function remove_routine_expense($object_id)
+    {
+        $expense = Expense::findOrFail($object_id);
+        $expense->number_of_days = NULL;
+        $expense->expire_expense_routine_date = NULL;
+        return $expense->save();
+    }
+
     public function filter($input = [])
     {
 
     }
 
     public function last_expenses(){
-        return $this->read_all()->with('expense_category')->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get();
+        return $this->read_all()->with('expense_category')->where('expire_expense_date' ,'>=', Carbon::now()->subDays(15)->format('Y-m-d'))->where('expire_expense_date' ,'<=', Carbon::now()->format('Y-m-d'))->get();
+    }
+
+    public function next_expenses(){
+        return $this->read_all()->with('expense_category')->where('expire_expense_date' ,'>', Carbon::now()->format('Y-m-d'))->where('expire_expense_date' ,'<=', Carbon::now()->addDays(15)->format('Y-m-d'))->get();
     }
 
     public function report_expense_by_cateogry(){
@@ -204,4 +232,5 @@ class Expense extends Model implements Crud
     private function validate_date($date_begin){
         return $date_begin < Carbon::now()->format('Y-m-d');
     }
+
 }

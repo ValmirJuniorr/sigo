@@ -62,3 +62,8 @@ input.secure {
     color: white;
 }
 
+.btn_badge{
+    position:absolute;
+    margin-left: -10px;
+}
+

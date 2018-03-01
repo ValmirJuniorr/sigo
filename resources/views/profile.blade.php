@@ -24,7 +24,6 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
-                         
                                 <form role="form">
                                     <div class="row">
                                             <div class="col-md-8">
