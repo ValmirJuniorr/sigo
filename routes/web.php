@@ -27,6 +27,8 @@ Route::get('/recover', 'UserController@recover');
 
 Route::post('/login/auth','UserController@do_login');
 
+Route::post('/logout','UserController@logout');
+
 Route::post('/rpc/v1/do_login_WS','WsUserController@do_login_WS');
 
 
@@ -292,18 +294,13 @@ Route::group(['middleware' => ['check_login']], function () {
 
 });
 
-
 Route::get('/expense/report_expense_by_cateogry', 'ExpenseController@report_expense_by_cateogry');
 
 Route::get('/expense/last_expenses', 'ExpenseController@last_expenses');
 
 Route::get('/expense/expense_by_day', 'ExpenseController@expense_by_day');
 
-Route::get('teste',function (){
-    $expense = new Expense();
-    return $expense->read_all_routine_expenses();
-});
-
+Route::get('/report/expense_transactitons','ReportController@resume_expense_transactions');
 
 Route::get('/expense/index_routine_expenses',[
     'uses' => 'ExpenseController@index_routine_expenses'

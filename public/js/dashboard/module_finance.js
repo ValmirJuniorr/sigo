@@ -111,17 +111,22 @@ $(document).ready(function () {
             jQuery.each(data['last_expense'], function(i, val) {
                 date = new Date(val.expire_expense_date);
                 date_now = new Date();
-                $('#table_last_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description.substring(1,10) +"..."+'</td> <td><span style="font-weight: bold;">'+val.expense_category.name+'</span></td><td class="center-elements"><a class="btn btn-primary btn-sm ad-click-event"  href="#"><i class="fa fa-edit"></i></a></td></tr>');
+                $('#table_last_expenses').append(
+                    '<tr> <td>'+ val.id+'</td> <td> ' +
+                    val.expire_expense_date + '</td> <td> '+
+                    val.price+' R$</td> <td>'+
+                    val.description.substring(1,10) +"..."+'</td>' +
+                    '<td><span style="font-weight: bold;">' +
+                    val.expense_category.name+'</span></td><td class="center-elements">' +
+                    '<a class="btn btn-primary btn-sm ad-click-event"  href="/expense/show_expense?id= ' + window.btoa(val.id)+ '">' +
+                    '<i class="fa fa-edit"></i></a></td></tr>');
             });
 
             jQuery.each(data['next_expense'], function(i, val) {
                 date = new Date(val.expire_expense_date);
                 date_now = new Date();
-                $('#table_next_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description.substring(1,10) +"..."+'</td> <td><span style="font-weight: bold;">'+val.expense_category.name+'</span></td><td class="center-elements"><a class="btn btn-primary btn-sm ad-click-event"  href="#"><i class="fa fa-edit"></i></a></td></tr>');
+                $('#table_next_expenses').append('<tr> <td>'+ val.id+'</td> <td> ' + val.expire_expense_date + '</td> <td> '+ val.price+' R$</td> <td>'+ val.description.substring(1,10) +"..."+'</td> <td><span style="font-weight: bold;">'+val.expense_category.name+'</span></td><td class="center-elements"><a class="btn btn-primary btn-sm ad-click-event"  href="/expense/show_expense?id= ' + window.btoa(val.id)+ '"><i class="fa fa-edit"></i></a></td></tr>');
             });
         }
     });
-
-
-
 });

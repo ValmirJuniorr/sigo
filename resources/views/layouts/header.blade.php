@@ -2,8 +2,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="{{asset('img/logo.png')}}" >
-    <title>SIGO - Sistema de Integrado de Gestão Odontológico@yield('title')</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="{{asset('img/teeth.png')}}" >
+    <link rel="manifest" href="/manifest.json">
+    <title>SIGO</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--Data tables -->

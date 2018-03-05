@@ -32,8 +32,7 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="row">
-                                    <div class="col-sm-12">
+                                <div class="col-sm-12 box-body table-responsive no-border">
                                         <table class="table table-bordered table-hover dataTable datatable_data" cellspacing="0" width="100%">
                                             <thead>
                                             <tr role="row">
@@ -68,7 +67,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>

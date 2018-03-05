@@ -47,6 +47,7 @@
 <script src="{{asset('js/jquery-mask-plugin-master/dist/jquery.mask.min.js')}}"></script>
 
 <script>
+
     $('.dropdown-toggle').dropdown();
 
         $('.datepicker').datepicker({
@@ -84,10 +85,16 @@
         );
 
         $(".aparence").removeClass('hide');
+        /*
+        $('.click').click(function () {
+            $('#loading').show();
+        });
 
-        //$('#cpf').mask('00000-000');
+        $('#loading').hide();*/
 
     } );
+
+
 </script>
 
 @yield('custom-js')

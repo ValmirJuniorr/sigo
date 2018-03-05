@@ -10,7 +10,7 @@
                 <section class="content">
                 <div class="row">
                     @foreach(show_modules() as $module)
-                        <div class="col-lg-3 col-xs-12">
+                        <div class="col-lg-3 col-xs-12 col-sm-4">
                             <!-- small box -->
                             <div class="small-box" style="height: 140px; background-color: {{$module->color}} ; margin-top: 40px; color: white;">
                                 <div class="inner">
