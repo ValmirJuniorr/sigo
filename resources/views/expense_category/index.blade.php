@@ -26,9 +26,8 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                    <div class="col-sm-12 box-body table-responsive no-border">
-                                        <div class="box-body box-body table-responsive no-border">
-                                            <table class="table table-striped table-bordered datatable_data">
+                                    <div class="col-sm-12 box-body table-responsive no-padding no-border">
+                                            <table id="example2" class="table table-bordered table-hover dataTable">
                                                 <thead>
                                                 <tr>
                                                     <th>Id</th>
@@ -57,7 +56,6 @@
                                                 @endforeach
                                                 </tbody>
                                             </table>
-                                        </div>
                                     </div>
                             </div>
                         </div>

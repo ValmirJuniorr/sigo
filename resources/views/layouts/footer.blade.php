@@ -85,6 +85,7 @@
         );
 
         $(".aparence").removeClass('hide');
+
         /*
         $('.click').click(function () {
             $('#loading').show();

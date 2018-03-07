@@ -26,9 +26,9 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="row">
                                     <div class="col-sm-12 box-body table-responsive no-border">
-                                            <table class="table table-striped table-bordered datatable_data">
+                                        <div class="box-body">
+                                        <table id="example2" class="table table-striped table-bordered datatable_data">
                                                 <thead>
                                                 <tr>
                                                     <th>Id</th>
@@ -58,7 +58,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                        </div>
                             </div>
                         </div>
                         <!-- /.box-body -->

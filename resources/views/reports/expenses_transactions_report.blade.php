@@ -12,6 +12,65 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Resumo Operacional</h3>
                 </div>
+
+                <div class="box-body col-md-10">
+
+                    <div class="form-group date col-md-2">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            {{  Form::text('expire_expense_routine_date', $value = null,array('class' => 'form-control pull-right datepicker' , 'placeholder' => 'Início'))}}
+                        </div>
+                    </div>
+
+                    <div class="form-group date col-md-2">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            {{  Form::text('expire_expense_routine_date', $value = null,array('class' => 'form-control pull-right datepicker' , 'placeholder' => 'Fim   '))}}
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <select name="expense_category_id" class="form-control select select-hidden-accessible">
+                            <option value="">Funcionário</option>
+                            <option value="">Teste</option>
+                            <option value="">Teste</option>
+                            <option value="">Teste</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <select name="expense_category_id" class="form-control select select-hidden-accessible">
+                            <option value="">Status Receita</option>
+                            <option value="">Teste</option>
+                            <option value="">Teste</option>
+                            <option value="">Teste</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <select class="form-control select2" multiple="" data-placeholder="Centro de Custo" style="width: 100%;" tabindex="-1" aria-hidden="true" >
+                            <option>Alabama</option>
+                            <option>Alaska</option>
+                            <option>California</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="box-body col-md-2">
+                    <button type="button" class="btn btn-block btn-primary">Pesquisar</button>
+                </div>
+
+
+
                 <div class="row">
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
@@ -39,7 +98,6 @@
                         <!-- /.info-box -->
                     </div>
                     <!-- /.col -->
-
                     <!-- fix for small devices only -->
                     <div class="clearfix visible-sm-block"></div>
 
@@ -69,6 +127,7 @@
                         <!-- /.info-box -->
                     </div>
                     <!-- /.col -->
+
                 </div>
             </div>
         </section>
