@@ -12,6 +12,23 @@
 .h5{}
 .h6{}
 
+.select2-selection__choice {
+    background-color: #3498db !important;
+    border: 1px solid white !important;
+}
+
+.select2-selection--multiple{
+    border-radius: 0px !important;
+    border: 1px solid #ccc !important;
+}
+
+.select2-selection__choice__remove {
+    color: #ccc !important;
+}
+
+.select2-selection__choice__remove:hover {
+    color: white !important;
+}
 
 .navbar-nav .user-menu .dropdown-menu li.user-header{
     height:75px;

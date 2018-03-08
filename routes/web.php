@@ -309,7 +309,17 @@ Route::get('/expense/last_expenses', 'ExpenseController@last_expenses');
 
 Route::get('/expense/expense_by_day', 'ExpenseController@expense_by_day');
 
-Route::get('/report/expense_transactitons','ReportController@resume_expense_transactions');
+
+
+
+
+Route::get('/report/expense_transactions','ReportController@resume_expense_transactions');
+
+Route::get('/expense/expense_by_day_with_dates', 'ExpenseController@expense_by_day_with_dates');
+
+
+
+
 
 Route::get('/expense/index_routine_expenses',[
     'uses' => 'ExpenseController@index_routine_expenses'

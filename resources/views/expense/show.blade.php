@@ -52,7 +52,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-align-justify"></i>
                                                 </div>
-                                                <select name="expense_category_id" class="form-control select2 select2-hidden-accessible">
+                                                <select name="expense_category_id" class="form-control">
                                                     <option value="{{$expense->expense_category_id}}">{{$expense->expense_category->name}}</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>

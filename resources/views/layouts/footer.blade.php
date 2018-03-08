@@ -46,6 +46,10 @@
 
 <script src="{{asset('js/jquery-mask-plugin-master/dist/jquery.mask.min.js')}}"></script>
 
+<script src="{{asset('select2/js/select2.min.js')}}"></script>
+
+
+
 <script>
 
     $('.dropdown-toggle').dropdown();
@@ -85,6 +89,9 @@
         );
 
         $(".aparence").removeClass('hide');
+
+        $('.select_2').select2();
+
 
         /*
         $('.click').click(function () {

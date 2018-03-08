@@ -7,6 +7,7 @@ use App\Models\Expensive\Expense;
 use App\Models\Expensive\ExpenseCategory;
 use App\Models\Util\Calendar;
 use App\Models\Util\Constants;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -139,7 +140,23 @@ class ExpenseController extends Controller
     }
 
     public function expense_by_day(){
-        $expenses = $this->expense->expense_by_day();
+
+        $start_date = Carbon::now()->subDays(15)->format('Y-m-d');
+
+        $today = Carbon::now()->format('Y-m-d');
+
+        $expenses = $this->expense->expense_by_day($start_date,$today);
+        return $expenses;
+    }
+
+    public function expense_by_day_with_dates(Request $request){
+
+        $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
+
+        $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
+
+        $expenses = $this->expense->expense_by_day($start_date,$end_date,[1,2,3,4]);
+
         return $expenses;
     }
 
