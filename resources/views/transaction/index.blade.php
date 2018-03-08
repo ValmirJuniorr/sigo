@@ -36,11 +36,23 @@
                                                     <th>Cliente</th>
                                                     <th>Cpf</th>
                                                     <th>Cidade</th>
-                                                    <th>Prontuário</th>
+                                                    <th>Prontuários</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                  @foreach($customers as $customer)
+                                                     <tr>
+                                                         <td>{{$customer->id}}</td>
+                                                         <td>{{$customer->name}}</td>
+                                                         <td>{{$customer->cpf}}</td>
+                                                         <td>{{$customer->city}}</td>
+                                                         <td>
+                                                             @role('update_transaction')
+                                                             <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("TransactionController@show", ['id' => base64_encode($customer->id)])}}">Prontuários</a>
+                                                             @endrole
+                                                         </td>
+                                                     </tr>
+                                                  @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

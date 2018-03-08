@@ -40,6 +40,8 @@ class Transaction extends Model implements Crud
 
     const READ_TRANSACTION = 'read_transaction';
 
+    const SHOW_TRANSACTION = 'read_transaction';
+
 
     public function create($object, $arguments = [])
     {
@@ -59,6 +61,13 @@ class Transaction extends Model implements Crud
     public function read($object_id, $arguments = [])
     {
         return Transaction::where('activated',true)->where('id',$object_id)->first();
+    }
+
+    public function read_of_customer($customer_id, $arguments = [])
+    {
+        $transactions  =  Transaction::where('activated',true)
+            ->where('customer_id',$customer_id)->get();
+        return $transactions->groupBy('procedure.staff_category.name');
     }
 
     public function read_all($arguments = [])

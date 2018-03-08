@@ -49,7 +49,7 @@ class Customer extends Model implements Crud
     }
 
     public function transaction(){
-        return $this->belongsToMany(Transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
     /**
@@ -118,8 +118,15 @@ class Customer extends Model implements Crud
     }
 
     public function read_customer_by_transaction($arguments = []){
-        return Customer::join('transactions','transactions.customer_id','=','customers.id')->get();
-
+        $customers = Customer::with(['transaction' => function ($query) {
+            $query->where('activated', true);
+        }])->where('activated', true)->get();
+        foreach ($customers as $key => $customer) {
+            if (!count($customer->transaction)) {
+                $customers->forget($key);
+            }
+        }
+       return $customers;
     }
 
     public function filter($input = [])

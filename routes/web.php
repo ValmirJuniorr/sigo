@@ -180,6 +180,11 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Transaction::STORE_TRANSACTION
             ]);
 
+        Route::get('/transaction/show',
+            ['uses' =>'TransactionController@show',
+                'role' => Transaction::STORE_TRANSACTION
+            ]);
+
         Route::get('/transaction/delete_transaction',
             ['uses' => 'TransactionController@delete_transaction',
                 'role' => Transaction::DELETE_TRANSACTION
@@ -227,6 +232,7 @@ Route::group(['middleware' => ['check_login']], function () {
             'role' =>Staff::UPDATE_STAFF
         ]);
 
+
         /* Staff category*/
         Route::get('/staff_category/read_staff_category',[
             'uses' => 'StaffCategoryController@read_staff_category',
@@ -238,6 +244,7 @@ Route::group(['middleware' => ['check_login']], function () {
             'role' => StaffCategory::STORE_STAFF_CATEGORY
         ]);
 
+
         Route::post('/staff_category/store',[
             'uses' => 'StaffCategoryController@store',
             'role' => StaffCategory::STORE_STAFF_CATEGORY
@@ -248,10 +255,12 @@ Route::group(['middleware' => ['check_login']], function () {
             'role' => StaffCategory::DELETE_STAFF_CATEGORY
         ]);
 
+
         Route::get('/staff_category/update_staff_category',[
             'uses' => 'StaffCategoryController@update_staff_category',
             'role' => StaffCategory::UPDATE_STAFF_CATEGORY
         ]);
+
 
         Route::post('/staff_category/update',[
             'uses' => 'StaffCategoryController@update',

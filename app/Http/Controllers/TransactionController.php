@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Model\Transaction;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -16,10 +16,9 @@ class TransactionController extends Controller
     public function read_transaction()
     {
         try{
-            $transaction = new Transaction();
-            //  $customers
-            //  $transactions = $transaction->read_all()->get();
-            return view('transaction.index', ['transactions' => '']);
+             $customer = new Customer();
+             $customers = $customer->read_all()->get();
+            return view('transaction.index', ['customers' => $customers]);
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
         } catch (Exception $e){
@@ -32,7 +31,7 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create_customer()
+    public function create_transaction()
     {
         //
     }
@@ -54,9 +53,18 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show(Request $request)
     {
-        //
+        try{
+            $transaction = new Transaction();
+            $customer_id = base64_decode($request->input('id'));
+            $transactionInCustomer = $transaction->read_of_customer($customer_id);
+            return view('transaction.show ', ['transactionOfCustomer' => $transactionInCustomer]);
+        }catch (GeneralException $ge){
+            return back()->withErrors($ge->getMessage());
+        } catch (Exception $e){
+            return back()->withErrors("Erro Interno");
+        }
     }
 
     /**
@@ -77,7 +85,7 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update_customer(Request $request, Transaction $transaction)
+    public function update_transaction(Request $request, Transaction $transaction)
     {
         //
     }
@@ -88,7 +96,7 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function delete_customer(Transaction $transaction)
+    public function delete_transaction(Transaction $transaction)
     {
         //
     }
