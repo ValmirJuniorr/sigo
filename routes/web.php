@@ -303,22 +303,21 @@ Route::group(['middleware' => ['check_login']], function () {
 
 });
 
-Route::get('/expense/report_expense_by_cateogry', 'ExpenseController@report_expense_by_cateogry');
+Route::get('/expense/report_expense_by_category', 'ExpenseController@report_expense_by_cateogry');
 
 Route::get('/expense/last_expenses', 'ExpenseController@last_expenses');
 
 Route::get('/expense/expense_by_day', 'ExpenseController@expense_by_day');
 
-
-
-
-
 Route::get('/report/expense_transactions','ReportController@resume_expense_transactions');
+
+
 
 Route::get('/expense/expense_by_day_with_dates', 'ExpenseController@expense_by_day_with_dates');
 
+Route::get('/expense/expense_by_category_with_dates', 'ExpenseController@expense_by_category_with_dates');
 
-
+Route::get('/transaction/read_group_transaction_by_category', 'TransactionController@read_group_transaction_by_category');
 
 
 Route::get('/expense/index_routine_expenses',[

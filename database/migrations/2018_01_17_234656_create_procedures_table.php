@@ -19,6 +19,7 @@ class CreateProceduresTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->float('price');
+            $table->float('cost_price');
             $table->time('procedure_time');
             $table->boolean('activated')->default(true);
             $table->timestamps();

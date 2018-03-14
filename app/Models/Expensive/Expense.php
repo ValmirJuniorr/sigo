@@ -104,7 +104,7 @@ class Expense extends Model implements Crud
 
     public function read_all($arguments = [])
     {
-        return Expense::orderBy('id','desc')->limit(100);
+        return Expense::orderBy('id','desc')->limit(1000);
     }
 
     public function read_all_routine_expenses(){
@@ -148,9 +148,14 @@ class Expense extends Model implements Crud
         return $this->read_all()->with('expense_category')->where('expire_expense_date' ,'>', Carbon::now()->format('Y-m-d'))->where('expire_expense_date' ,'<=', Carbon::now()->addDays(15)->format('Y-m-d'))->get();
     }
 
-    public function report_expense_by_cateogry(){
+    public function report_expense_by_cateogry($start_date,$end_date,$expense_category_ids = null){
 
-        $results = Expense::with('expense_category')->where('created_at' ,'>', Carbon::now()->subDays(15)->format('Y-m-d'))->get()->groupBy('expense_category.name');
+        $results = Expense::with('expense_category')
+            ->where('expire_expense_date' ,'>=', $start_date)
+            ->where('expire_expense_date','<=',$end_date)
+            ->when($expense_category_ids,function ($query) use ($expense_category_ids){
+                return $query->whereIn('expense_category_id',$expense_category_ids);
+            })->get()->groupBy('expense_category.name');
 
         $pie_chart = new Collection();
 
@@ -170,8 +175,7 @@ class Expense extends Model implements Crud
             ->where('expire_expense_date', '<=', $end_date)
             ->when($expense_category_ids,function ($query) use ($expense_category_ids){
                 return $query->whereIn('expense_category_id',$expense_category_ids);
-            })
-            ->groupBy('expire_expense_date')->get();
+            })->groupBy('expire_expense_date')->get();
 
         $final_result = array();
 

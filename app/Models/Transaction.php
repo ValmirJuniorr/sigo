@@ -7,22 +7,28 @@ use App\Models\Staff;
 use App\Models\TransactionStatus;
 use App\Models\Util\Crud;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Transaction extends Model implements Crud
 {
-    public function customer(){
+    public function customer()
+    {
         return $this->belongsTo(Customer::class);
     }
 
-    public function procedure(){
+    public function procedure()
+    {
         return $this->belongsTo(Procedure::class);
     }
 
-    public function staff(){
+    public function staff()
+    {
         return $this->belongsTo(Staff::class);
     }
 
-    public function transactionStatus(){
+    public function transactionStatus()
+    {
         return $this->belongsTo(TransactionStatus::class);
     }
 
@@ -60,13 +66,13 @@ class Transaction extends Model implements Crud
 
     public function read($object_id, $arguments = [])
     {
-        return Transaction::where('activated',true)->where('id',$object_id)->first();
+        return Transaction::where('activated', true)->where('id', $object_id)->first();
     }
 
     public function read_of_customer($customer_id, $arguments = [])
     {
-        $transactions  =  Transaction::where('activated',true)
-            ->where('customer_id',$customer_id)->get();
+        $transactions = Transaction::where('activated', true)
+            ->where('customer_id', $customer_id)->get();
         return $transactions->groupBy('procedure.staff_category.name');
     }
 
@@ -79,6 +85,26 @@ class Transaction extends Model implements Crud
     {
         // TODO: Implement filter() method.
     }
+
+    public function read_group_transaction_by_cateogry($start_date, $end_date, $procedure_ids = null)
+    {
+        $result = DB::table('transactions')
+            ->join('procedures', 'transactions.procedure_id', '=', 'procedures.id')
+            ->where('transactions.created_at' ,'>=', $start_date)
+            ->where('transactions.created_at', '<=', $end_date)
+            ->when($procedure_ids,function ($query) use ($procedure_ids){
+                return $query->whereIn('procedure_id',$procedure_ids);
+            })->selectRaw('sum(transactions.price) as price, procedures.name as name')->groupBy('name')->get();
+
+        $set = new Collection();
+
+        foreach ($result as $parcial){
+            $set->push(array($parcial->name,$parcial->price));
+        }
+
+        return $set;
+    }
+
 
     public function inputs($object)
     {

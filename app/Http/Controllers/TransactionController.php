@@ -4,10 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Model\Transaction;
 use App\Models\Customer;
+use App\Models\Util\Calendar;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
+
+
+    private $transaction;
+
+
+    /**
+     * TransactionController constructor.
+     */
+    public function __construct()
+    {
+        $this->transaction = new Transaction();
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,13 +31,13 @@ class TransactionController extends Controller
      */
     public function read_transaction()
     {
-        try{
-             $customer = new Customer();
-             $customers = $customer->read_all()->get();
+        try {
+            $customer = new Customer();
+            $customers = $customer->read_all()->get();
             return view('transaction.index', ['customers' => $customers]);
-        }catch (GeneralException $ge){
+        } catch (GeneralException $ge) {
             return back()->withErrors($ge->getMessage());
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return back()->withErrors("Erro Interno");
         }
     }
@@ -39,7 +55,7 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -50,19 +66,19 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
-        try{
+        try {
             $transaction = new Transaction();
             $customer_id = base64_decode($request->input('id'));
             $transactionInCustomer = $transaction->read_of_customer($customer_id);
             return view('transaction.show ', ['transactionOfCustomer' => $transactionInCustomer]);
-        }catch (GeneralException $ge){
+        } catch (GeneralException $ge) {
             return back()->withErrors($ge->getMessage());
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return back()->withErrors("Erro Interno");
         }
     }
@@ -70,7 +86,7 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
     public function update(Transaction $transaction)
@@ -81,8 +97,8 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Transaction  $transaction
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
     public function update_transaction(Request $request, Transaction $transaction)
@@ -93,11 +109,21 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
     public function delete_transaction(Transaction $transaction)
     {
         //
     }
+
+
+    public function read_group_transaction_by_category(Request $request)
+    {
+        $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
+        $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
+
+        return $this->transaction->read_group_transaction_by_cateogry($start_date,$end_date);
+    }
+
 }

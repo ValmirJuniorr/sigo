@@ -14,62 +14,43 @@
                 </div>
 
                 <div class="box-body">
-                <div class="box-body col-md-10">
+                    <div class="box-body col-md-10">
 
-                    <div class="form-group date col-md-2">
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
+                        <div class="form-group date col-md-2">
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                {{  Form::text('start_date', $value = null,array('class' => 'form-control pull-right datepicker','id' => 'start_date', 'placeholder' => 'Início'))}}
                             </div>
-                            {{  Form::text('start_date', $value = null,array('class' => 'form-control pull-right datepicker','id' => 'start_date', 'placeholder' => 'Início'))}}
                         </div>
-                    </div>
 
-                    <div class="form-group date col-md-2">
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
+                        <div class="form-group date col-md-2">
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                {{  Form::text('end_date', $value = null,array('class' => 'form-control pull-right datepicker','id' => 'end_date', 'placeholder' => 'Fim'))}}
                             </div>
-                            {{  Form::text('end_date', $value = null,array('class' => 'form-control pull-right datepicker','id' => 'end_date', 'placeholder' => 'Fim'))}}
                         </div>
+
+                        <div class="form-group col-md-3">
+                            @include('components.select',['id' => 'staff_id' , 'set' => $staffs, 'default' => array('id' => null , 'value' => 'Funcionários')])
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            @include('components.select',['id' => 'statuts_id' , 'set' => $transactionStatuses, 'default' => array('id' => null , 'value' => 'Status')])
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            @include('components.multi_select',['id' => 'statuses','set' => $expenseCategories ,'name'  => 'Centro de Custo'])
+                        </div>
+
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <select name="expense_category_id" class="form-control select select-hidden-accessible">
-                            <option value="">Funcionário</option>
-                            <option value="">Teste</option>
-                            <option value="">Teste</option>
-                            <option value="">Teste</option>
-                        </select>
+                    <div class="box-body col-md-2">
+                        <button type="button" class="btn btn-block btn-primary" id="search_button_expense_transactino">Pesquisar</button>
                     </div>
-
-                    <div class="form-group col-md-2">
-                        <select name="expense_category_id" class="form-control select select-hidden-accessible">
-                            <option value="">Status Receita</option>
-                            <option value="">Teste</option>
-                            <option value="">Teste</option>
-                            <option value="">Teste</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <select class="form-control select_2" name="states[]" multiple="multiple" data-placeholder="Centro de Custo" style="width: 100%;" tabindex="-1" aria-hidden="true" >
-                            <option>Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="box-body col-md-2">
-                    <button type="button" class="btn btn-block btn-primary" id="search_button_expense_transactino">Pesquisar</button>
-                </div>
-
                 </div>
 
                 <div class="box-body">
@@ -107,7 +88,7 @@
                             <span class="info-box-icon bg-blue"><i class="ion ion-ios-cart-outline"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Orçamen. Aprovados</span>
+                                <span class="info-box-text">Procedimentos</span>
                                 <span class="info-box-number">150</span>
                             </div>
                             <!-- /.info-box-content -->
@@ -120,7 +101,7 @@
                             <span class="info-box-icon bg-yellow"><i class="ion-card"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Média Receita/Dia</span>
+                                <span class="info-box-text">Lucro</span>
                                 <span class="info-box-number">175,25 <small>R$</small></span>
                             </div>
                             <!-- /.info-box-content -->
@@ -134,9 +115,10 @@
 
                 <div class="box-body">
 
-                    <div class="col-md-12" id="line_chart_resume_expense_per_day">
-
-                    </div>
+                    <div class="col-md-12" id="line_chart_resume_expense_per_day"></div>
+                    <div class="col-md-6" id="pie_chart_expense_category"></div>
+                    <div class="col-md-6" id="pie_chart_transaction_category"></div>
+                    <div class="col-md-12" id="column_chart_transactions"></div>
                 </div>
 
 
@@ -152,7 +134,9 @@
 
         <script src="{{asset('js/highchart_graphics/line_chart.js')}}"></script>
 
-        {{--<script>line_chart('line_chart_resume_expense_per_day',''/expense/expense_by_day'');</script>--}}
+        <script src="{{asset('js/highchart_graphics/basic_pie_chart.js')}}"></script>
+
+        <script src="{{asset('js/highchart_graphics/basic_column_chart.js')}}"></script>
 
     @endsection
 

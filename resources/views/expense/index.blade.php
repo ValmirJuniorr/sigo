@@ -53,7 +53,7 @@
 
                                                     </td>
                                                     <td>{{ $expense->expense_category->name}}</td>
-                                                    <td>{{ $expense->price }}</td>
+                                                    <td>{{ $expense->price }} R$</td>
                                                     <td>{{ Carbon\Carbon::parse($expense->expire_expense_date)->format('d-m-Y') }}</td>
                                                     <td>{{ str_limit($expense->description,30) }}</td>
                                                     <td class="center-elements">

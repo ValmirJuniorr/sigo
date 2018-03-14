@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        url: '/expense/report_expense_by_cateogry',
+        url: '/expense/report_expense_by_category',
         data: {},
         success: function( data ){
 
@@ -24,12 +24,9 @@ $(document).ready(function () {
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                            style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                            }
-                        }
+                            enabled: false,
+                        },
+                        showInLegend: true
                     }
                 },
                 series: [{
