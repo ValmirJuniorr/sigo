@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->float('price');
+            $table->float('cost_price')->nullable();
             $table->boolean('paid');
             $table->string('description');
             $table->boolean('activated')->default(true);

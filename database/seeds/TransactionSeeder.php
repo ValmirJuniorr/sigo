@@ -25,7 +25,7 @@ class TransactionSeeder extends Seeder
                     'paid' => true,
                     'description' => 'teste@teste',
                     'customer_id' => '1',
-                    'procedure_id' => mt_rand(1,5),
+                    'procedure_id' => mt_rand(1,4),
                     'staff_id' => '1',
                     'transaction_status_id' => '1',
                 ]

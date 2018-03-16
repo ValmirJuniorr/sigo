@@ -39,11 +39,11 @@
                         </div>
 
                         <div class="form-group col-md-2">
-                            @include('components.select',['id' => 'statuts_id' , 'set' => $transactionStatuses, 'default' => array('id' => null , 'value' => 'Status')])
+                            @include('components.select',['id' => 'status_id' , 'set' => $transactionStatuses, 'default' => array('id' => null , 'value' => 'Status')])
                         </div>
 
                         <div class="form-group col-md-3">
-                            @include('components.multi_select',['id' => 'statuses','set' => $expenseCategories ,'name'  => 'Centro de Custo'])
+                            @include('components.multi_select',['id' => 'expense_category_ids','set' => $expenseCategories ,'name'  => 'Centro de Custo'])
                         </div>
 
                     </div>
