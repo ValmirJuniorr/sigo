@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Model\Transaction;
 use App\Models\Customer;
 use App\Models\Util\Calendar;
+use App\Models\Staff;
+use App\Models\StaffCategory;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -73,10 +75,17 @@ class TransactionController extends Controller
     {
         try {
             $transaction = new Transaction();
+            $category = new StaffCategory();
+            $staffs = new Staff();
             $customer_id = base64_decode($request->input('id'));
+            $category_all = $category->read_all()->get();
+            $staff_all = $staffs->read_all()->get();
             $transactionInCustomer = $transaction->read_of_customer($customer_id);
             return view('transaction.show ', ['transactionOfCustomer' => $transactionInCustomer]);
         } catch (GeneralException $ge) {
+            return view('transaction.show ', ['transactionOfCustomer' => $transactionInCustomer,
+                 'categories' => $category_all,'staffs' => $staff_all]);
+        }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
         } catch (Exception $e) {
             return back()->withErrors("Erro Interno");
