@@ -21,6 +21,7 @@ class Procedure extends Model implements Crud
     private $attribute = array(
         'name' => 'Nome',
         'price' => 'Preço',
+        'cost_price' =>'Preço de Custo',
         'procedure_time' => 'Tempo',
         'staff_category_id' => 'Categoria'
     );
@@ -90,6 +91,7 @@ class Procedure extends Model implements Crud
             'name' => 'required',
             'procedure_time' => 'required',
             'price' => 'required|numeric|min:0',
+            'cost_price' =>'required|numeric|min:0|max:price',
             'staff_category_id' => 'required',
         ];
     }

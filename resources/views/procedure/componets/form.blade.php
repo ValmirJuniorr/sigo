@@ -15,6 +15,10 @@
                     {{  Form::label('price', '* Valor') }}
                     {{  Form::text('price', $value = $procedure->price ? money_format('%i',$procedure->price) : null ,array('class' => 'form-control pull-right money' ,"step" => "0.01", 'placeholder' => 'Valor','max' => '1000000'))}}
                 </div>
+                <div class="form-group has-feedback col-sm-12 col-md-3 col-lg-3">
+                    {{  Form::label('cost_price', '* Preço de Custo') }}
+                    {{  Form::text('cost_price', $value = $procedure->cost_price ? money_format('%i',$procedure->cost_price) : null ,array('class' => 'form-control pull-right money' ,"step" => "0.01", 'placeholder' => 'Valor','max' => '1000000'))}}
+                </div>
                 <div class="form-group col-sm-12 col-md-3 col-lg-3">
                     <label>* Categoria</label>
                     @include('components.select',['id' => 'staff_category_id','set' => $staff_categories,'tittle' => 'Categoria','default' => array('id' => $procedure->staff_category != null ? $procedure->staff_category->id : '', 'value' => $procedure->staff_category != null ? $procedure->staff_category->name : '')])

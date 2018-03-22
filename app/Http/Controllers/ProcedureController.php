@@ -66,6 +66,7 @@ class ProcedureController extends Controller
         try{
             $this->procedure->name = $request->input('name');
             $this->procedure->price = Currency::currency_to_float($request->input('price'));
+            $this->procedure->cost_price = Currency::currency_to_float($request->input('cost_price'));
             $this->procedure->procedure_time = $request->input('timer');
             $this->procedure->staff_category_id = $request->input('staff_category_id');
             if($this->procedure->create($this->procedure)){
@@ -106,6 +107,7 @@ class ProcedureController extends Controller
             $this->procedure->id = $request->input('id');
             $this->procedure->name = $request->input('name');
             $this->procedure->price = Currency::currency_to_float($request->input('price'));
+            $this->procedure->cost_price = Currency::currency_to_float($request->input('cost_price'));
             $this->procedure->procedure_time = $request->input('timer');
             $this->procedure->staff_category_id = $request->input('staff_category_id');
             $this->procedure->edit($this->procedure);
