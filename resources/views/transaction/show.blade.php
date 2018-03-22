@@ -28,7 +28,7 @@
                                                         {{  Form::label('expense_category_id', 'Profissional') }}
                                                         <div class="input-group date col-sm-11 col-md-11 col-lg-11">
                                                             <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                                            <select name="expense_category_id" class="form-control select2-hidden-accessible">
+                                                            <select name="expense_category_id" class="form-control">
                                                                 <option></option>
                                                                 @foreach($staffs as $staff)
                                                                     <option value="{{$staff->id}}">{{$staff->name}}</option>
@@ -40,7 +40,7 @@
                                                         {{  Form::label('expense_category_id', 'Categoria do Procedimento') }}
                                                         <div class="input-group date col-sm-11 col-md-11 col-lg-11">
                                                             <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                                            <select name="expense_category_id" class="form-control select2-hidden-accessible">
+                                                            <select name="expense_category_id" class="form-control">
                                                                 <option></option>
                                                                 @foreach($categories as $category)
                                                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -52,7 +52,7 @@
                                                            {{  Form::label('expense_category_id', 'Procedimento') }}
                                                            <div class="input-group date col-sm-11 col-md-11 col-lg-11">
                                                                <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                                               <select name="expense_category_id" class="form-control select2-hidden-accessible">
+                                                               <select name="expense_category_id" class="form-control">
                                                                    <option></option>
                                                                    @foreach($categories as $category)
                                                                        <option value="{{$category->id}}">{{$category->name}}</option>
@@ -91,31 +91,44 @@
                                                         @php  $flag_tab_div = 0;  @endphp
                                                         @foreach($transactionOfCustomer as $category => $transactions)
                                                             @if($flag_tab_div == 0)
-                                                                <div class="tab-pane active" id="{{$category}}">
+                                                                <div class="tab-pane active" id="{{$category}}" style="height: 300px;overflow-y: scroll;">
                                                                     <table class="table table-hover">
                                                                         <thead>
                                                                         <tr>
                                                                             <th>Codigo</th>
+                                                                            <th>Data de realização</th>
                                                                             <th>Procedimento</th>
                                                                             <th>Valor</th>
                                                                             <th>Responsável</th>
                                                                             <th>Situação</th>
                                                                             <th>Status</th>
+                                                                            <th>Editar</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                         @foreach($transactions as $transaction)
                                                                             <tr>
                                                                                 <td>{{$transaction->id}}</td>
+                                                                                @if(isset($transaction->transaction_date))
+                                                                                <td>{{\Carbon\Carbon::parse($transaction->transaction_date)->format('d-m-Y')}}</td>
+                                                                                @else
+                                                                                    <td>00-00-0000</td>
+                                                                                @endif
                                                                                 <td>{{$transaction->procedure->name}}</td>
                                                                                 <td>{{$transaction->price}}</td>
                                                                                 <td>{{$transaction->staff->name}}</td>
-                                                                                <td>{{$transaction->transactionStatus->name}}</td>
-                                                                                @if($transaction->paid)
-                                                                                    <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 22px;"></i></td>
+                                                                                @if($transaction->transactionStatus->name == \App\Models\Util\Constants::TRANSACTION_STATUS_WARNING)
+                                                                                <td><i class="fa fa-exclamation-circle" style="color:#f39a0d; font-size: 20px;"></i></td>
                                                                                 @else
-                                                                                    <td><i class="fa fa-window-minimize" style="color:#009fe8; font-size: 16px;"></i></td>
+                                                                                <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
                                                                                 @endif
+                                                                                @if($transaction->paid)
+                                                                                    <td><i class="fa fa-vimeo" style="color:#4ca20b; font-size: 20px;"></i></td>
+                                                                                @else
+                                                                                    <td><i class="fa fa-times-circle" style="color:#aa1111; font-size: 20px;"></i></td>
+                                                                                @endif
+                                                                                <td><a href="{{action("ExpenseController@remove_expense", ['id' => $transaction->id])}}">
+                                                                                        <i class="fa fa-pencil" style="font-size: 20px;"></i></a></td>
                                                                             </tr>
                                                                         @endforeach
                                                                         </tbody>
@@ -123,31 +136,44 @@
                                                                 </div>
                                                                 @php $flag_tab_div = 1; @endphp
                                                             @else
-                                                                <div class="tab-pane" id="{{$category}}" >
+                                                                <div class="tab-pane" id="{{$category}}" style="height: 300px;overflow-y: scroll;" >
                                                                     <table class="table table-hover">
                                                                         <thead>
                                                                         <tr>
                                                                             <th>Codigo</th>
+                                                                            <th>Data de realização</th>
                                                                             <th>Procedimento</th>
                                                                             <th>Valor</th>
                                                                             <th>Responsável</th>
                                                                             <th>Situação</th>
                                                                             <th>Status</th>
+                                                                            <th>Editar</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                         @foreach($transactions as $transaction)
                                                                             <tr>
                                                                                 <td>{{$transaction->id}}</td>
+                                                                                @if(isset($transaction->transaction_date))
+                                                                                    <td>{{\Carbon\Carbon::parse($transaction->transaction_date)->format('d-m-Y')}}</td>
+                                                                                @else
+                                                                                    <td>00-00-0000</td>
+                                                                                @endif
                                                                                 <td>{{$transaction->procedure->name}}</td>
                                                                                 <td>{{$transaction->price}}</td>
                                                                                 <td>{{$transaction->staff->name}}</td>
-                                                                                <td>{{$transaction->transactionStatus->name}}</td>
-                                                                                @if($transaction->paid)
-                                                                                   <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 22px;"></i></td>
+                                                                                @if($transaction->transactionStatus->name == \App\Models\Util\Constants::TRANSACTION_STATUS_WARNING)
+                                                                                    <td><i class="fa fa-exclamation-circle" style="color:#f39a0d; font-size: 20px;"></i></td>
                                                                                 @else
-                                                                                    <td><i class="fa fa-window-minimize" style="color:#009fe8; font-size: 16px;"></i></td>
+                                                                                    <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
                                                                                 @endif
+                                                                                @if($transaction->paid)
+                                                                                    <td><i class="fa fa-vimeo" style="color:#4ca20b; font-size: 20px;"></i></td>
+                                                                                @else
+                                                                                    <td><i class="fa fa-times-circle" style="color:#aa1111; font-size: 20px;"></i></td>
+                                                                                @endif
+                                                                                <td><a href="{{action("ExpenseController@remove_expense", ['id' => $transaction->id])}}">
+                                                                                        <i class="fa fa-pencil" style="font-size: 20px;"></i></a></td>
                                                                             </tr>
                                                                         @endforeach
                                                                         </tbody>

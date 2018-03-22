@@ -20,4 +20,11 @@ class Constants
     CONST MESSAGE = "MESSAGE";
 
     CONST SUCCESS = 'success';
+
+    CONST DEFAULT_DATE = '0000-00-00';
+
+    CONST TRANSACTION_STATUS_WARNING = 'Pendente';
+
+    CONST TRANSACTION_STATUS_SUCCESS = 'Concluido';
+
 }

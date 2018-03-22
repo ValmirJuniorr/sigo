@@ -88,7 +88,7 @@ class Transaction extends Model implements Crud
 
     public function read_group_transaction_by_cateogry($start_date, $end_date, $procedure_ids = null,$status_ids = null)
     {
-        $result = DB::table('transactions')
+        $transactions = DB::table('transactions')
             ->join('procedures', 'transactions.procedure_id', '=', 'procedures.id')
             ->where('transactions.created_at' ,'>=', $start_date)
             ->where('transactions.created_at', '<=', $end_date)
@@ -97,14 +97,11 @@ class Transaction extends Model implements Crud
             })->when($status_ids,function ($query) use ($status_ids){
                 return $query->whereIn('transaction_status_id',$status_ids);
             })->selectRaw('sum(transactions.price) as price, procedures.name as name')->groupBy('name')->get();
-
-        $set = new Collection();
-
-        foreach ($result as $parcial){
-            $set->push(array($parcial->name,$parcial->price));
+        $transactionData = new Collection();
+        foreach ($transactions as $transaction){
+            $transactionData->push(array($transaction->name,$transaction->price));
         }
-
-        return $set;
+        return $transactionData;
     }
 
 
