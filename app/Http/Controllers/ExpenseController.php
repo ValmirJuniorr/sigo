@@ -166,10 +166,10 @@ class ExpenseController extends Controller
     {
 
         $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
-
         $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
+        $expense_category_ids = $request->input('expense_category_ids');
 
-        $expenses = $this->expense->expense_by_day($start_date, $end_date);
+        $expenses = $this->expense->expense_by_day($start_date, $end_date,$expense_category_ids);
 
         return $expenses;
     }
@@ -188,8 +188,9 @@ class ExpenseController extends Controller
     {
         $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
         $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
+        $expense_category_ids = $request->input('expense_category_ids');
 
-        $expenses = $this->expense->report_expense_by_cateogry($start_date, $end_date);
+        $expenses = $this->expense->report_expense_by_cateogry($start_date, $end_date,$expense_category_ids);
         return $expenses;
     }
 

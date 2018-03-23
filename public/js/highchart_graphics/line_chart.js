@@ -44,15 +44,21 @@ function line_chart(id,url,args) {
                     }
                 },
 
-                series: [{
-                    name: 'Gasto Total (dia)',
-                    // Define the data points. All series have a dummy year
-                    // of 1970/71 in order to be compared on the same x axis. Note
-                    // that in JavaScript, months start at 0 for January, 1 for February etc.
-                    data: data
-                }]
+                series: [
+                    {
+                        name: 'Despesa Total',
+                        data: data['expenses']
+                    },
+                    {
+                        name: 'Receita Total',
+                        data: data['transactions_total']
+                    },{
+                        name: 'Margem de Contribuição Total',
+                        data: data['transactions_parcial']
+                    }
+                ]
             });
-            // console.log(data);
+             console.log(data);
         }
     });
 

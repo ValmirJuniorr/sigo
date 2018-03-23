@@ -15,14 +15,19 @@ class TransactionSeeder extends Seeder
     {
         print Carbon::now()->format("H:m:s") . "\n";
         for ($i = 1 ; $i < 300; $i++){
+
+            $price = mt_rand(40,180);
+
             Transaction::updateOrCreate(
                 [
                     'id' => $i
                 ],
                 [
                     'id' => $i,
-                    'price' => mt_rand(40,180),
+                    'price' => $price,
+                    'cost_price' => $price * mt_rand(2,7) / 10,
                     'paid' => true,
+                    'transaction_date' => Carbon::now()->subDay(mt_rand(1,90))->format('Y-m-d'),
                     'description' => 'teste@teste',
                     'customer_id' => '1',
                     'procedure_id' => mt_rand(1,4),

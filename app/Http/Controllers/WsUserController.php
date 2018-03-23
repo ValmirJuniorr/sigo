@@ -23,7 +23,7 @@ class WsUserController extends Controller
                 $user_result[Constants::RESULT] = TRUE;
         }catch (AuthenticationException $e){
             $user_result[Constants::ERROR] = array(Constants::TYPE_ERROR => 1 , Constants::MESSAGE => $e->getMessage());
-        }catch (Exception $e){
+        }catch (\Exception $e){
             $user_result[Constants::ERROR] = array(Constants::TYPE_ERROR => 500 , Constants::MESSAGE => $e->getMessage());
         }finally{
             return $user_result;

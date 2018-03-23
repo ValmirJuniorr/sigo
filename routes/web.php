@@ -27,7 +27,7 @@ Route::get('/recover', 'UserController@recover');
 
 Route::post('/login/auth','UserController@do_login');
 
-Route::post('/logout','UserController@logout');
+Route::get('/logout','UserController@logout');
 
 Route::post('/rpc/v1/do_login_WS','WsUserController@do_login_WS');
 
@@ -315,9 +315,15 @@ Route::get('/expense/expense_by_category_with_dates', 'ExpenseController@expense
 
 Route::get('/transaction/read_group_transaction_by_category', 'TransactionController@read_group_transaction_by_category');
 
+Route::get('/transaction/resume_data_to_stack_collumn', 'TransactionController@resume_data_to_stack_collumn');
+
 
 
 Route::get('/report/expense_transactions','ReportController@resume_expense_transactions');
+
+Route::get('/report/report_line_chart_expenses_transactions','ReportController@report_line_chart_expenses_transactions');
+
+
 
 Route::get('/expense/index_routine_expenses',[
     'uses' => 'ExpenseController@index_routine_expenses'

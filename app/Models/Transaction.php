@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Staff;
 use App\Models\TransactionStatus;
 use App\Models\Util\Crud;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -86,23 +87,82 @@ class Transaction extends Model implements Crud
         // TODO: Implement filter() method.
     }
 
-    public function read_group_transaction_by_cateogry($start_date, $end_date, $procedure_ids = null,$status_ids = null)
-    {
-        $transactions = DB::table('transactions')
+    private function filter_transactions($start_date, $end_date, $procedure_ids = null, $status_id = null,$staff_id = null){
+
+        return DB::table('transactions')
             ->join('procedures', 'transactions.procedure_id', '=', 'procedures.id')
-            ->where('transactions.created_at' ,'>=', $start_date)
-            ->where('transactions.created_at', '<=', $end_date)
+            ->where('transactions.transaction_date' ,'>=', $start_date)
+            ->where('transactions.transaction_date', '<=', $end_date)
             ->when($procedure_ids,function ($query) use ($procedure_ids){
                 return $query->whereIn('procedure_id',$procedure_ids);
-            })->when($status_ids,function ($query) use ($status_ids){
-                return $query->whereIn('transaction_status_id',$status_ids);
-            })->selectRaw('sum(transactions.price) as price, procedures.name as name')->groupBy('name')->get();
-        $transactionData = new Collection();
-        foreach ($transactions as $transaction){
-            $transactionData->push(array($transaction->name,$transaction->price));
-        }
-        return $transactionData;
+            })->when($status_id,function ($query) use ($status_id){
+                return $query->where('transaction_status_id',$status_id);
+            })->when($staff_id,function ($query) use ($staff_id){
+                return $query->where('staff_id',$staff_id);
+            })->selectRaw('sum(transactions.price) as price, sum(transactions.cost_price) as cost_price, procedures.name as name')->groupBy('name')->get();
     }
+
+    private function filter_transactions_by_day($start_date,$end_date){
+        return DB::table('transactions')->selectRaw('sum(price) as price, sum(cost_price) as cost_price , transaction_date')
+            ->where('transactions.transaction_date' ,'>=', $start_date)
+            ->where('transactions.transaction_date', '<=', $end_date)
+            ->groupBy('transactions.transaction_date')->get();
+    }
+
+    public function read_group_transaction_by_cateogry($start_date, $end_date, $procedure_ids = null, $status_id = null,$staff_id = null)
+    {
+        $result = $this->filter_transactions($start_date, $end_date, $procedure_ids,$status_id,$staff_id);
+
+        $set = new Collection();
+
+        foreach ($result as $parcial){
+            $set->push(array($parcial->name,$parcial->price,$parcial->cost_price));
+        }
+
+        return $set;
+    }
+
+    public function resume_data_to_stack_collumn($start_date, $end_date, $procedure_ids = null, $status_id = null,$staff_id = null)
+    {
+        $data = $this->filter_transactions($start_date, $end_date, $procedure_ids,$status_id,$staff_id);
+
+        $procedures = new Collection();
+        $cost_price = new Collection();
+        $price = new Collection();
+
+        foreach ($data as $parcial){
+            $procedures->push($parcial->name);
+            $cost_price->push($parcial->cost_price);
+            $price->push($parcial->price - $parcial->cost_price);
+        }
+
+        return array('name' => $procedures, 'cost_price' => $cost_price, 'price' => $price);
+    }
+
+    public function transactions_by_day_total_value($start_date,$end_date){
+
+        $parcial_result = $this->filter_transactions_by_day($start_date,$end_date);
+
+        $final_result = array();
+
+        foreach ($parcial_result as $item){
+            array_push($final_result,array(Carbon::parse($item->transaction_date)->timestamp * 1000,$item->price));
+        }
+        return $final_result;
+    }
+
+    public function transactions_by_day_parcial_value($start_date,$end_date){
+
+        $parcial_result = $this->filter_transactions_by_day($start_date,$end_date);
+
+        $final_result = array();
+
+        foreach ($parcial_result as $item){
+            array_push($final_result,array(Carbon::parse($item->transaction_date)->timestamp * 1000,$item->price - $item->cost_price));
+        }
+        return $final_result;
+    }
+
 
 
     public function inputs($object)

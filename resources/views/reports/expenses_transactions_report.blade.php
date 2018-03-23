@@ -101,7 +101,7 @@
                             <span class="info-box-icon bg-yellow"><i class="ion-card"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Lucro</span>
+                                <span class="info-box-text">Resultado Operacional</span>
                                 <span class="info-box-number">175,25 <small>R$</small></span>
                             </div>
                             <!-- /.info-box-content -->

@@ -5,7 +5,63 @@ function basic_column_chart(id,url,args,name) {
         data: args,
         success: function( data ){
 
+            console.log(data);
+
             Highcharts.chart(id, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: name
+                },
+                xAxis: {
+                    categories: data['name']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total em Reais (R$)'
+                    }
+                },
+                tooltip: {
+                    formatter: function() {
+                        var s = '<b>'+ this.x +'</b>',
+                        sum = 0;
+
+                        $.each(this.points, function(i, point) {
+                            sum += point.y;
+                        });
+
+
+                        $.each(this.points, function(i, point) {
+                            s += '<br/>'+ point.series.name +' : ' + point.y + ' R$ <b>(' + ((point.y / sum) * 100).toFixed(2) + " %)</b>" ;
+                        });
+
+                        s += '<br/>Total: '+sum + ' R$'
+
+                        return s;
+                    },
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal'
+                    }
+                },
+                series: [
+                    {
+                        name: 'Margem de Contribuição',
+                        data: data['price']
+                    },
+                    {
+                        name: 'Custo',
+                        data: data['cost_price']
+                    }
+                ]
+            });
+
+
+            /*Highcharts.chart(id, {
                 chart: {
                     type: 'column'
                 },
@@ -50,11 +106,9 @@ function basic_column_chart(id,url,args,name) {
                         }
                     }
                 }]
-            });
-
-
-            console.log(data);
+            });*/
         }
     });
+
 
 }
