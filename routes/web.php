@@ -323,6 +323,7 @@ Route::get('/report/expense_transactions','ReportController@resume_expense_trans
 
 Route::get('/report/report_line_chart_expenses_transactions','ReportController@report_line_chart_expenses_transactions');
 
+Route::get('/report/resume_result_expense_transaction','ReportController@resume_result_expense_transaction');
 
 
 Route::get('/expense/index_routine_expenses',[

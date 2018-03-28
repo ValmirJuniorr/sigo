@@ -102,11 +102,17 @@ class Transaction extends Model implements Crud
             })->selectRaw('sum(transactions.price) as price, sum(transactions.cost_price) as cost_price, procedures.name as name')->groupBy('name')->get();
     }
 
-    private function filter_transactions_by_day($start_date,$end_date){
-        return DB::table('transactions')->selectRaw('sum(price) as price, sum(cost_price) as cost_price , transaction_date')
+    private function filter_generic_transactions($start_date, $end_date, $procedure_ids = null, $status_id = null, $staff_id = null){
+        return DB::table('transactions')
             ->where('transactions.transaction_date' ,'>=', $start_date)
             ->where('transactions.transaction_date', '<=', $end_date)
-            ->groupBy('transactions.transaction_date')->get();
+            ->when($procedure_ids,function ($query) use ($procedure_ids){
+                return $query->whereIn('procedure_id',$procedure_ids);
+            })->when($status_id,function ($query) use ($status_id){
+                return $query->where('transaction_status_id',$status_id);
+            })->when($staff_id,function ($query) use ($staff_id){
+                return $query->where('staff_id',$staff_id);
+            });
     }
 
     public function read_group_transaction_by_cateogry($start_date, $end_date, $procedure_ids = null, $status_id = null,$staff_id = null)
@@ -141,7 +147,11 @@ class Transaction extends Model implements Crud
 
     public function transactions_by_day_total_value($start_date,$end_date){
 
-        $parcial_result = $this->filter_transactions_by_day($start_date,$end_date);
+        $result  = $this->filter_generic_transactions($start_date,$end_date)
+            ->selectRaw('sum(price) as price, sum(cost_price) as cost_price , transaction_date')
+            ->groupBy('transactions.transaction_date')->get();
+
+        $parcial_result = $result;
 
         $final_result = array();
 
@@ -153,7 +163,12 @@ class Transaction extends Model implements Crud
 
     public function transactions_by_day_parcial_value($start_date,$end_date){
 
-        $parcial_result = $this->filter_transactions_by_day($start_date,$end_date);
+
+        $result  = $this->filter_generic_transactions($start_date,$end_date)
+            ->selectRaw('sum(price) as price, sum(cost_price) as cost_price , transaction_date')
+            ->groupBy('transactions.transaction_date')->get();
+
+        $parcial_result = $result;
 
         $final_result = array();
 
@@ -163,7 +178,15 @@ class Transaction extends Model implements Crud
         return $final_result;
     }
 
+    public function transactinos_operational_contribuition_margin($start_date, $end_date, $procedure_ids = null, $status_id = null, $staff_id = null){
+        return $this->filter_generic_transactions($start_date,$end_date,$procedure_ids,$status_id,$staff_id)
+            ->selectRaw('sum(price - cost_price) as operational_result')->get()->first()->operational_result;
+    }
 
+    public function transactinos_operational_income($start_date, $end_date, $procedure_ids = null, $status_id = null,$staff_id = null){
+        return $this->filter_generic_transactions($start_date,$end_date,$procedure_ids,$status_id,$staff_id)
+            ->selectRaw('sum(price) as price')->get()->first()->price;
+    }
 
     public function inputs($object)
     {

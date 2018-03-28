@@ -29,7 +29,6 @@ function line_chart(id,url,args) {
                     title: {
                         text: 'Valor Total (R$)'
                     },
-                    min: 0
                 },
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',

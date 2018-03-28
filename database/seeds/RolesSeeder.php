@@ -406,6 +406,19 @@ class RolesSeeder extends Seeder
             ]
         );
 
+        Role::updateOrCreate(
+            [
+                'id' => 33
+            ],
+            [
+                'id' => 33,
+                'name' => 'teste',
+                'display' => 'Regra possibilita utilizar o relatório do resultado operacional',
+                'sub_module_id' => 9
+            ]
+        );
+
+
 
     }
 }

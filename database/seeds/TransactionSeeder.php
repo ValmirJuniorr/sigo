@@ -24,7 +24,7 @@ class TransactionSeeder extends Seeder
                 ],
                 [
                     'id' => $i,
-                    'price' => $price,
+                    'price' => $price * mt_rand(8,9) / 10,
                     'cost_price' => $price * mt_rand(2,7) / 10,
                     'paid' => true,
                     'transaction_date' => Carbon::now()->subDay(mt_rand(1,90))->format('Y-m-d'),

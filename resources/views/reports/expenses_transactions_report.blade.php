@@ -60,7 +60,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Despesas</span>
-                                <span class="info-box-number">5.875,25 <small>R$</small></span>
+                                <span id="expense_value" class="info-box-number"><small></small></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -73,7 +73,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Receitas</span>
-                                <span class="info-box-number">5.875,25 <small>R$</small></span>
+                                <span id="transaction_value" class="info-box-number"><small></small></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -88,8 +88,8 @@
                             <span class="info-box-icon bg-blue"><i class="ion ion-ios-cart-outline"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Procedimentos</span>
-                                <span class="info-box-number">150</span>
+                                <span  class="info-box-text">Margem de Contribuição</span>
+                                <span id="contribution_margin" class="info-box-number"></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -102,7 +102,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Resultado Operacional</span>
-                                <span class="info-box-number">175,25 <small>R$</small></span>
+                                <span id="operational_result" class="info-box-number"><small></small></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>

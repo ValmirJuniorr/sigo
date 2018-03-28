@@ -213,6 +213,15 @@ class Expense extends Model implements Crud
         return TRUE;
     }
 
+    public function resume_expense_result($start_date,$end_date,$expense_category_ids){
+        return Expense::with('expense_category')
+            ->where('expire_expense_date' ,'>=', $start_date)
+            ->where('expire_expense_date','<=',$end_date)
+            ->when($expense_category_ids,function ($query) use ($expense_category_ids){
+                return $query->whereIn('expense_category_id',$expense_category_ids);
+            })->selectRaw('sum(price) as price')->get()->first()->price;
+    }
+
     public function inputs($object)
     {
         return [

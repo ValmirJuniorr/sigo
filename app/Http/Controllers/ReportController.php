@@ -65,5 +65,36 @@ class ReportController extends Controller
     }
 
 
+    public function resume_result_expense_transaction(Request $request){
+
+        $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
+        $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
+        $status_id = $request->input('status_id');
+        $staff_id = $request->input('staff_id');
+        $expense_category_ids = $request->input('expense_category_ids');
+
+
+        $contribuition_margin = $this->transaction->transactinos_operational_contribuition_margin($start_date,$end_date,null,$status_id,$staff_id);
+
+        $income_result = $this->transaction->transactinos_operational_income($start_date,$end_date,null,$status_id,$staff_id);
+
+        $expense_result = $this->expense->resume_expense_result($start_date,$end_date,$expense_category_ids);
+
+
+
+        //$contribuition_margin = $operational_result - $expense_result;
+
+        return array('operational_result' => $contribuition_margin - $expense_result,
+                     'income_result' => $income_result,
+                     'expense_result' => $expense_result,
+                     'contribution_margin' => $contribuition_margin
+                    );
+
+    }
+
+
+
+
+
 
 }

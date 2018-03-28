@@ -8,7 +8,7 @@ $(document).ready(function(){
             expense_category_ids: $("#expense_category_ids").val(),
         };
 
-        //console.log(args);
+
 
         line_chart('line_chart_resume_expense_per_day','/report/report_line_chart_expenses_transactions',args);
 
@@ -17,6 +17,20 @@ $(document).ready(function(){
         basic_pie_chart('pie_chart_transaction_category','/transaction/read_group_transaction_by_category',args,'Gráfico Categoria de Receitas');
 
         basic_column_chart('column_chart_transactions','/transaction/resume_data_to_stack_collumn',args,'Receitas por Operação');
+
+        $.ajax({
+            type: 'GET',
+            url: '/report/resume_result_expense_transaction',
+            data: args,
+            success: function (data) {
+                $("#transaction_value").text("R$ " + data['income_result']);
+                $("#expense_value").text("R$ " + data['expense_result']);
+                $("#contribution_margin").text("R$ " + data['contribution_margin']);
+                $("#operational_result").text("R$ " + data['operational_result']);
+                console.log(data);
+            }
+        });
+
 
     });
 });

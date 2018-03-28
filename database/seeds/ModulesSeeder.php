@@ -19,7 +19,7 @@ class ModulesSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Gestão de Prontuário',
-                'description' => 'Gerenciamento do atendimento ao Cliente',
+                'description' => '-',
                 'color' => '#3498db',
                 'icon' => '',
             ]
@@ -32,7 +32,7 @@ class ModulesSeeder extends Seeder
             [
                 'id' => 2,
                 'name' => 'Gestão Financeira',
-                'description' => 'Controle e gestão das financeias',
+                'description' => '-',
                 'color' => '#27ae60',
                 'icon' => '',
             ]
@@ -45,7 +45,7 @@ class ModulesSeeder extends Seeder
             [
                 'id' => 3,
                 'name' => 'Gestão de Horários',
-                'description' => 'Gestão dos agendamentos dos horarios',
+                'description' => '-',
                 'color' => '#34495e',
                 'icon' => '',
             ]
@@ -58,10 +58,24 @@ class ModulesSeeder extends Seeder
             [
                 'id' => 4,
                 'name' => 'Utilitários',
-                'description' => 'Controler administrativo do sistema',
+                'description' => '-',
                 'color' => '#34495e',
                 'icon' => '',
             ]
         );
+
+        Module::updateOrCreate(
+            [
+                'id' => 5
+            ],
+            [
+                'id' => 5,
+                'name' => 'Relatórios',
+                'description' => '-',
+                'color' => '#5352ed',
+                'icon' => '',
+            ]
+        );
+
     }
 }

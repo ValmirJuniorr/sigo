@@ -123,5 +123,20 @@ class SubModulesSeeder extends Seeder
                 'sub_module_category_id' => 1
             ]
         );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 9
+            ],
+            [
+                'id' => 9,
+                'name' => 'Resultado Operacional',
+                'url' => 'ReportController@resume_expense_transactions',
+                'icon' => 'fa fa-pie-chart',
+                'module_id' => 5,
+                'sub_module_category_id' => 1
+            ]
+        );
+
     }
 }
