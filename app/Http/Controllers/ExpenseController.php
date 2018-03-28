@@ -61,8 +61,9 @@ class ExpenseController extends Controller
                 return redirect('/expense/index')->with(Constants::SUCCESS, __('messages.success'));
             }
         } catch (ValidationException $e) {
-            return back()->withErrors($e->getMessage());
+            return back()->withErrors($e->getMessage())->withInput();
         }
+
     }
 
     public function show_expense(Request $request)

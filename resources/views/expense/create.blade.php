@@ -54,11 +54,9 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-align-justify"></i>
                                                 </div>
-                                                <select name="expense_category_id" class="form-control">
-                                                    @foreach($categories as $category)
-                                                        <option value="{{$category->id}}">{{$category->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                                @include('components.select', ['id'=> 'expense_category_id', 'set' => $categories,
+                                                 'default' => array('id' => old('expense_category_id') , 'value' => 'Categoria')])
+
                                             </div>
                                         </div>
                                         <div class="form-group date col-md-12">

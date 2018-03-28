@@ -79,8 +79,9 @@ class Procedure extends Model implements Crud
     {
         return [
             'name' => $object->name,
-            'price' => $object->price,
             'procedure_time' => $object->procedure_time,
+            'price' => $object->price,
+            'cost_price' =>$object->cost_price,
             'staff_category_id' => $object->staff_category_id,
         ];
     }
@@ -91,7 +92,7 @@ class Procedure extends Model implements Crud
             'name' => 'required',
             'procedure_time' => 'required',
             'price' => 'required|numeric|min:0',
-            'cost_price' =>'required|numeric|min:0|max:price',
+            'cost_price' =>'required|numeric|min:0',
             'staff_category_id' => 'required',
         ];
     }

@@ -51,10 +51,10 @@ return [
     'ipv6'                 => 'O :attribute preisa ser um endereço de IPv6 válido.',
     'json'                 => 'O :attribute preisa ser um texto JSON.',
     'max'                  => [
-        'numeric' => 'O :attribute não pore ser maior que :max.',
-        'file'    => 'O :attribute não pore ser maior que :max kilobytes.',
-        'string'  => 'O :attribute não pore ser maior que :max carácteers.',
-        'array'   => 'O :attribute não pore ter mais do que :max items.',
+        'numeric' => 'O :attribute não pode ser maior que :max.',
+        'file'    => 'O :attribute não pode ser maior que :max kilobytes.',
+        'string'  => 'O :attribute não pode ser maior que :max carácteers.',
+        'array'   => 'O :attribute não pode ter mais do que :max items.',
     ],
     'mimes'                => 'O :attribute precisa ser um aqruivo ou tipo: :values.',
     'mimetypes'            => 'O :attribute precisa ser um aqruivo ou tipo: :values.',
@@ -102,7 +102,7 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
-        ],
+        ]
     ],
 
     /*
@@ -116,6 +116,7 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+    ],
 
 ];
