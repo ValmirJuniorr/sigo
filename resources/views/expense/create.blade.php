@@ -40,11 +40,11 @@
 
                                         <div class="form-group date col-md-6">
                                             {{  Form::label('price', 'Valor') }}
-                                            <div class="input-group date">
+                                            <div class="input-group">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-money"></i>
                                                 </div>
-                                                {{  Form::number('price', $value = null,array('class' => 'form-control pull-right' ,"step" => "0.01", 'placeholder' => 'Valor','max' => '1000000'))}}
+                                                {{  Form::text('price', $value = null,array('class' => 'form-control pull-right money' ,"step" => "0.01", 'placeholder' => 'Valor','max' => '1000000'))}}
                                             </div>
                                         </div>
 

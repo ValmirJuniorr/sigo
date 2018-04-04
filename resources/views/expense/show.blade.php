@@ -43,7 +43,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-money"></i>
                                                 </div>
-                                                {{  Form::number('price', $expense->price,array('class' => 'form-control pull-right',"step" => "0.01", 'placeholder' => 'Valor','max' => '1000000'))}}
+                                                {{  Form::text('price', $value = $expense->price ? money_format('%i',$expense->price) : null,array('class' => 'form-control pull-right money',"step" => "0.01", 'placeholder' => 'Valor','max' => '1000000'))}}
                                             </div>
                                         </div>
                                         <div class="form-group date col-md-12">

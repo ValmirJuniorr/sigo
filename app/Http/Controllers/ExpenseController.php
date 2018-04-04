@@ -7,6 +7,7 @@ use App\Models\Expensive\Expense;
 use App\Models\Expensive\ExpenseCategory;
 use App\Models\Util\Calendar;
 use App\Models\Util\Constants;
+use App\Models\Util\Currency;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -52,7 +53,7 @@ class ExpenseController extends Controller
     {
         try {
             $this->expense->expire_expense_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_date'));
-            $this->expense->price = $request->input('price');
+            $this->expense->price = Currency::currency_to_float($request->input('price'));
             $this->expense->description = $request->input('description');
             $this->expense->expense_category_id = $request->input('expense_category_id');
             $this->expense->expire_expense_routine_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_routine_date'));
@@ -83,7 +84,7 @@ class ExpenseController extends Controller
         try {
             $this->expense->expire_expense_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_date'));
             $this->expense->id = $request->input('id');
-            $this->expense->price = $request->input('price');
+            $this->expense->price = Currency::currency_to_float($request->input('price'));
             $this->expense->description = $request->input('description');
             $this->expense->expense_category_id = $request->input('expense_category_id');
             $this->expense->expire_expense_routine_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('expire_expense_routine_date'));
