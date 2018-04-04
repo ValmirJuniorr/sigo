@@ -325,6 +325,8 @@ Route::get('/report/report_line_chart_expenses_transactions','ReportController@r
 
 Route::get('/report/resume_result_expense_transaction','ReportController@resume_result_expense_transaction');
 
+Route::get('/report/result_resume_transactions_report','TransactionController@result_resume_transactions_report');
+
 
 Route::get('/expense/index_routine_expenses',[
     'uses' => 'ExpenseController@index_routine_expenses'
@@ -344,3 +346,7 @@ Route::get('/expense/remove_routine_expense',[
 
 
 Route::get('/procedure/get_procedure_by_category', 'ProcedureController@get_procedure_by_category');
+
+Route::get('/transactions/report/resume_transactions',[
+    'uses' => 'TransactionController@transactions_report'
+]);

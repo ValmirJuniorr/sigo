@@ -214,6 +214,21 @@ class Transaction extends Model implements Crud
             ->selectRaw('sum(price) as price')->get()->first()->price;
     }
 
+    public function resume_transactions_report($start_date, $end_date, $procedure_ids = null, $status_id = null,$staff_id = null){
+
+        $result = $this->filter_generic_transactions($start_date,$end_date,$procedure_ids,$status_id,$staff_id)
+        ->join('procedures', 'transactions.procedure_id', '=', 'procedures.id')
+        ->join('customers', 'transactions.customer_id', '=', 'customers.id')
+        ->join('staff', 'transactions.staff_id', '=', 'staff.id')
+        ->join('transaction_statuses', 'transactions.transaction_status_id', '=', 'transaction_statuses.id')
+        ->select('transactions.id as id','transactions.price as price','transactions.cost_price as cost_price',
+            'customers.name as customer_name','procedures.name as procedure_name','staff.name  as staff_name',
+            'transaction_statuses.name as status_name')->get();
+
+        return array('data' => $result, 'total_price' => $result->sum('price') , 'total_cost_price' => $result->sum('cost_price'));
+
+    }
+
     public function inputs($object)
     {
         return [

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Procedure;
 use App\Model\Transaction;
 use App\Models\Customer;
+use App\Models\TransactionStatus;
 use App\Models\Util\Calendar;
 use App\Models\Staff;
 use App\Models\StaffCategory;
@@ -29,6 +30,7 @@ class TransactionController extends Controller
         $this->category = new StaffCategory();
         $this->staff = new Staff();
         $this->customer= new Customer();
+        $this->transactionStatus = new TransactionStatus();
     }
 
 
@@ -161,5 +163,28 @@ class TransactionController extends Controller
 
         return $this->transaction->resume_data_to_stack_collumn($start_date,$end_date,null,$status_id,$staff_id);
     }
+
+    public function transactions_report(Request $request){
+
+        $staffs = $this->staff->read_all()->get();
+        $transactionStatuses = $this->transactionStatus->read_all()->get();
+        $transactions = $this->transaction->read_all();
+
+        return view('reports.transactions_report')->with(array(
+            'staffs' => $staffs,
+            'transactionStatuses' => $transactionStatuses,
+            'transactions' => $transactions
+        ));
+    }
+
+    public function result_resume_transactions_report(Request $request){
+        $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
+        $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
+        $status_id = $request->input('status_id');
+        $staff_id = $request->input('staff_id');
+        return $this->transaction->resume_transactions_report($start_date,$end_date,null,$status_id,$staff_id);
+    }
+
+
 
 }

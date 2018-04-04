@@ -16,6 +16,4 @@ class Currency
         return floatval(str_replace(",",".",$value));
     }
 
-
-
 }
