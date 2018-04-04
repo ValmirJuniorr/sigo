@@ -71,6 +71,10 @@ class Procedure extends Model implements Crud
         return Procedure::where('activated',true)->orderBy('name','desc');
     }
 
+    public function read_by_category($category_id){
+        return Procedure::where('activated',true)->where('staff_category_id',$category_id)->orderBy('name','asc');
+    }
+
     public function filter($input = [])
     {
     }

@@ -15,6 +15,9 @@ class TransactionController extends Controller
 
 
     private $transaction;
+    private $category;
+    private $staff;
+    private $customer;
 
 
     /**
@@ -23,7 +26,9 @@ class TransactionController extends Controller
     public function __construct()
     {
         $this->transaction = new Transaction();
-
+        $this->category = new StaffCategory();
+        $this->staff = new Staff();
+        $this->customer= new Customer();
     }
 
 
@@ -52,7 +57,7 @@ class TransactionController extends Controller
      */
     public function create_transaction()
     {
-        //
+
     }
 
     /**
@@ -63,7 +68,20 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $transaction = new Transaction();
+            $customer_id = $request->input('customer_id');
+            $transaction->staff_id = $request->input('staff_id');
+            $transaction->procedure_id = $request->input('procedure_id');
+            $transaction->description = $request->input('description');
+            $transaction->customer_id = $customer_id;
+            $transactionCreate = $transaction->create($transaction);
+            return redirect()->action('TransactionController@show', ['id' => base64_encode($customer_id)]);
+        }catch (ValidationException $ve){
+            return back()->withErrors($ve->getMessage())->withInput();
+        }catch (Exception $e){
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
@@ -75,17 +93,13 @@ class TransactionController extends Controller
     public function show(Request $request)
     {
         try {
-            $transaction = new Transaction();
-            $category = new StaffCategory();
-            $staffs = new Staff();
-            $procedure = new Procedure();
             $customer_id = base64_decode($request->input('id'));
-            $category_all = $category->read_all()->get();
-            $staff_all = $staffs->read_all()->get();
-         //   $procedures = $procedure->read_all()->get();
-            $transactionInCustomer = $transaction->read_of_customer($customer_id);
+            $category_all = $this->category->read_all()->get();
+            $staff_all = $this->staff->read_all()->get();
+            $transactionInCustomer = $this->transaction->read_of_customer($customer_id);
+            $customer = $this->customer->read($customer_id);
             return view('transaction.show ', ['transactionOfCustomer' => $transactionInCustomer,
-                 'categories' => $category_all,'staffs' => $staff_all]);
+                 'categories' => $category_all,'staffs' => $staff_all,'customer' => $customer]);
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
         } catch (Exception $e) {

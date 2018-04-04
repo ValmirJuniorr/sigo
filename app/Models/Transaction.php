@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Staff;
 use App\Models\TransactionStatus;
 use App\Models\Util\Crud;
+use App\Models\Util\ValidatorModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -39,6 +40,25 @@ class Transaction extends Model implements Crud
         'description'
     );
 
+    /*
+     * 'staff_id' => 'required',
+            'category_id' => 'required',
+            'procedure_id' => 'required',
+            'description' => 'required',
+     *
+     */
+
+    /**
+     * Tradução dos atributos da classe
+     * @var array
+     */
+    private $attribute = array(
+        'staff_id' => 'Especialista',
+        'procedure_id' => 'Procedimento',
+        'description' => 'Descrição',
+    );
+
+
     const STORE_TRANSACTION = 'store_transaction';
 
     const UPDATE_TRANSACTION = 'update_transaction';
@@ -52,7 +72,13 @@ class Transaction extends Model implements Crud
 
     public function create($object, $arguments = [])
     {
-        // TODO: Implement create() method.
+        if(ValidatorModel::validation($this->inputs($object),$this->rules(),$this->attribute)){
+            $procedure = Procedure::findOrFail($object->procedure_id);
+            $object->price = $procedure->price;
+            $object->transaction_status_id = 1;
+            $object->paid = 0;
+            return $object->save();
+        }
     }
 
     public function remove($object_id, $arguments = [])
@@ -190,11 +216,19 @@ class Transaction extends Model implements Crud
 
     public function inputs($object)
     {
-        // TODO: Implement inputs() method.
+        return [
+            'staff_id' => $object->staff_id,
+            'procedure_id' => $object->procedure_id,
+            'description' => $object->description,
+        ];
     }
 
     public function rules($id = 0)
     {
-        // TODO: Implement rules() method.
+        return [
+            'staff_id' => 'required',
+            'procedure_id' => 'required',
+            'description' => 'required',
+        ];
     }
 }

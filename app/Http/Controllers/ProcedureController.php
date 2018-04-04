@@ -133,4 +133,14 @@ class ProcedureController extends Controller
         }
 
     }
+
+    public function get_procedure_by_category(Request $request){
+        try{
+            $procedure = new Procedure();
+            $category_id = $request->input('id');
+            return $procedure->read_by_category($category_id)->get();
+        }catch (\Exception $e){
+            return back()->withErrors($e->getMessage());
+        }
+    }
 }

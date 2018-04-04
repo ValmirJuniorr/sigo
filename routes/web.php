@@ -175,8 +175,8 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Transaction::STORE_TRANSACTION
             ]);
 
-        Route::post('/transaction/transaction',
-            ['uses' =>'TransactionController@transaction',
+        Route::post('/transaction/store_transaction',
+            ['uses' =>'TransactionController@store',
                 'role' => Transaction::STORE_TRANSACTION
             ]);
 
@@ -341,3 +341,6 @@ Route::post('/expense/update_routine_expense',[
 Route::get('/expense/remove_routine_expense',[
     'uses' => 'ExpenseController@remove_routine_expense'
 ]);
+
+
+Route::get('/procedure/get_procedure_by_category', 'ProcedureController@get_procedure_by_category');
