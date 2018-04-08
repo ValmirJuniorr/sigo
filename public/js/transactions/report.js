@@ -5,6 +5,7 @@ $(document).ready(function () {
             end_date: $("#end_date").val(),
             staff_id: $('#staff_id').val(),
             status_id: $("#status_id").val(),
+            procedure_ids: $("#procedure_ids").val()
         };
 
         $.ajax({

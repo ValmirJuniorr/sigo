@@ -19,6 +19,7 @@ class TransactionController extends Controller
     private $category;
     private $staff;
     private $customer;
+    private $procedure;
 
 
     /**
@@ -31,6 +32,7 @@ class TransactionController extends Controller
         $this->staff = new Staff();
         $this->customer= new Customer();
         $this->transactionStatus = new TransactionStatus();
+        $this->procedure = new Procedure();
     }
 
 
@@ -168,12 +170,12 @@ class TransactionController extends Controller
 
         $staffs = $this->staff->read_all()->get();
         $transactionStatuses = $this->transactionStatus->read_all()->get();
-        $transactions = $this->transaction->read_all();
+        $procedures = $this->procedure->read_all()->get();
 
         return view('reports.transactions_report')->with(array(
             'staffs' => $staffs,
             'transactionStatuses' => $transactionStatuses,
-            'transactions' => $transactions
+            'procedures' => $procedures
         ));
     }
 
@@ -182,7 +184,8 @@ class TransactionController extends Controller
         $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
         $status_id = $request->input('status_id');
         $staff_id = $request->input('staff_id');
-        return $this->transaction->resume_transactions_report($start_date,$end_date,null,$status_id,$staff_id);
+        $procedure_ids = $request->input('procedure_ids');
+        return $this->transaction->resume_transactions_report($start_date,$end_date,$procedure_ids,$status_id,$staff_id);
     }
 
 

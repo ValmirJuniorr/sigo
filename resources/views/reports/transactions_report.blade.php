@@ -38,6 +38,10 @@
                             @include('components.select',['id' => 'staff_id' , 'set' => $staffs, 'default' => array('id' => null , 'value' => 'Funcionários')])
                         </div>
 
+                        <div class="form-group col-md-3">
+                            @include('components.multi_select',['id' => 'procedure_ids','set' => $procedures,'name'  => 'Procedimentos'])
+                        </div>
+
                         <div class="form-group col-md-2">
                             @include('components.select',['id' => 'status_id' , 'set' => $transactionStatuses, 'default' => array('id' => null , 'value' => 'Status')])
                         </div>

@@ -69,6 +69,8 @@ class Transaction extends Model implements Crud
 
     const SHOW_TRANSACTION = 'read_transaction';
 
+    const RESUME_TRANSACTIONS_REPORT = 'resune_transactions_report';
+
 
     public function create($object, $arguments = [])
     {

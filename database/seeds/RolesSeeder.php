@@ -412,9 +412,33 @@ class RolesSeeder extends Seeder
             ],
             [
                 'id' => 33,
-                'name' => 'teste',
+                'name' => '-',
                 'display' => 'Regra possibilita utilizar o relatório do resultado operacional',
                 'sub_module_id' => 9
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 34
+            ],
+            [
+                'id' => 34,
+                'name' => Transaction::RESUME_TRANSACTIONS_REPORT,
+                'display' => 'Regra possibilita utilizar o relatório do resultado das receitas',
+                'sub_module_id' => 10
+            ]
+        );
+
+        Role::updateOrCreate(
+            [
+                'id' => 35
+            ],
+            [
+                'id' => 35,
+                'name' => Expense::RESUME_EXPENSES_REPORT,
+                'display' => 'Regra possibilita utilizar o relatório do resultado das despesas',
+                'sub_module_id' => 11
             ]
         );
 

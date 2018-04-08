@@ -21,6 +21,8 @@ class Expense extends Model implements Crud
 
     const READ_EXPENSE = 'read_expense';
 
+    const RESUME_EXPENSES_REPORT = 'resume_expenses_report';
+
     /**
      * Nome do modelo para serem gerados os logs.
      * @constant String

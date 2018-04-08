@@ -138,5 +138,33 @@ class SubModulesSeeder extends Seeder
             ]
         );
 
+        SubModule::updateOrCreate(
+            [
+                'id' => 10
+            ],
+            [
+                'id' => 10,
+                'name' => 'Resultado de Receitas',
+                'url' => 'TransactionController@transactions_report',
+                'icon' => 'fa fa-area-chart',
+                'module_id' => 5,
+                'sub_module_category_id' => 1
+            ]
+        );
+
+        SubModule::updateOrCreate(
+            [
+                'id' => 11
+            ],
+            [
+                'id' => 11,
+                'name' => 'Resultado de Despesas',
+                'url' => 'ExpenseController@expenses_report',
+                'icon' => 'fa fa-line-chart',
+                'module_id' => 5,
+                'sub_module_category_id' => 1
+            ]
+        );
+
     }
 }
