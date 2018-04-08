@@ -30,7 +30,7 @@ class TransactionController extends Controller
         $this->transaction = new Transaction();
         $this->category = new StaffCategory();
         $this->staff = new Staff();
-        $this->customer= new Customer();
+        $this->customer = new Customer();
         $this->transactionStatus = new TransactionStatus();
         $this->procedure = new Procedure();
     }
@@ -72,7 +72,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+        try {
             $transaction = new Transaction();
             $customer_id = $request->input('customer_id');
             $transaction->staff_id = $request->input('staff_id');
@@ -81,9 +81,9 @@ class TransactionController extends Controller
             $transaction->customer_id = $customer_id;
             $transactionCreate = $transaction->create($transaction);
             return redirect()->action('TransactionController@show', ['id' => base64_encode($customer_id)]);
-        }catch (ValidationException $ve){
+        } catch (ValidationException $ve) {
             return back()->withErrors($ve->getMessage())->withInput();
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return back()->withErrors($e->getMessage());
         }
     }
@@ -91,7 +91,7 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Transaction $transaction
+     * @param  \App\Models\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
@@ -102,9 +102,17 @@ class TransactionController extends Controller
             $staff_all = $this->staff->read_all()->get();
             $transactionInCustomer = $this->transaction->read_of_customer($customer_id);
             $customer = $this->customer->read($customer_id);
-            return view('transaction.show ', ['transactionOfCustomer' => $transactionInCustomer,
-                 'categories' => $category_all,'staffs' => $staff_all,'customer' => $customer]);
-        }catch (GeneralException $ge){
+            $transactionStatuses = $this->transactionStatus->read_all()->get();
+            return view('transaction.show ',
+                [
+                    'transactionOfCustomer' => $transactionInCustomer,
+                    'categories' => $category_all,
+                    'staffs' => $staff_all,
+                    'customer' => $customer,
+                    'transactionStatuses' =>$transactionStatuses
+                ]
+            );
+        } catch (GeneralException $ge) {
             return back()->withErrors($ge->getMessage());
         } catch (Exception $e) {
             return back()->withErrors("Erro Interno");
@@ -114,7 +122,7 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Transaction $transaction
+     * @param  \App\Models\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
     public function update(Transaction $transaction)
@@ -126,7 +134,7 @@ class TransactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Transaction $transaction
+     * @param  \App\Models\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
     public function update_transaction(Request $request, Transaction $transaction)
@@ -137,12 +145,19 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Transaction $transaction
+     * @param  \App\Models\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
-    public function delete_transaction(Transaction $transaction)
+    public function delete_transaction(Request $request)
     {
-        //
+        try {
+            $expense_id = $request->input('id');
+            if ($this->expense->remove($expense_id)) {
+                return back()->with(Constants::SUCCESS, __('messages.success'));
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 
 
@@ -153,7 +168,7 @@ class TransactionController extends Controller
         $status_id = $request->input('status_id');
         $staff_id = $request->input('staff_id');
 
-        return $this->transaction->read_group_transaction_by_cateogry($start_date,$end_date,null,$status_id,$staff_id);
+        return $this->transaction->read_group_transaction_by_cateogry($start_date, $end_date, null, $status_id, $staff_id);
     }
 
     public function resume_data_to_stack_collumn(Request $request)
@@ -163,10 +178,11 @@ class TransactionController extends Controller
         $status_id = $request->input('status_id');
         $staff_id = $request->input('staff_id');
 
-        return $this->transaction->resume_data_to_stack_collumn($start_date,$end_date,null,$status_id,$staff_id);
+        return $this->transaction->resume_data_to_stack_collumn($start_date, $end_date, null, $status_id, $staff_id);
     }
 
-    public function transactions_report(Request $request){
+    public function transactions_report(Request $request)
+    {
 
         $staffs = $this->staff->read_all()->get();
         $transactionStatuses = $this->transactionStatus->read_all()->get();
@@ -179,15 +195,15 @@ class TransactionController extends Controller
         ));
     }
 
-    public function result_resume_transactions_report(Request $request){
+    public function result_resume_transactions_report(Request $request)
+    {
         $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
         $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
         $status_id = $request->input('status_id');
         $staff_id = $request->input('staff_id');
         $procedure_ids = $request->input('procedure_ids');
-        return $this->transaction->resume_transactions_report($start_date,$end_date,$procedure_ids,$status_id,$staff_id);
+        return $this->transaction->resume_transactions_report($start_date, $end_date, $procedure_ids, $status_id, $staff_id);
     }
-
 
 
 }

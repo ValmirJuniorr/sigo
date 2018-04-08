@@ -34,8 +34,8 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Cliente</th>
-                                                    <th>Cpf</th>
-                                                    <th>Cidade</th>
+                                                    <th class="hide-on-med-and-down ">Cpf</th>
+                                                    <th class="hide-on-med-and-down">Cidade</th>
                                                     <th>Prontuários</th>
                                                 </tr>
                                                 </thead>
@@ -44,8 +44,8 @@
                                                      <tr>
                                                          <td>{{$customer->id}}</td>
                                                          <td>{{$customer->name}}</td>
-                                                         <td>{{$customer->cpf}}</td>
-                                                         <td>{{$customer->city}}</td>
+                                                         <td class="hide-on-med-and-down ">{{$customer->cpf}}</td>
+                                                         <td class="hide-on-med-and-down">{{$customer->city}}</td>
                                                          <td>
                                                              @role('update_transaction')
                                                              <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("TransactionController@show", ['id' => base64_encode($customer->id)])}}">Prontuários</a>

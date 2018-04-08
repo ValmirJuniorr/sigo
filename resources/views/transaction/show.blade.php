@@ -20,7 +20,7 @@
                                     <div class="col-sm-12 box-body table-responsive no-border">
                                         <div class="box-body">
                                             <div class="nav-tabs-custom">
-                                                <h3>{{$customer->name}}</h3>
+                                                <h3>{{$customer->name}} - {{show_cpf_mask($customer->cpf)}}</h3>
                                                 <div class="row col-sm-12 col-md-12 col-lg-12" style="margin-top: 10px;">
                                                     {{Form::open(array('action' => array('TransactionController@store','customer_id'=> $customer->id)))}}
                                                    <div class="row col-sm-7 col-md-7 col-lg-7" style="margin-top: 10px;">
@@ -98,8 +98,8 @@
                                                                             <th>Procedimento</th>
                                                                             <th>Valor</th>
                                                                             <th>Responsável</th>
-                                                                            <th>Situação</th>
                                                                             <th>Status</th>
+                                                                            <th>Situação</th>
                                                                             <th>Editar</th>
                                                                         </tr>
                                                                         </thead>
@@ -121,14 +121,14 @@
                                                                                 <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
                                                                                 @endif
                                                                                 @if($transaction->paid)
-                                                                                    <td><i class="fa fa-vimeo" style="color:#4ca20b; font-size: 20px;"></i></td>
+                                                                                    <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
                                                                                 @else
                                                                                     <td><i class="fa fa-times-circle" style="color:#aa1111; font-size: 20px;"></i></td>
                                                                                 @endif
                                                                             <!--   <td><a href="{{action("ExpenseController@remove_expense", ['id' => $transaction->id])}}">
                                                                                         <i class="fa fa-pencil" style="font-size: 20px;"></i></a></td>-->
                                                                                 <td>
-                                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTransaction">Modal</button>
+                                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTransaction">Detalhes</button>
 
                                                                                 </td>
 
@@ -178,7 +178,7 @@
                                                                              <!--   <td><a href="{{action("ExpenseController@remove_expense", ['id' => $transaction->id])}}">
                                                                                         <i class="fa fa-pencil" style="font-size: 20px;"></i></a></td>-->
                                                                                 <td>
-                                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTransaction">Modal</button>
+                                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTransaction">Detalhes</button>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
@@ -205,77 +205,7 @@
         </section>
         <!-- /.content -->
       </div>
-    <div class="modal fade" id="modalTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Informação da Transação</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group col-sm-12 col-md-3 col-lg-3">
-                            <label for="recipient-name" class="col-form-label">Data</label>
-                            <input type="text" readonly class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group col-sm-12 col-md-9 col-lg-9">
-                            {{  Form::label('expense_category_id', 'Procedimento') }}
-                            <div class="input-group date col-sm-11 col-md-11 col-lg-11">
-                                <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                <select name="expense_category_id" class="form-control">
-                                    <option></option>
-                                    @foreach($staffs as $staff)
-                                        <option value="{{$staff->id}}">{{$staff->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-12 col-md-3 col-lg-3">
-                            <label for="recipient-name" class="col-form-label">Valor a Receber</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group col-sm-12 col-md-9 col-lg-9">
-                            {{  Form::label('expense_category_id', 'Profissional') }}
-                            <div class="input-group date col-sm-11 col-md-11 col-lg-11">
-                                <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                <select name="expense_category_id" class="form-control">
-                                    <option></option>
-                                    @foreach($staffs as $staff)
-                                        <option value="{{$staff->id}}">{{$staff->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                            {{  Form::label('expense_category_id', 'Situação') }}
-                            <div class="input-group date col-sm-11 col-md-11 col-lg-11">
-                                <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                <select name="expense_category_id" class="form-control">
-                                    <option></option>
-                                    <option value="">Realizado</option>
-                                    <option value="">Pendente</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                            {{  Form::label('expense_category_id', 'Status') }}
-                            <div class="input-group date col-sm-11 col-md-11 col-lg-11">
-                                <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                <select name="expense_category_id" class="form-control">
-                                    <option></option>
-                                    <option value="">Pago</option>
-                                    <option value="">Inadiplente</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar Alterações</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        @include('transaction.components.modal')
     </body>
 @endsection
 

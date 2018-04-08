@@ -2,9 +2,10 @@
 
 use App\Models\Module;
 use App\Models\SubModule;
+use App\Models\Util\Mask;
 
 
-    function show_modules(){
+function show_modules(){
         try {
             $module = new Module();
             return $module->read_modules_by_user();
@@ -21,3 +22,9 @@ use App\Models\SubModule;
             return null;
         }
     }
+
+
+    function show_cpf_mask($value){
+        return Mask::mask($value,'###.###.###-##');
+    }
+

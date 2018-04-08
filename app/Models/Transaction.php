@@ -71,6 +71,7 @@ class Transaction extends Model implements Crud
 
     const RESUME_TRANSACTIONS_REPORT = 'resune_transactions_report';
 
+    const DEFAULT_LIMIT = 10;
 
     public function create($object, $arguments = [])
     {
@@ -85,7 +86,8 @@ class Transaction extends Model implements Crud
 
     public function remove($object_id, $arguments = [])
     {
-        // TODO: Implement remove() method.
+        $transaction = Transaction::findOrFail($object_id);
+        return $transaction->delete();
     }
 
     public function edit($object, $arguments = [])
@@ -100,8 +102,14 @@ class Transaction extends Model implements Crud
 
     public function read_of_customer($customer_id, $arguments = [])
     {
+        $limit = in_array('limit',$arguments) ? $arguments['limit'] : self::DEFAULT_LIMIT;
+
         $transactions = Transaction::where('activated', true)
-            ->where('customer_id', $customer_id)->get();
+            ->where('customer_id', $customer_id)
+            ->when($limit,function ($query){
+                return $query->limit(self::DEFAULT_LIMIT);
+            })->orderBy('id','DESC')->get();
+
         return $transactions->groupBy('procedure.staff_category.name');
     }
 

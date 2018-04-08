@@ -1,11 +1,6 @@
+$('#modalTransaction').on('shown.bs.modal', function () {
 
-function modalTransaction(transaction_id,div) {
-    $('#'+div).on('shown.bs.modal', function () {
-
-
-
-    })
-}
+});
 
 function update_select_by_id(id_first,url,id_second){
     var $selectDropdown =
