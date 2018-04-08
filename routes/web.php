@@ -350,3 +350,11 @@ Route::get('/procedure/get_procedure_by_category', 'ProcedureController@get_proc
 Route::get('/transactions/report/resume_transactions',[
     'uses' => 'TransactionController@transactions_report'
 ]);
+
+Route::get('/expense/report/resume_expense',[
+    'uses' => 'ExpenseController@expenses_report'
+]);
+
+Route::get('/expense/report/result_resume_expense',[
+    'uses' => 'ExpenseController@result_expenses_report'
+]);

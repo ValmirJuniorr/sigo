@@ -196,5 +196,39 @@ class ExpenseController extends Controller
         return $expenses;
     }
 
+    public function expenses_report(){
+        $expenseCategory = new ExpenseCategory();
+        $expenseCategories = $expenseCategory->read_all()->get();
+
+        return view('reports.expense_report')->with(
+            [
+                'expenseCategories' => $expenseCategories
+            ]
+        );
+    }
+
+    public function result_expenses_report(Request $request){
+        $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
+        $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
+        $expense_category_ids = $request->input('expense_category_ids');
+
+
+        $expenses = $this->expense->with('expense_category')
+            ->when($start_date,function ($query) use ($start_date){
+                return $query->where('expire_expense_date','>=',$start_date);
+            })
+            ->when($end_date,function ($query) use ($end_date){
+                return $query->where('expire_expense_date','<=',$end_date);
+            })
+            ->when($expense_category_ids,function ($query) use ($expense_category_ids){
+                return $query->whereIn('expense_category_id',$expense_category_ids);
+            })->get();
+
+
+
+        $total_price = $expenses->sum('price');
+        return array("expenses"=>$expenses,"total_price" =>$total_price);
+    }
+
 
 }
