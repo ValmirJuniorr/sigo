@@ -57,11 +57,12 @@
                                                     <td>{{ Carbon\Carbon::parse($expense->expire_expense_date)->format('d-m-Y') }}</td>
                                                     <td>{{ str_limit($expense->description,30) }}</td>
                                                     <td class="center-elements">
+                                                        @role('update_expense')
                                                         <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ExpenseController@show_expense", ['id' => base64_encode($expense->id)])}}">Editar</a>
                                                         @if($expense->expire_expense_routine_date)
                                                             <span class="badge bg-teal btn_badge">R</span>
                                                         @endif
-
+                                                        @endrole
                                                     </td>
                                                 </tr>
                                             @endforeach

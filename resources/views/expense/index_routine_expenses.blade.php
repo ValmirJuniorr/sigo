@@ -19,11 +19,9 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Despesas Agendadas</h3>
                             <div class="box-tools pull-right">
-                                @role('store_expense')
                                 <a href="{{ action('ExpenseController@index') }}" class="btn btn-primary btn-sm ad-click-event">
                                     Voltar
                                 </a>
-                                @endrole
                             </div>
 
                         </div>
@@ -49,7 +47,9 @@
                                                     <td>{{ $expense->price }}</td>
                                                     <td>{{ Carbon\Carbon::parse($expense->expire_expense_routine_date)->format('d-m-Y') . ' (' . \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($expense->expire_expense_routine_date)) . ')'}}</td>
                                                     <td class="center-elements">
+                                                        @role('update_expense')
                                                         <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("ExpenseController@show_routine_expense", ['id' => base64_encode($expense->id)])}}">Editar</a>
+                                                        @endrole
                                                     </td>
                                                 </tr>
                                             @endforeach

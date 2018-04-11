@@ -42,7 +42,9 @@ class ExpenseCategory extends Model implements Crud
 
     public function remove($object_id, $arguments = [])
     {
-        return ExpenseCategory::findOrFail($object_id)->delete();
+        $expense_category = ExpenseCategory::findOrFail($object_id);
+        $expense_category->actvated = true;
+        return $expense_category->save();
     }
 
     public function edit($object, $arguments = [])

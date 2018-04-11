@@ -54,7 +54,10 @@ class Staff extends Model implements Crud {
 
     public function remove($object_id, $arguments = [])
     {
-        return Staff::findOrFail($object_id)->delete();
+        $staff = Staff::findorFail($object_id);
+        $staff ->activated = false;
+        return $staff ->save();
+
     }
 
     public function edit($object, $arguments = [])

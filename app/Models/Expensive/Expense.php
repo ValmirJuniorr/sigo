@@ -15,7 +15,7 @@ class Expense extends Model implements Crud
 
     const STORE_EXPENSE = 'store_expense';
 
-    const UPDATE_EXPENSE = 'update_expense';
+    const UPDATE_EXPENSE = '';
 
     const DELETE_EXPENSE = 'delete_expense';
 

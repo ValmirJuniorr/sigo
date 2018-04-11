@@ -40,7 +40,9 @@ class StaffCategory extends Model implements Crud
 
     public function remove($object_id, $arguments = [])
     {
-        return StaffCategory::findOrFail($object_id)->delete();
+        $staffCategory = StaffCategory::findorFail($object_id);
+        $staffCategory ->activated = false;
+        return $staffCategory ->save();
     }
 
     public function edit($object, $arguments = [])
