@@ -177,7 +177,7 @@
                                                                                     <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
                                                                                 @endif
                                                                                 @if($transaction->paid)
-                                                                                    <td><i class="fa fa-vimeo" style="color:#4ca20b; font-size: 20px;"></i></td>
+                                                                                    <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
                                                                                 @else
                                                                                     <td><i class="fa fa-times-circle" style="color:#aa1111; font-size: 20px;"></i></td>
                                                                                 @endif
