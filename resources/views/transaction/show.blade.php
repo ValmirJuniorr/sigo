@@ -52,14 +52,11 @@
                                                            {{  Form::label('expense_category_id', 'Procedimento') }}
                                                            <div class="input-group date col-sm-11 col-md-11 col-lg-11">
                                                                <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                                               <select name="procedure_id" id="procedure_id" class="form-control">
-                                                                   <option></option>
-                                                               </select>
+                                                               <select name="procedure_id" id="procedure_id" class="form-control"></select>
                                                            </div>
                                                     </div>
                                                 </div>
                                                 <div class="row col-sm-5 col-md-5 col-lg-5" >
-
                                                     <div class="form-group row col-sm-12 col-md-12 col-lg-12">
                                                         <label for="description">Descrição do Procedimento</label>
                                                         <textarea class="form-control" name="description" id="description" rows="3" cols="50" ></textarea>
@@ -100,7 +97,9 @@
                                                                             <th>Responsável</th>
                                                                             <th>Status</th>
                                                                             <th>Situação</th>
+                                                                            <th>Excluir</th>
                                                                             <th>Editar</th>
+                                                                            <th>Imprimir</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -116,22 +115,27 @@
                                                                                 <td>{{$transaction->price}}</td>
                                                                                 <td>{{$transaction->staff->name}}</td>
                                                                                 @if($transaction->transactionStatus->name == \App\Models\Util\Constants::TRANSACTION_STATUS_WARNING)
-                                                                                <td><i class="fa fa-exclamation-circle" style="color:#f39a0d; font-size: 20px;"></i></td>
+                                                                                <td><i title="{{$transaction->transactionStatus->name}}" data-toggle="tooltip" class="fa fa-exclamation-circle" style="color:#f39a0d; font-size: 20px;"></i></td>
                                                                                 @else
-                                                                                <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
+                                                                                <td><i title="{{$transaction->transactionStatus->name}}" data-toggle="tooltip" class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
                                                                                 @endif
                                                                                 @if($transaction->paid)
-                                                                                    <td><i class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
+                                                                                    <td><i title="Pago" data-toggle="tooltip" class="fa fa-check-circle" style="color:#4ca20b; font-size: 20px;"></i></td>
                                                                                 @else
-                                                                                    <td><i class="fa fa-times-circle" style="color:#aa1111; font-size: 20px;"></i></td>
+                                                                                    <td><i title="Inadiplente" data-toggle="tooltip" class="fa fa-times-circle" style="color:#aa1111; font-size: 20px;"></i></td>
                                                                                 @endif
-                                                                            <!--   <td><a href="{{action("ExpenseController@remove_expense", ['id' => $transaction->id])}}">
-                                                                                        <i class="fa fa-pencil" style="font-size: 20px;"></i></a></td>-->
+                                                                               <td>
+                                                                                   <a href="{{action("TransactionController@delete_transaction", ['id' => $transaction->id])}}" onclick="return confirm('Deseja realmente excluir a transação?')">
+                                                                                        <i title="Remover" data-toggle="tooltip" class="fa fa-trash-o" style="font-size: 20px;"></i></a>
+                                                                               </td>
                                                                                 <td>
-                                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTransaction">Detalhes</button>
-
+                                                                                    <a href="#" onclick="updateTransaction('{{$transaction->id}}')"  data-toggle="modal" data-target="#modalTransaction">
+                                                                                        <i title="Editar" data-toggle="tooltip" class="fa fa-pencil" style="font-size: 20px;"></i></a>
                                                                                 </td>
-
+                                                                                <td>
+                                                                                    <a href="#" onclick="updateTransaction('{{$transaction->id}}')"  data-toggle="modal" data-target="#modalTransaction">
+                                                                                        <i title="Imprimir" data-toggle="tooltip" class="fa fa-print" style="font-size: 20px;"></i></a>
+                                                                                </td>
                                                                             </tr>
                                                                         @endforeach
                                                                         </tbody>
@@ -150,7 +154,9 @@
                                                                             <th>Responsável</th>
                                                                             <th>Situação</th>
                                                                             <th>Status</th>
+                                                                            <th>Excluir</th>
                                                                             <th>Editar</th>
+                                                                            <th>Imprimir</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -175,10 +181,17 @@
                                                                                 @else
                                                                                     <td><i class="fa fa-times-circle" style="color:#aa1111; font-size: 20px;"></i></td>
                                                                                 @endif
-                                                                             <!--   <td><a href="{{action("ExpenseController@remove_expense", ['id' => $transaction->id])}}">
-                                                                                        <i class="fa fa-pencil" style="font-size: 20px;"></i></a></td>-->
                                                                                 <td>
-                                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTransaction">Detalhes</button>
+                                                                                    <a href="{{action("TransactionController@delete_transaction", ['id' => $transaction->id])}}" onclick="return confirm('Deseja realmente excluir a transação?')">
+                                                                                        <i class="fa fa-trash-o" style="font-size: 20px;"></i></a>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a href="#" onclick="updateTransaction('{{$transaction->id}}')"  data-toggle="modal" data-target="#modalTransaction" >
+                                                                                        <i class="fa fa-pencil" style="font-size: 20px;"></i></a>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a href="#" onclick="updateTransaction('{{$transaction->id}}')"  data-toggle="modal" data-target="#modalTransaction" >
+                                                                                        <i class="fa fa-print" style="font-size: 20px;"></i></a>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach

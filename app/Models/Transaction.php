@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Models\Customer;
 use App\Models\Staff;
 use App\Models\TransactionStatus;
+use App\Models\Util\Constants;
 use App\Models\Util\Crud;
 use App\Models\Util\ValidatorModel;
 use Carbon\Carbon;
@@ -53,9 +54,14 @@ class Transaction extends Model implements Crud
      * @var array
      */
     private $attribute = array(
-        'staff_id' => 'Especialista',
+        'staff_id' => 'Profissional',
         'procedure_id' => 'Procedimento',
         'description' => 'Descrição',
+        'staff_id' => 'Funcionario',
+        'cost_price' => 'Preço Custo',
+        'price' => 'Preço',
+        'paid' => 'Situação',
+        'transaction_status_id' => 'Status',
     );
 
 
@@ -92,12 +98,38 @@ class Transaction extends Model implements Crud
 
     public function edit($object, $arguments = [])
     {
-        // TODO: Implement edit() method.
+        if(ValidatorModel::validation($this->inputs_update($object),$this->rules_update(),$this->attribute)){
+            $transactionEdit = Transaction::findOrFail($object->id);
+            $transactionEdit->staff_id = $object->staff_id;
+            $transactionEdit->cost_price = $object->cost_price;
+            $transactionEdit->price = $object->price;
+            $transactionEdit->paid = $object->paid;
+            $transactionEdit->transaction_status_id = $object->transaction_status_id;
+            $transactionEdit->description = $object->description;
+            return $transactionEdit->save();
+        }
     }
 
     public function read($object_id, $arguments = [])
     {
-        return Transaction::where('activated', true)->where('id', $object_id)->first();
+        $transaction_show = array();
+        $transaction = Transaction::where('activated', true)->where('id', $object_id)->first();
+        $transaction_show['staff_id'] = $transaction->staff_id;
+        $transaction_show['staff'] = $transaction->staff->name;
+        $transaction_show['price'] = $transaction->price;
+        $transaction_show['cost_price'] = $transaction->price;
+        if($transaction->paid){
+            $transaction_show['paid_id'] = Constants::TRANSACTION_PAID;
+            $transaction_show['paid'] = Constants::TRANSACTION_NAME_PAID;
+        }else{
+            $transaction_show['paid_id'] = Constants::TRANSACTION_UNPAID;
+            $transaction_show['paid'] = Constants::TRANSACTION_NAME_UNPAID;
+        }
+        $transaction_show['status_id'] = $transaction->transaction_status_id;
+        $transaction_show['status'] = $transaction->transactionStatus->name;
+        $transaction_show['description'] = $transaction->description;
+        return $transaction_show;
+
     }
 
     public function read_of_customer($customer_id, $arguments = [])
@@ -253,6 +285,30 @@ class Transaction extends Model implements Crud
         return [
             'staff_id' => 'required',
             'procedure_id' => 'required',
+            'description' => 'required',
+        ];
+    }
+
+    public function inputs_update($object)
+    {
+        return [
+            'staff_id' => $object->staff_id,
+            'cost_price' => $object->cost_price,
+            'price' => $object->price,
+            'paid' => $object->paid,
+            'transaction_status_id' => $object->transaction_status_id,
+            'description' => $object->description,
+        ];
+    }
+
+    public function rules_update($id = 0)
+    {
+        return [
+            'staff_id' => 'required',
+            'cost_price' => 'required',
+            'price' => 'required',
+            'paid' => 'required',
+            'transaction_status_id' => 'required',
             'description' => 'required',
         ];
     }

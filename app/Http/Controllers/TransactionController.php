@@ -9,7 +9,9 @@ use App\Models\TransactionStatus;
 use App\Models\Util\Calendar;
 use App\Models\Staff;
 use App\Models\StaffCategory;
+use App\Models\Util\Constants;
 use Illuminate\Http\Request;
+use App\Exceptions\Util\ValidationException;
 
 class TransactionController extends Controller
 {
@@ -79,11 +81,11 @@ class TransactionController extends Controller
             $transaction->procedure_id = $request->input('procedure_id');
             $transaction->description = $request->input('description');
             $transaction->customer_id = $customer_id;
-            $transactionCreate = $transaction->create($transaction);
+            $transaction->create($transaction);
             return redirect()->action('TransactionController@show', ['id' => base64_encode($customer_id)]);
-        } catch (ValidationException $ve) {
+        } catch (ValidationException $ve){
             return back()->withErrors($ve->getMessage())->withInput();
-        } catch (Exception $e) {
+        }catch (Exception $e){
             return back()->withErrors($e->getMessage());
         }
     }
@@ -119,15 +121,40 @@ class TransactionController extends Controller
         }
     }
 
+
+    public function show_transaction(Request $request)
+    {
+        try {
+            $transaction_id = $request->input('id');
+            return  $this->transaction->read($transaction_id);
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Transaction $transaction)
+    public function update(Request $request)
     {
-        //
+        try{
+            $this->transaction->id = $request->input('code');
+            $this->transaction->staff_id = $request->input('staff_transaction');
+            $this->transaction->cost_price = $request->input('cost_price');
+            $this->transaction->price = $request->input('value_procedure');
+            $this->transaction->paid = $request->input('situation_transaction');
+            $this->transaction->transaction_status_id = $request->input('status_transaction');
+            $this->transaction->description = $request->input('description');
+            $this->transaction->edit($this->transaction);
+            return redirect()->action('TransactionController@show', ['id' => base64_encode(1)]);
+        } catch (ValidationException $ve){
+            return back()->withErrors($ve->getMessage())->withInput();
+        }catch (Exception $e){
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
@@ -152,7 +179,7 @@ class TransactionController extends Controller
     {
         try {
             $expense_id = $request->input('id');
-            if ($this->expense->remove($expense_id)) {
+            if ($this->transaction->remove($expense_id)) {
                 return back()->with(Constants::SUCCESS, __('messages.success'));
             }
         } catch (\Exception $e) {
@@ -204,6 +231,9 @@ class TransactionController extends Controller
         $procedure_ids = $request->input('procedure_ids');
         return $this->transaction->resume_transactions_report($start_date, $end_date, $procedure_ids, $status_id, $staff_id);
     }
+
+
+
 
 
 }

@@ -27,4 +27,13 @@ class Constants
 
     CONST TRANSACTION_STATUS_SUCCESS = 'Concluido';
 
+    CONST TRANSACTION_PAID = 1;
+
+    CONST TRANSACTION_UNPAID = 0;
+
+    CONST TRANSACTION_NAME_PAID = 'Pago';
+
+    CONST TRANSACTION_NAME_UNPAID = 'Inadiplente';
+
+
 }

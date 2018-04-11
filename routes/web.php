@@ -273,6 +273,13 @@ Route::group(['middleware' => ['check_login']], function () {
             ]
         );
 
+        Route::get('/transaction/showTransaction',
+            [
+                'uses' => 'TransactionController@show_transaction',
+                'role' => Transaction::STORE_TRANSACTION
+            ]
+        );
+
         Route::get('/transaction/delete_transaction',
             [
                 'uses' => 'TransactionController@delete_transaction',

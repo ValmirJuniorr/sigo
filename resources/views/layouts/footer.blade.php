@@ -48,7 +48,7 @@
 
 <script src="{{asset('select2/js/select2.min.js')}}"></script>
 
-<script src="{{asset('js/transaction/transaction.js')}}"></script>
+<script src="{{asset('js/transaction/transaction.js')}}"></script>]
 
 <script>
 
@@ -65,6 +65,7 @@
     $('.cpf').mask('000.000.000-00', {reverse: true});
     $('.money').mask("##0,00", {reverse: true});
     $('.money2').mask("#,##0,00", {reverse: true});
+    $('[data-toggle="tooltip"]').tooltip();
 
     $(document).ready(function() {
         $('.datatable_data').DataTable(
