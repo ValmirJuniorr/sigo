@@ -19,7 +19,7 @@
                             <div class="box-tools pull-right">
                                 @role('store_staff')
                                 <a href="{{ action('StaffController@create_staff') }}" class="btn btn-success btn-block ad-click-event">
-                                    {{Lang::get('staff.new_staff')}}
+                                    {{Lang::get('crud.new')}}
                                 </a>
                                 @endrole
                             </div>

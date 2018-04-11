@@ -7,6 +7,7 @@
  */
 
 return[
+    'new' => 'Novo(a)',
     'Create' => 'Cadastrar',
     'Edit' => 'Editar',
     'Remove' => 'Remover'

@@ -16,12 +16,12 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Administração de Usuários</h3>
+                            <h3 class="box-title">Usuários</h3>
 
                             <div class="box-tools pull-right">
                                 @role('store_user')
                                     <a href="{{ action('UserController@create_user') }}" class="btn btn-success btn-sm ad-click-event">
-                                        Cadastrar Usuário
+                                        Novo
                                     </a>
                                 @endrole
                             </div>

@@ -18,7 +18,7 @@
                             <div class="box-tools pull-right">
                                 @role('store_expense_category')
                                 <a href="{{ action('ExpenseCategoryController@create_expense_category') }}" class="btn btn-success btn-block ad-click-event">
-                                    {{Lang::get('expense_category.new_expense_categories')}}
+                                    {{Lang::get('crud.new')}}
                                 </a>
                                 @endrole
                             </div>

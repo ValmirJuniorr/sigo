@@ -18,7 +18,7 @@
                             <div class="box-tools pull-right">
                                 @role('store_staff_category')
                                 <a href="{{ action('StaffCategoryController@create_staff_category') }}" class="btn btn-success btn-block ad-click-event">
-                                    {{Lang::get('staff_category.new_staff_categories')}}
+                                    {{Lang::get('crud.new')}}
                                 </a>
                                 @endrole
                             </div>
