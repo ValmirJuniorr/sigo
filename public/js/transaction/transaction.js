@@ -5,14 +5,11 @@
 
 
 function updateTransaction(transaction_id) {
-
     $.ajax({
         type: 'GET',
         url: '/transaction/showTransaction',
         data:  {id:transaction_id},
         success: function (data) {
-
-
             $('#code').val(transaction_id);
             $('#value_procedure').val(data.price);
             $('#cost_price').val(data.cost_price);
