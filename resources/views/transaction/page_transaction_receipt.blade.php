@@ -75,7 +75,7 @@
             </tr>
             <tr>
                 <th>Valor</th>
-                <th>{{$transaction->price or "-"}} R$</th>
+                <th>{{show_money_mask($transaction->price)}}</th>
             </tr>
             <tr>
                 <th>Responsável</th>

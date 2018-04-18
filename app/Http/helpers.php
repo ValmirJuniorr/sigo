@@ -29,5 +29,5 @@ function show_cpf_mask($value){
 }
 
 function show_money_mask($value){
-    return money_format('$%i', $value);
+    return money_format('R$ %i', $value);
 }
