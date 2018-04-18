@@ -513,7 +513,3 @@ Route::get('/report/report_line_chart_expenses_transactions', 'ReportController@
 Route::get('/report/resume_result_expense_transaction', 'ReportController@resume_result_expense_transaction');
 
 Route::get('/procedure/get_procedure_by_category', 'ProcedureController@get_procedure_by_category');
-
-Route::get('costumer/timeline','CustomerController@timeLine');
-
-

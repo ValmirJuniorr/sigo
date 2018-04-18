@@ -111,6 +111,71 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <script>
+                    alert({{print_r($transactions)}});
+                </script>
+                <div class="col-xs-12">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div style="overflow-y: scroll; height:500px">
+                                <ul class="timeline">
+                                    <!-- timeline time label -->
+                                    <li class="time-label">
+                                <span class="bg-blue">
+                                    Procedimentos
+                                </span>
+                                    </li>
+                                    <!-- /.timeline-label -->
+
+                                @foreach($transactions as $transaction)
+                                    <!-- timeline item -->
+                                        <li>
+                                            <!-- timeline icon -->
+                                            @if($transaction->paid)
+                                                <i title="Pago" data-toggle="tooltip" class="fa fa-check-circle bg-green" ></i>
+                                            @else
+                                                <i title="Inadiplente" data-toggle="tooltip" class="fa fa-times-circle bg-red"></i>
+                                        @endif
+                                        <!--i class="fa fa-money bg-blue"></i-->
+                                            <div class="timeline-item">
+                                                <span class="date"><i class="fa fa-calendar"></i> {{$transaction->transaction_date}}</span>
+
+                                                <h3 class="timeline-header">
+                                                    @if($transaction->transactionStatus->name == \App\Models\Util\Constants::TRANSACTION_STATUS_WARNING)
+                                                        <i title="{{$transaction->transactionStatus->name}}" data-toggle="tooltip" class="fa fa-exclamation-circle bg-yellow icon-circle" ></i>
+                                                    @else
+                                                        <i title="{{$transaction->transactionStatus->name}}" data-toggle="tooltip" class="fa fa-check-circle bg-green icon-circle"></i>
+                                                    @endif
+                                                    <a href="{{action('TransactionController@page_transaction_receipt_print',['id' => $transaction->id])}}"
+                                                    target="_blank">
+                                                        {{$transaction->procedure->name}}  {{show_money_mask($transaction->price)}}
+                                                    </a></h3>
+
+                                                <div class="timeline-body">
+
+                                                    {{$transaction->description}}
+                                                </div>
+
+                                                <!--div-- class="timeline-footer">
+                                                    <a
+                                                       class="btn btn-primary btn-xs" target="_blank">Detalhar</a>
+                                                </div-->
+                                            </div>
+                                        </li>
+                                        <!-- END timeline item -->
+                                    @endforeach
+                                    ...
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
     </body>

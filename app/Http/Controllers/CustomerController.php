@@ -56,7 +56,9 @@ class CustomerController extends Controller
             $id = base64_decode($request->input('id'));
             $customer = new Customer();
             $customer_show = $customer->read($id);
-            return view('customer.update', ['customer' => $customer_show]);
+            $transaction = new Transaction();
+            $transactions = $transaction->read_of_customer_with_all_relation($id);
+            return view('customer.update', ['customer' => $customer_show,'transactions'=>$transactions]);
         }catch (GeneralException $ge){
             return back()->withErrors($ge->getMessage());
         }catch (Exception $e){
@@ -88,14 +90,6 @@ class CustomerController extends Controller
         }catch (\Exception $e){
             return back()->withErrors($e->getMessage());
         }
-    }
-
-    public function timeLine(Request $request){
-        //$customer_id = $request->input(id);
-        $transaction = new Transaction();
-        $transactions = $transaction->read_of_customer_with_all_relation(1);
-        //return $transactions;
-        return view('customer.timeline',['transactions'=>$transactions]);
     }
 
 
