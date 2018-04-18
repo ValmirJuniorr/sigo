@@ -2,6 +2,10 @@
 
 return [
 
+    'app_name' => 'SIG',
+
+    'app_description' => 'Sistema Integrado de Gestão',
+
     'invalid_login' => 'Usuário e/ou senha inválidos',
 
     'user_without_section' => 'Por favor faça login no sistema',

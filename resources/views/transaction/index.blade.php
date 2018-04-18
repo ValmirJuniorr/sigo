@@ -48,7 +48,7 @@
                                                          <td class="hide-on-med-and-down">{{$customer->city}}</td>
                                                          <td>
                                                              @role('update_transaction')
-                                                             <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("TransactionController@show", ['id' => base64_encode($customer->id)])}}">Prontuários</a>
+                                                             <a class="btn btn-primary btn-sm ad-click-event"  href="{{action("TransactionController@show", ['id' => base64_encode($customer->id)])}}">Detalhes</a>
                                                              @endrole
                                                          </td>
                                                      </tr>

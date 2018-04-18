@@ -21,7 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->date('transaction_date')->nullable();
             $table->float('cost_price')->nullable();
             $table->boolean('paid');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->boolean('activated')->default(true);
             $table->timestamps();
         });

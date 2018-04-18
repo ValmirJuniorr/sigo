@@ -106,6 +106,7 @@ class Transaction extends Model implements Crud
             $transactionEdit->paid = $object->paid;
             $transactionEdit->transaction_status_id = $object->transaction_status_id;
             $transactionEdit->description = $object->description;
+            $transactionEdit->transaction_date = Carbon::now()->format('Y-m-d');
             return $transactionEdit->save();
         }
     }
@@ -140,6 +141,12 @@ class Transaction extends Model implements Crud
 
         return $transactions;
     }
+
+    public function read_one($object_id, $arguments = []){
+        $transaction = Transaction::where('activated', true)->where('id', $object_id)->first();
+        return $transaction;
+    }
+
 
     public function read_of_customer($customer_id, $arguments = [])
     {
@@ -294,7 +301,7 @@ class Transaction extends Model implements Crud
         return [
             'staff_id' => 'required',
             'procedure_id' => 'required',
-            'description' => 'required',
+            'description' => '',
         ];
     }
 
@@ -318,7 +325,7 @@ class Transaction extends Model implements Crud
             'price' => 'required',
             'paid' => 'required',
             'transaction_status_id' => 'required',
-            'description' => 'required',
+            'description' => '',
         ];
     }
 }

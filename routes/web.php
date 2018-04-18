@@ -301,6 +301,15 @@ Route::group(['middleware' => ['check_login']], function () {
             ]
         );
 
+
+        Route::get('/transaction/print_receipt_page',
+            [
+                'uses' => 'TransactionController@page_transaction_receipt_print',
+                'role' => Transaction::READ_TRANSACTION
+            ]
+        );
+
+
         /*Staffs */
 
         Route::get('/staff/read_staff',

@@ -188,6 +188,15 @@ class TransactionController extends Controller
     }
 
 
+    public function page_transaction_receipt_print(Request $request){
+
+        $id = $request->input('id');
+
+        $transaction = $this->transaction->read_one($id);
+
+        return view('transaction.page_transaction_receipt')->with(array('transaction' => $transaction));
+    }
+
     public function read_group_transaction_by_category(Request $request)
     {
         $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
@@ -231,9 +240,5 @@ class TransactionController extends Controller
         $procedure_ids = $request->input('procedure_ids');
         return $this->transaction->resume_transactions_report($start_date, $end_date, $procedure_ids, $status_id, $staff_id);
     }
-
-
-
-
 
 }

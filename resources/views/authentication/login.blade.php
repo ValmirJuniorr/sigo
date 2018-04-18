@@ -11,8 +11,8 @@
 <body class="hold-transition login-page" style="background-color: #3c8dbc" >
     <div class="login-box">
         <div class="login-logo">
-            <p class="bold white_text">SIGO</p>
-            <p class="h3 white_text">Sistema Integrado Odontológico</p>
+            <p class="bold white_text">{{__('messages.app_name')}}</p>
+            <p class="h3 white_text">{{__('messages.app_description')}}</p>
         </div>
         <div class="login-box-body">
                 {{ Form::open(array('action' => 'UserController@do_login','method' => 'POST'))}}

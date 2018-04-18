@@ -133,7 +133,7 @@
                                                                                         <i title="Editar" data-toggle="tooltip" class="fa fa-pencil" style="font-size: 20px;"></i></a>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <a href="#" onclick="updateTransaction('{{$transaction->id}}')"  data-toggle="modal" data-target="#modalTransaction">
+                                                                                    <a href="{{action('TransactionController@page_transaction_receipt_print',['id' => $transaction->id])}}" target="_blank">
                                                                                         <i title="Imprimir" data-toggle="tooltip" class="fa fa-print" style="font-size: 20px;"></i></a>
                                                                                 </td>
                                                                             </tr>
@@ -190,7 +190,7 @@
                                                                                         <i title="Editar" data-toggle="tooltip" class="fa fa-pencil" style="font-size: 20px;"></i></a>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <a href="#" onclick="updateTransaction('{{$transaction->id}}')"  data-toggle="modal" data-target="#modalTransaction" >
+                                                                                    <a href="{{action('TransactionController@page_transaction_receipt_print',['id' => $transaction->id])}}" target="_blank">
                                                                                         <i title="Imprimir" data-toggle="tooltip" class="fa fa-print" style="font-size: 20px;"></i></a>
                                                                                 </td>
                                                                             </tr>

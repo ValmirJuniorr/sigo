@@ -4,7 +4,7 @@
     <!-- Logo -->
     <a href="{{ action('ModuleController@index') }}" class="logo hide-on-small-only" style="background-color: {{session('module_color')}};">
         <img src="{{asset('img/teeth.png')}}" style="width:40px; margin-top: -4px;">
-        <span class=""><b>SIGO</b></span>
+        <span class=""><b>{{__('messages.app_name')}}</b></span>
     </a>
 
     <!-- Header Navbar -->
