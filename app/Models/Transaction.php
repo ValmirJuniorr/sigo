@@ -131,6 +131,15 @@ class Transaction extends Model implements Crud
         return $transaction_show;
 
     }
+    public function read_of_customer_with_all_relation($customer_id, $arguments = [])
+    {
+        $transactions = Transaction::where('activated', true)
+            ->where('customer_id', $customer_id)
+            ->with('procedure','staff','transactionStatus')
+            ->orderBy('id','DESC')->get();
+
+        return $transactions;
+    }
 
     public function read_of_customer($customer_id, $arguments = [])
     {

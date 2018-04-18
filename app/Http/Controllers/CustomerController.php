@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Util\ValidationException;
+use App\Model\Transaction;
 use App\Models\Customer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -87,6 +88,14 @@ class CustomerController extends Controller
         }catch (\Exception $e){
             return back()->withErrors($e->getMessage());
         }
+    }
+
+    public function timeLine(Request $request){
+        //$customer_id = $request->input(id);
+        $transaction = new Transaction();
+        $transactions = $transaction->read_of_customer_with_all_relation(1);
+        //return $transactions;
+        return view('customer.timeline',['transactions'=>$transactions]);
     }
 
 
