@@ -2,16 +2,22 @@
 <header class="main-header">
 
     <!-- Logo -->
-
-    <a href="{{ action('ModuleController@index') }}" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>SIP</b></span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>SIP</b></span>
+    <a href="{{ action('ModuleController@index') }}" class="logo hide-on-small-only" style="background-color: {{session('module_color')}};">
+        <img src="{{asset('img/teeth.png')}}" style="width:40px; margin-top: -4px;">
+        <span class=""><b>{{__('messages.app_name')}}</b></span>
     </a>
 
     <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="navbar navbar-static-top" style="background-color: {{session('module_color')}}; opacity: 0.9" role="navigation">
+
+        <a href="#" class="sidebar-toggle show-on-small inline click" data-toggle="push-menu" role="button" style="background: {{session('module_color')}}">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+
+        <a href="{{ action('ModuleController@index') }}" class="show-on-small inline center-icon click" style="background-color: {{session('module_color')}}; margin-left: 30%; position:absolute;">
+            <img src="{{asset('img/teeth.png')}}" style="width:32px;">
+            <span class="hide-on-small-only"><b>SIGO</b></span>
+        </a>
 
 
         <!-- Navbar Right Menu -->
@@ -20,7 +26,7 @@
 
 
                 <!-- Notifications Menu -->
-                <li class="dropdown notifications-menu">
+                {{--<li class="dropdown notifications-menu">
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
@@ -45,23 +51,21 @@
                         </li>
                         <li class="footer"><a href="#">Ver todas</a></li>
                     </ul>
-                </li>
-
-
+                </li>--}}
 
                 <!-- User Account Menu -->
                 <li class="dropdown user user-menu">
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                        <span class=""> <i class="fa fa-user-circle" style="width: 20px;"></i> {{explode(' ',trim(Auth::user()->name ))[0]}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
 
                             <p>
-                                {{ Auth::user()->username  }}
+                                {{Auth::user()->username}}
                                 <small>Desenvolvedor</small>
                             </p>
                         </li>
@@ -71,16 +75,17 @@
                             <div class="pull-left">
                                 <a href="{{ action('ProfileController@index') }}" class="btn btn-default btn-flat">Perfil</a>
                             </div>
+
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Ajuda</a>
+                                <a href="{{action('UserController@logout')}}" class="btn btn-default btn-flat">Sair</a>
                             </div>
                         </li>
                     </ul>
                 </li>
                 <!-- Control Sidebar Toggle Button -->
-                <li>
+                {{--<li>
                     <a href="#" data-toggle="control-sidebar"><i alt="Sair"  class="fa fa-sign-out"></i> </a>
-                </li>
+                </li>--}}
             </ul>
         </div>
     </nav>

@@ -8,25 +8,25 @@
 
 @section('content')
 
-<body class="hold-transition login-page">
-    <div class="login-box ">
+<body class="hold-transition login-page" style="background-color: #3c8dbc" >
+    <div class="login-box">
         <div class="login-logo">
-            <p class="bold">SIP</p>
-            <p class="h3">Sistema de Integração Pública</p>
+            <p class="bold white_text">{{__('messages.app_name')}}</p>
+            <p class="h3 white_text">{{__('messages.app_description')}}</p>
         </div>
         <div class="login-box-body">
                 {{ Form::open(array('action' => 'UserController@do_login','method' => 'POST'))}}
                 <div class="form-group has-feedback">
-                    {{  Form::text('username', $value = null,array('class' => 'form-control', 'placeholder' => 'Usuário'))}}
+                    {{  Form::text('username', $value = "",array('class' => 'form-control', 'placeholder' => 'Usuário' , 'autoComplete' => 'off'))}}
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    {{ Form::password('password',array('class' => 'form-control', 'required' => "required",'placeholder' => 'Senha')) }}
+                    {{ Form::password('password',array('class' => 'form-control secure', 'required' => "required",'placeholder' => 'Senha')) }}
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                {{  Form::submit('Entrar',array('class'=> 'btn btn-primary btn-block btn-flat'))}}
+                {{  Form::submit('Entrar',array('class'=> 'btn btn-block btn-flat white_text' ,'style' => 'background-color: #3c8dbc'))}}
                 {{ Form::close() }}
-            <a href="#">Esqueceu sua senha?</a>
+            {{--<a href="#">Esqueceu sua senha?</a>--}}
         </div>
     </div>
 

@@ -1,0 +1,13 @@
+{
+  "short_name": "SIG APP",
+  "name": "SIG APP",
+  "icons": [
+    {
+      "src": "img/teeth.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ],
+  "display": "fullscreen",
+  "background_color": "#3498db"
+}

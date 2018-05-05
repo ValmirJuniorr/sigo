@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Expensive\ExpenseCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(CustomersSeeder::class);
+
         $this->call(UsersSeeder::class);
 
         $this->call(ModulesSeeder::class);
@@ -20,6 +23,22 @@ class DatabaseSeeder extends Seeder
         $this->call(SubModulesSeeder::class);
 
         $this->call(RolesSeeder::class);
+
+        $this->call(ExpenseCategorySeeder::class);
+
+        $this->call(RoleUserSeeder::class);
+
+        $this->call(StaffCategoriesSeeder::class);
+
+        $this->call(StaffsSeeder::class);
+
+        $this->call(TransactionStatusesSeeder::class);
+
+        $this->call(ProceduresSeeder::class);
+
+        $this->call(TransactionSeeder::class);
+
+        $this->call(ExpenseSeeder::class);
 
     }
 }

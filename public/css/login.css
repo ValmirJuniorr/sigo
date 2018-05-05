@@ -60,3 +60,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
         background-size: 240px 24px;
     }
 }
+
+.login-page{
+    background-color: #8CBBAD;
+}
+
+.login-box{
+    margin: 0px auto;
+}

@@ -18,9 +18,9 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 1,
-                'name' => 'IPTU',
-                'description' => 'Controle e gestão do IPTU do município',
-                'color' => '#ccc',
+                'name' => 'Gestão de Prontuário',
+                'description' => '-',
+                'color' => '#3498db',
                 'icon' => '',
             ]
         );
@@ -31,9 +31,9 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'Financeiro',
-                'description' => 'Controle e gestão das financeias',
-                'color' => '#ccc',
+                'name' => 'Gestão Financeira',
+                'description' => '-',
+                'color' => '#27ae60',
                 'icon' => '',
             ]
         );
@@ -44,9 +44,9 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'Recursos Humanos',
-                'description' => 'Gestão de pessoas do município',
-                'color' => '#ccc',
+                'name' => 'Gestão de Horários',
+                'description' => '-',
+                'color' => '#34495e',
                 'icon' => '',
             ]
         );
@@ -57,9 +57,9 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'name' => 'Suprimentos',
-                'description' => 'Controle e gestão do recursos do município',
-                'color' => '#ccc',
+                'name' => 'Utilitários',
+                'description' => '-',
+                'color' => '#34495e',
                 'icon' => '',
             ]
         );
@@ -70,11 +70,12 @@ class ModulesSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'name' => 'Utilitários',
-                'description' => 'Controler administrativo do sistema',
-                'color' => '#ccc',
+                'name' => 'Relatórios',
+                'description' => '-',
+                'color' => '#5352ed',
                 'icon' => '',
             ]
         );
+
     }
 }

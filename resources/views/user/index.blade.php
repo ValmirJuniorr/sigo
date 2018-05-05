@@ -16,12 +16,12 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Administração de Usuários</h3>
+                            <h3 class="box-title">Usuários</h3>
 
                             <div class="box-tools pull-right">
                                 @role('store_user')
                                     <a href="{{ action('UserController@create_user') }}" class="btn btn-success btn-sm ad-click-event">
-                                        Cadastrar Usuário
+                                        Novo
                                     </a>
                                 @endrole
                             </div>
@@ -29,8 +29,7 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 box-body table-responsive no-padding no-border">
                                         <table id="example2" class="table table-bordered table-hover dataTable" role="grid">
                                             <thead>
                                             <tr role="row">
@@ -62,9 +61,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-
-
                                 <div class="center-elements"> @include('layouts.pagination', ['object' => $users]) </div>
                             </div>
                         </div>

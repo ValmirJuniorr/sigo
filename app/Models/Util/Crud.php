@@ -14,7 +14,7 @@ interface Crud
 
     public function read_all($arguments = []);
 
-    public function filter($input);
+    public function filter($input = []);
 
     public function inputs($object);
 

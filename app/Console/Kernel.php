@@ -24,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $dir = '/home/'. get_current_user() . '/output';
+
+        $schedule->command('routine:launch_expenses')->everyMinute()->appendOutputTo($dir);
     }
 
     /**

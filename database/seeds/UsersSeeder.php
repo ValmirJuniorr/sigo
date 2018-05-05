@@ -126,7 +126,11 @@ class UsersSeeder extends Seeder
                 'username' => 'biel.oliveira',
                 'password' => bcrypt('root@123'),
                 'email' => 'bielzinho@gmail.com',
+<<<<<<< HEAD
                 'activated' => '0'
+=======
+                'activated' => 0
+>>>>>>> dev
             ]
         );
 
@@ -140,7 +144,11 @@ class UsersSeeder extends Seeder
                 'username' => 'tadeu.oliveira',
                 'password' => bcrypt('root@123'),
                 'email' => 'tadeu.pereira@ufca.br',
+<<<<<<< HEAD
                 'activated' => '0'
+=======
+                'activated' => 0
+>>>>>>> dev
             ]
         );
 
@@ -154,7 +162,11 @@ class UsersSeeder extends Seeder
                 'username' => 'marcosduarte',
                 'password' => bcrypt('root@123'),
                 'email' => 'marcosduarte@gmail.com',
+<<<<<<< HEAD
                 'activated' => '0'
+=======
+                'activated' => 0
+>>>>>>> dev
             ]
         );
 

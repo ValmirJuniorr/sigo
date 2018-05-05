@@ -12,6 +12,32 @@
 .h5{}
 .h6{}
 
+.icon-circle{
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.select2-selection__choice {
+    background-color: #3498db !important;
+    border: 1px solid white !important;
+}
+
+.select2-selection--multiple{
+    border-radius: 0px !important;
+    border: 1px solid #ccc !important;
+}
+
+.select2-selection__choice__remove {
+    color: #ccc !important;
+}
+
+.select2-selection__choice__remove:hover {
+    color: white !important;
+}
 
 .navbar-nav .user-menu .dropdown-menu li.user-header{
     height:75px;
@@ -29,4 +55,91 @@ aside.main-sidebar{
     position: absolute;
     right: 1%;
     top: 10%;
+}
+
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side{
+    background-color: white;
+}
+
+.sidebar ul li .menu-sidebar-a {
+    color:white;
+}
+
+body{
+    background-color: #eceff1;
+}
+
+input.secure {
+    text-security: disc;
+    -webkit-text-security: disc;
+}
+
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+.menu-sidebar-a:hover {
+    opacity: 1 !important;
+}
+
+.white_text {
+    color: white;
+}
+
+.btn_badge{
+    position:absolute;
+    margin-left: -10px;
+}
+
+.center-icon{
+    line-height: 50px;
+}
+
+.main-sidebar{
+    padding-top: 50px !important;
+}
+
+.show-on-small , .show-on-large , .show-on-medium ,.show-on-medium-and-up ,.how-on-medium-and-down{
+    display: none !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .hide-on-small-only, .hide-on-small-and-down {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .hide-on-med-and-down {
+        display: none !important;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .hide-on-med-and-up {
+        display: none !important;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+    .hide-on-med-only {
+        display: none !important;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .hide-on-large-only {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .show-on-small {
+        display: block !important;
+    }
+    .inline{
+        display: inline !important;
+    }
 }

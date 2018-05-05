@@ -2,9 +2,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIP - Sistema de Integração Pública @yield('title')</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="{{asset('img/teeth.png')}}" >
+    <link rel="manifest" href="/manifest.json">
+    <title>{{__('messages.app_name')}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!--Data tables -->
+    <link rel="stylesheet" type="text/css" href="{{asset('css/datatable/datatable.min.css')}}">
+    <!-- css do bootstrap -->
     <link rel="stylesheet" href="{{asset('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css')}}">
@@ -29,7 +36,14 @@
     <link rel="stylesheet" href="{{asset('css/override.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <link href="{{asset('select2/css/select2.min.css')}}" rel="stylesheet" />
+
+
     @yield('custom-css')
+
+    @yield('custom-js-important')
+
 </head>
 <!-- Main Header -->
 
