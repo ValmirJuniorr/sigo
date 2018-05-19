@@ -141,7 +141,8 @@ class TransactionController extends Controller
     public function update(Request $request)
     {
         try{
-            $this->transaction->id = $request->input('code');
+            $id_transaction = $request->input('code');
+            $this->transaction->id = $id_transaction;
             $this->transaction->staff_id = $request->input('staff_transaction');
             $this->transaction->cost_price = $request->input('cost_price');
             $this->transaction->price = $request->input('value_procedure');
@@ -149,7 +150,7 @@ class TransactionController extends Controller
             $this->transaction->transaction_status_id = $request->input('status_transaction');
             $this->transaction->description = $request->input('description');
             $this->transaction->edit($this->transaction);
-            return redirect()->action('TransactionController@show', ['id' => base64_encode(1)]);
+            return redirect()->action('TransactionController@show', ['id' => base64_encode($id_transaction)]);
         } catch (ValidationException $ve){
             return back()->withErrors($ve->getMessage())->withInput();
         }catch (Exception $e){
