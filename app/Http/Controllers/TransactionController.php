@@ -150,7 +150,7 @@ class TransactionController extends Controller
             $this->transaction->transaction_status_id = $request->input('status_transaction');
             $this->transaction->description = $request->input('description');
             $this->transaction->edit($this->transaction);
-            return redirect()->action('TransactionController@show', ['id' => base64_encode($id_transaction)]);
+            return back();
         } catch (ValidationException $ve){
             return back()->withErrors($ve->getMessage())->withInput();
         }catch (Exception $e){
