@@ -20,8 +20,8 @@ class Procedure extends Model implements Crud
 
     private $attribute = array(
         'name' => 'Nome',
-        'price' => 'PreÃ§o',
-        'cost_price' =>'PreÃ§o de Custo',
+        'price' => 'Preço',
+        'cost_price' =>'Preço de Custo',
         'procedure_time' => 'Tempo',
         'staff_category_id' => 'Categoria'
     );
@@ -53,6 +53,7 @@ class Procedure extends Model implements Crud
         $procedure_edit = Procedure::findorFail($object->id);
         $procedure_edit->name = $object->name;
         $procedure_edit->price = $object->price;
+        $procedure_edit->cost_price = $object->cost_price;
         $procedure_edit->procedure_time = $object->procedure_time;
         $procedure_edit->staff_category_id = $object->staff_category_id;
 
