@@ -97,8 +97,8 @@
                                                                             <th>Responsável</th>
                                                                             <th>Status</th>
                                                                             <th>Situação</th>
-                                                                            <th>Excluir</th>
                                                                             <th>Editar</th>
+                                                                            <th>Excluir</th>
                                                                             <th>Imprimir</th>
                                                                         </tr>
                                                                         </thead>
@@ -124,14 +124,19 @@
                                                                                 @else
                                                                                     <td><i title="Inadiplente" data-toggle="tooltip" class="fa fa-times-circle" style="color:#aa1111; font-size: 20px;"></i></td>
                                                                                 @endif
-                                                                               <td>
-                                                                                   <a href="{{action("TransactionController@delete_transaction", ['id' => $transaction->id])}}" onclick="return confirm('Deseja realmente excluir a transação?')">
-                                                                                        <i title="Remover" data-toggle="tooltip" class="fa fa-trash-o" style="font-size: 20px;"></i></a>
-                                                                               </td>
+                                                                                @if(!$transaction->paid or $transaction->transactionStatus->name == \App\Models\Util\Constants::TRANSACTION_STATUS_WARNING)
                                                                                 <td>
                                                                                     <a href="#" onclick="updateTransaction('{{$transaction->id}}')"  data-toggle="modal" data-target="#modalTransaction">
                                                                                         <i title="Editar" data-toggle="tooltip" class="fa fa-pencil" style="font-size: 20px;"></i></a>
                                                                                 </td>
+                                                                                <td>
+                                                                                    <a href="{{action("TransactionController@delete_transaction", ['id' => $transaction->id])}}" onclick="return confirm('Deseja realmente excluir a transação?')">
+                                                                                        <i title="Remover" data-toggle="tooltip" class="fa fa-trash-o" style="font-size: 20px;"></i></a>
+                                                                                </td>
+                                                                                @else
+                                                                                    <td>----</td>
+                                                                                    <td>----</td>
+                                                                                @endif
                                                                                 <td>
                                                                                     <a href="{{action('TransactionController@page_transaction_receipt_print',['id' => $transaction->id])}}" target="_blank">
                                                                                         <i title="Imprimir" data-toggle="tooltip" class="fa fa-print" style="font-size: 20px;"></i></a>

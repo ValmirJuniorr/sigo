@@ -1,7 +1,13 @@
 
-/*$('#modalTransaction').on('shown.bs.modal', function () {
 
-});*/
+
+
+
+
+
+
+
+
 
 
 function updateTransaction(transaction_id) {

@@ -166,5 +166,19 @@ class SubModulesSeeder extends Seeder
             ]
         );
 
+      /*SubModule::updateOrCreate(
+            [
+                'id' => 12
+            ],
+            [
+                'id' => 12,
+                'name' => 'Agendamento',
+                'url' => 'ExpenseController@expenses_report',
+                'icon' => 'fa fa-line-chart',
+                'module_id' => 5,
+                'sub_module_category_id' => 1
+            ]
+        );*/
+
     }
 }

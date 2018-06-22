@@ -84,6 +84,7 @@ class Transaction extends Model implements Crud
         if(ValidatorModel::validation($this->inputs($object),$this->rules(),$this->attribute)){
             $procedure = Procedure::findOrFail($object->procedure_id);
             $object->price = $procedure->price;
+            $object->cost_price = $procedure->cost_price;
             $object->transaction_status_id = 1;
             $object->paid = 0;
             return $object->save();
@@ -118,7 +119,7 @@ class Transaction extends Model implements Crud
         $transaction_show['staff_id'] = $transaction->staff_id;
         $transaction_show['staff'] = $transaction->staff->name;
         $transaction_show['price'] = $transaction->price;
-        $transaction_show['cost_price'] = $transaction->price;
+        $transaction_show['cost_price'] = $transaction->cost_price;
         if($transaction->paid){
             $transaction_show['paid_id'] = Constants::TRANSACTION_PAID;
             $transaction_show['paid'] = Constants::TRANSACTION_NAME_PAID;
