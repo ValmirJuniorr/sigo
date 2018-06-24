@@ -77,5 +77,18 @@ class ModulesSeeder extends Seeder
             ]
         );
 
+        Module::updateOrCreate(
+            [
+                'id' => 6
+            ],
+            [
+                'id' => 6,
+                'name' => 'Agendamento',
+                'description' => '-',
+                'color' => '#5352ed',
+                'icon' => '',
+            ]
+        );
+
     }
 }

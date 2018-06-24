@@ -23,10 +23,10 @@ $(document).ready(function(){
             url: '/report/resume_result_expense_transaction',
             data: args,
             success: function (data) {
-                $("#transaction_value").text("R$ " + data['income_result']);
-                $("#expense_value").text("R$ " + data['expense_result']);
-                $("#contribution_margin").text("R$ " + data['contribution_margin']);
-                $("#operational_result").text("R$ " + data['operational_result']);
+                (data['income_result'] == null) ? $("#transaction_value").text("R$ 0") :  $("#transaction_value").text("R$ " + data['income_result']);
+                (data['expense_result'] == null) ? $("#expense_value").text("R$ 0") :  $("#expense_value").text("R$ " + data['expense_result']);
+                (data['contribution_margin'] == null) ? $("#contribution_margin").text("R$ 0") :  $("#contribution_margin").text("R$ " + data['contribution_margin']);
+                (data['operational_result'] == null) ? $("#operational_result").text("R$ 0") :  $("#operational_result").text("R$ " + data['operational_result']);
                 console.log(data);
             }
         });
