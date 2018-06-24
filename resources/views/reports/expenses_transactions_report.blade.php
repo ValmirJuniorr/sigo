@@ -111,8 +111,6 @@
                     <!-- /.col -->
 
                 </div>
-
-
                 <div class="box-body">
 
                     <div class="col-md-12" id="line_chart_resume_expense_per_day"></div>
