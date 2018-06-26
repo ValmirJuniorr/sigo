@@ -68,6 +68,7 @@ class UserController extends Controller
             $user->name = $request->input('name');
             $user->username = $request->input('username');
             $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
             $roles = $request->input('roles');
             $user->edit($user, ['roles' => $roles]);
             return redirect('/user/read_user');
