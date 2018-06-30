@@ -23,11 +23,18 @@
                         </div>
                         <div class="box-body">
 
+                            @if(session('module_id') == 1)
+                                @include('components.dashboards.include_procedures_dashboard')
+                            @endif
+
                             @if(session('module_id') == 2)
                                 @include('components.dashboards.include_financial_dashboard')
                             @endif
-                            @if(session('module_id') == 4)
+
+                            @if(session('module_id') == 4 or session('module_id') == 5)
+                                @include('components.dashboards.include_nothing_dashboard')
                             @endif
+
                         </div>
                     </div>
                 </div>

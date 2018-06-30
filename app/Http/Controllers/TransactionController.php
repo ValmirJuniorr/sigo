@@ -10,6 +10,7 @@ use App\Models\Util\Calendar;
 use App\Models\Staff;
 use App\Models\StaffCategory;
 use App\Models\Util\Constants;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Exceptions\Util\ValidationException;
 
@@ -22,6 +23,8 @@ class TransactionController extends Controller
     private $staff;
     private $customer;
     private $procedure;
+    const DASHBOARD_NUMBER_DAYS = 55;
+
 
 
     /**
@@ -188,7 +191,6 @@ class TransactionController extends Controller
         }
     }
 
-
     public function page_transaction_receipt_print(Request $request){
 
         $id = $request->input('id');
@@ -205,7 +207,7 @@ class TransactionController extends Controller
         $status_id = $request->input('status_id');
         $staff_id = $request->input('staff_id');
 
-        return $this->transaction->read_group_transaction_by_cateogry($start_date, $end_date, null, $status_id, $staff_id);
+        return $this->transaction->read_group_transaction_by_category($start_date, $end_date, null, $status_id, $staff_id);
     }
 
     public function resume_data_to_stack_collumn(Request $request)
@@ -241,5 +243,30 @@ class TransactionController extends Controller
         $procedure_ids = $request->input('procedure_ids');
         return $this->transaction->resume_transactions_report($start_date, $end_date, $procedure_ids, $status_id, $staff_id);
     }
+
+    public function dashboard_report_total_transaction_by_day(Request $request){
+        $start_date = Carbon::now()->subDays(self::DASHBOARD_NUMBER_DAYS)->format('Y-m-d');
+        $today = Carbon::now()->format('Y-m-d');
+
+        $transactions_total = $this->transaction->transactions_by_day_total_value($start_date,$today);
+
+        $transactions_parcial = $this->transaction->transactions_by_day_parcial_value($start_date,$today);
+
+        return array('transactions_total' => $transactions_total, 'transactions_parcial' => $transactions_parcial);
+    }
+
+    public function dashboard_report_trasaction_by_category(){
+        $start_date = Carbon::now()->subDays(self::DASHBOARD_NUMBER_DAYS)->format('Y-m-d');
+        $today = Carbon::now()->format('Y-m-d');
+        return $this->transaction->read_group_transaction_by_category($start_date, $today);
+    }
+
+    public function dashboard_report_trasaction_stack_collumn(){
+        $start_date = Carbon::now()->subDays(self::DASHBOARD_NUMBER_DAYS)->format('Y-m-d');
+        $today = Carbon::now()->format('Y-m-d');
+        return $this->transaction->resume_data_to_stack_collumn($start_date, $today);
+    }
+
+
 
 }

@@ -133,6 +133,7 @@ class Transaction extends Model implements Crud
         return $transaction_show;
 
     }
+
     public function read_of_customer_with_all_relation($customer_id, $arguments = [])
     {
         $transactions = Transaction::where('activated', true)
@@ -147,7 +148,6 @@ class Transaction extends Model implements Crud
         $transaction = Transaction::where('activated', true)->where('id', $object_id)->first();
         return $transaction;
     }
-
 
     public function read_of_customer($customer_id, $arguments = [])
     {
@@ -200,7 +200,7 @@ class Transaction extends Model implements Crud
             });
     }
 
-    public function read_group_transaction_by_cateogry($start_date, $end_date, $procedure_ids = null, $status_id = null,$staff_id = null)
+    public function read_group_transaction_by_category($start_date, $end_date, $procedure_ids = null, $status_id = null, $staff_id = null)
     {
         $result = $this->filter_transactions($start_date, $end_date, $procedure_ids,$status_id,$staff_id);
 

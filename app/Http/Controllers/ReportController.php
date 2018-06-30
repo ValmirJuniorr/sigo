@@ -48,7 +48,6 @@ class ReportController extends Controller
         );
     }
 
-
     public function report_line_chart_expenses_transactions(Request $request){
         $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
         $end_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('end_date'));
@@ -63,7 +62,6 @@ class ReportController extends Controller
         return array('expenses' => $expenses, 'transactions_total' => $transactions_total, 'transactions_parcial' => $transactions_parcial);
 
     }
-
 
     public function resume_result_expense_transaction(Request $request){
 

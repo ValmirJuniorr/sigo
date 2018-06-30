@@ -384,14 +384,12 @@ Route::group(['middleware' => ['check_login']], function () {
             ]
         );
 
-
         Route::get('/staff_category/update_staff_category',
             [
                 'uses' => 'StaffCategoryController@update_staff_category',
                 'role' => StaffCategory::UPDATE_STAFF_CATEGORY
             ]
         );
-
 
         Route::post('/staff_category/update',
             [
@@ -443,7 +441,6 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => ExpenseCategory::UPDATE_EXPENSE_CATEGORY
             ]
         );
-
 
         /* Telas de Resumo de Receitas e despesas */
 
@@ -505,6 +502,11 @@ Route::get('/transaction/read_group_transaction_by_category', 'TransactionContro
 
 Route::get('/transaction/resume_data_to_stack_collumn', 'TransactionController@resume_data_to_stack_collumn');
 
+Route::get('/report/transaction/dashboard/transaction_by_day','TransactionController@dashboard_report_total_transaction_by_day');
+
+Route::get('/report/transaction/dashboard/transaction_by_category','TransactionController@dashboard_report_trasaction_by_category');
+
+Route::get('/report/transaction/dashboard/transaction_stack_collumn','TransactionController@dashboard_report_trasaction_stack_collumn');
 
 Route::get('/report/expense_transactions', 'ReportController@resume_expense_transactions');
 
