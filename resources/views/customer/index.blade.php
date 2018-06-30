@@ -18,7 +18,7 @@
                             <div class="box-tools pull-right">
                                 @role('store_customer')
                                 <a href="{{ action('CustomerController@create_customer') }}" class="btn btn-success btn-block ad-click-event">
-                                        Novo Cliente
+                                    {{Lang::get('crud.new')}}
                                 </a>
                                 @endrole
                             </div>
