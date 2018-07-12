@@ -50,6 +50,8 @@
 
 <script src="{{asset('js/transaction/transaction.js')}}"></script>]
 
+<script src="{{asset('js/procedures/procedure_form.js')}}"></script>]
+
 <script>
 
     $('.dropdown-toggle').dropdown();

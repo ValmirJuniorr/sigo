@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 function updateTransaction(transaction_id) {
     $.ajax({
         type: 'GET',
@@ -25,8 +13,33 @@ function updateTransaction(transaction_id) {
             $('#description_transaction').val(data.description);
         }
     });
+}
+
+
+function answerTransactionForm(transaction_id) {
+/*
+    $.ajax({
+        type: 'GET',
+        url: null,
+        data:  {id:transaction_id},
+        success: function (data) {
+        }
+    });
+
+
+*/
+
+    $("#modal-form").empty();
+
+    $("#modal-form").append("<input type=\"text\" />");
+
+    $("#modal-form").append("<input type=\"radio\" />" + transaction_id);
+
+    $("#modal-form").append("<input type=\"checkbox\" /> test");
 
 }
+
+
 
 function update_select_by_id(id_first,url,id_second){
     var $selectDropdown =
