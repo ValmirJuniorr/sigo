@@ -26,6 +26,24 @@ class GroupQuestion extends Model
         return $this->belongsTo(Procedure::class);
     }
 
+    public function getLastPriority($procedure_id)
+    {
+        $groupQuestions = readByProcedure($procedure_id);
+        return $groupQuestions->lenth >0 ? $groupQuestions->last->priority+1: 1;
+    }
+
+    public function create($object, $arguments = [])
+    {
+        if(ValidatorModel::validation($this->inputs($object),$this->rules(),$this->attribute)){
+            return $object->save();
+        }
+    }
+
+    public function readByProcedure($procedure_id)
+    {
+        return GroupQuestion::where('procedure_id', $procedure_id)->orderBy('priority','ASC')->get();
+    }
+
     public function filter($input = [])
     {
     }
@@ -47,6 +65,7 @@ class GroupQuestion extends Model
             'procedure_id' => 'required|numeric|min:0'
         ];
     }
+
 
 
 }
