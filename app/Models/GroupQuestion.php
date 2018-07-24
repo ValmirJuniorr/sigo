@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Model\Procedure;
+use App\Models\Util\ValidatorModel;
 use Illuminate\Database\Eloquent\Model;
 
 class GroupQuestion extends Model
@@ -26,9 +27,9 @@ class GroupQuestion extends Model
         return $this->belongsTo(Procedure::class);
     }
 
-    public function getLastPriority($procedure_id)
+    public function get_last_priority($procedure_id)
     {
-        $groupQuestions = readByProcedure($procedure_id);
+        $groupQuestions = $this->read_by_procedure($procedure_id);
         return $groupQuestions->lenth >0 ? $groupQuestions->last->priority+1: 1;
     }
 
@@ -39,7 +40,22 @@ class GroupQuestion extends Model
         }
     }
 
-    public function readByProcedure($procedure_id)
+    public function edit($object, $arguments = [])
+    {
+        $groupQuestion_edit = GroupQuestion::findorFail($object->id);
+        $groupQuestion_edit->title = $object->title;
+        if(ValidatorModel::validation($this->inputs($groupQuestion_edit),$this->rules($groupQuestion_edit->id),$this->attribute)){
+            return $groupQuestion_edit->save();
+        }
+    }
+
+
+    public function remove($object, $arguments = [])
+    {
+        return GroupQuestion::findorFail($object->id)->delete();
+    }
+
+    public function read_by_procedure($procedure_id)
     {
         return GroupQuestion::where('procedure_id', $procedure_id)->orderBy('priority','ASC')->get();
     }
@@ -65,7 +81,4 @@ class GroupQuestion extends Model
             'procedure_id' => 'required|numeric|min:0'
         ];
     }
-
-
-
 }
