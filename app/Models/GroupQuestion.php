@@ -27,6 +27,10 @@ class GroupQuestion extends Model
         return $this->belongsTo(Procedure::class);
     }
 
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
+
     public function get_last_priority($procedure_id)
     {
         $groupQuestions = $this->read_by_procedure($procedure_id);

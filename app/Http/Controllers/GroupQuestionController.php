@@ -21,10 +21,12 @@ class GroupQuestionController extends Controller
     public function store(Request $request)
     {
         try{
-            $this->groupQuestion->title = $request->input('title');
+            $this->groupQuestion->title = $request->input('name');
             $this->groupQuestion->procedure_id = $request->input('procedure_id');
-            $this->groupQuestion->priority = $this->groupQuestion->get_last_priority($this->groupQuestion->procedure_id);
-            return $this->groupQuestion->create($this->groupQuestion);
+            //$this->groupQuestion->priority = $this->groupQuestion->get_last_priority($this->groupQuestion->procedure_id);
+            $this->groupQuestion->priority = 1;
+            $this->groupQuestion->create($this->groupQuestion);
+            return back();
         }catch (ValidationException $e){
             return null;
         }

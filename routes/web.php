@@ -171,6 +171,16 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Procedure::UPDATE_PROCEDURE
             ]);
 
+        Route::post('/groupquestion/store',
+            ['uses' => 'GroupQuestionController@store',
+                'role' => Procedure::STORE_PROCEDURE
+            ]);
+
+        Route::post('/question/store',
+            ['uses' => 'GroupQuestionController@store',
+                'role' => Procedure::STORE_PROCEDURE
+            ]);
+
         /* Despesas */
 
         Route::get('/expense/index',
