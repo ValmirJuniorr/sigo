@@ -34,41 +34,6 @@
     </div>
     {{ Form::close() }}
 </div>
-<div class="row">
-     <div class="col-sm-12 col-md-12 col-lg-12">
-         <div class="box-header with-border">
-             <h4 class="box-title">Grupos de Perguntas</h4>
-             <div class=" pull-right">
-                 <a href="{{ action('CustomerController@create_customer') }}" class="btn btn-success btn-block btn-flat">
-                     Novo Grupo
-                 </a>
-             </div>
-         </div>
-         <div class="box-body">
-             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                 <div class="col-sm-12 box-body table-responsive no-border">
-                     <div class="box-body">
-                         <table class="table table-striped table-bordered">
-                             <thead>
-                             <tr>
-                                 <th>Id</th>
-                                 <th>Nome</th>
-                                 <th>Tipo</th>
-                                 <th>Perguntas</th>
-                                 <th>Deletar</th>
-                             </tr>
-                             </thead>
-                             <tbody>
-
-                             </tbody>
-                         </table>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
-</div>
-
 
 @section('custom-css')
     <link rel="stylesheet" href="{{asset('css/timer/bootstrap-datetimepicker.min.css')}}">

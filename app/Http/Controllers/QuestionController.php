@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\Util\ValidationException;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,7 @@ class QuestionController extends Controller
             $this->question->title = $request->input('title');
             $this->question->type = $request->input('type');
             $this->question->group_question_id = $request->input('group_question_id');
-            $this->question->priority = $this->question->get_last_priority($this->question->group_question_id);
+            $this->question->priority = 1;
             $this->question->create($this->question);
             return back();
         }catch (ValidationException $e){

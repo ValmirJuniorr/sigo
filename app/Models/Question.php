@@ -70,7 +70,7 @@ class Question extends Model
             'title' => $object->title,
             'priority' => $object->priority,
             'type' => $object->type,
-            'group_question_id' => $object->procedure_id
+            'group_question_id' => $object->group_question_id
         ];
     }
 
@@ -79,8 +79,8 @@ class Question extends Model
         return [
             'title' => 'required',
             'priority' => 'required',
-            'type' => 'requerid',
-            'group_question_id' => 'required|numeric|min:0'
+            'type' => 'required',
+            'group_question_id' => 'required'
         ];
     }
 }
