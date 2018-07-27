@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Util\ValidatorModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
@@ -54,7 +55,7 @@ class Question extends Model
     }
 
     private $attribute = array(
-        'title' => 'Titúlo',
+        'title' => 'Título',
         'type' => 'Tipo',
         'priority' => 'Prioridade',
         'procedure_id' => 'Procedimento'
