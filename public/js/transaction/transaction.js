@@ -16,31 +16,6 @@ function updateTransaction(transaction_id) {
 }
 
 
-function answerTransactionForm(transaction_id) {
-/*
-    $.ajax({
-        type: 'GET',
-        url: null,
-        data:  {id:transaction_id},
-        success: function (data) {
-        }
-    });
-
-
-*/
-
-    $("#modal-form").empty();
-
-    $("#modal-form").append("<input type=\"text\" />");
-
-    $("#modal-form").append("<input type=\"radio\" />" + transaction_id);
-
-    $("#modal-form").append("<input type=\"checkbox\" /> test");
-
-}
-
-
-
 function update_select_by_id(id_first,url,id_second){
     var $selectDropdown =
         $("#" + id_second)
@@ -70,4 +45,61 @@ function update_select_by_id(id_first,url,id_second){
             $selectDropdown.material_select();
         }
     });
+}
+
+
+function answerTransactionForm(transaction_id) {
+
+        $.ajax({
+            type: 'GET',
+            url: '/testeApp',
+            data:  {id:transaction_id},
+            success: function (data) {
+                var indice_details = 0;
+                var field = "<form>";
+
+                for(indice_details = 0; indice_details < data.length; indice_details++){
+                    var list_question = data[indice_details].questions;
+                    var indice_details_question = 0;
+
+                    field +=  data[indice_details].title + "<hr>";
+                      for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question++){
+
+                          field += "<div class='form-group'>" +
+                              "<label for='email'>" + list_question[indice_details_question].title +"</label>" +
+                              "<input type='email' class='form-control' id='email'>" +
+                              "</div>";
+
+                      }
+                }
+
+                 field += "<button type='submit' class='btn btn-default'>Salvar Formulario</button>";
+                 field += "</form>";
+                var jfield = $(field);
+                $('.form_modal_23443').empty();  // Limpa os dados da tabela atual */
+                $('.form_modal_23443').append(jfield);  // atualizar a tabela com os novos registro */
+            }
+        });
+
+
+
+
+
+
+
+
+
+/*
+    $("#modal-form").empty();
+
+
+    $("#modal-form").append('<div class="row col-sm-5 col-md-5 col-lg-5"><input type="text" name="mytext[]"/></div>');
+
+
+
+
+    $("#modal-form").append("<input type=\"radio\" />" + transaction_id);
+
+    $("#modal-form").append("<input type=\"checkbox\" /> test");*/
+
 }

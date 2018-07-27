@@ -48,9 +48,9 @@
 
 <script src="{{asset('select2/js/select2.min.js')}}"></script>
 
-<script src="{{asset('js/transaction/transaction.js')}}"></script>]
+<script src="{{asset('js/transaction/transaction.js')}}"></script>
 
-<script src="{{asset('js/procedures/procedure_form.js')}}"></script>]
+<script src="{{asset('js/procedures/procedure_form.js')}}"></script>
 
 <script>
 
