@@ -8,23 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
 
-    const STORE_QUESTION = 'store_question';
-
-    const UPDATE_QUESTION = 'update_question';
-
-    const DELETE_QUESTION = 'delete_question';
-
-    const READ_QUESTION = 'read_question';
-
-
     public function group_question(){
         return $this->belongsTo(GroupQuestion::class);
-    }
-
-    public function get_last_priority($group_question_id)
-    {
-        return $this->read_by_group_question($group_question_id);
-         $groupQuestions->lenth >0 ? $groupQuestions->last->priority+1: 1;
     }
 
     public function create($object, $arguments = [])
@@ -38,9 +23,21 @@ class Question extends Model
     {
         $question_edit = Question::findorFail($object->id);
         $question_edit->title = $object->title;
+        $question_edit->type = $object->type;
         if(ValidatorModel::validation($this->inputs($question_edit),$this->rules($question_edit->id),$this->attribute)){
             return $question_edit->save();
         }
+    }
+
+    public static function change_priority($question_one, $question_two)
+    {
+        $question_one = Question::findorFail($question_one->id);
+        $question_two = Question::findorFail($question_two->id);
+        $aux =$question_one->priority;
+        $question_one->priority = $question_two->priority;
+        $question_two->priority = $aux;
+        $question_one->save();
+        $question_two->save();
     }
 
 
@@ -51,7 +48,13 @@ class Question extends Model
 
     public function read_by_group_question($group_question_id)
     {
-        return Question::where('group_question_id', $group_question_id)->orderBy('group_question_id','ASC')->get();
+        return Question::where('group_question_id', $group_question_id)->orderBy('priority','ASC')->get();
+    }
+
+    public function get_last_priority($group_question_id)
+    {
+        $questions =  $this->read_by_group_question($group_question_id);
+        $questions->count() >0 ? $questions->last()->priority+1: 1;
     }
 
     private $attribute = array(

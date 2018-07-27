@@ -25,13 +25,12 @@ class QuestionController extends Controller
     {
         try{
             $this->question->title = $request->input('title');
+            $this->question->type = $request->input('type');
             $this->question->group_question_id = $request->input('group_question_id');
-            //$this->question->priority = $this->groupQuestion->get_last_priority($this->groupQuestion->procedure_id);
-            $this->groupQuestion->priority = 1;
-            $this->groupQuestion->create($this->groupQuestion);
+            $this->question->priority = $this->question->get_last_priority($this->question->group_question_id);
             return back();
         }catch (ValidationException $e){
-            return null;
+            return back()->withErrors($e->getMessage());
         }
     }
 
