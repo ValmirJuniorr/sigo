@@ -177,7 +177,7 @@ Route::group(['middleware' => ['check_login']], function () {
             ]);
 
         Route::post('/question/store',
-            ['uses' => 'GroupQuestionController@store',
+            ['uses' => 'QuestionController@store',
                 'role' => Procedure::STORE_PROCEDURE
             ]);
 

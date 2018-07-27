@@ -93,17 +93,17 @@
                                             </table>
 
                                             <!-- Form de cadastro das perguntas -->
-                                            {{ Form::open(array('action' => array('GroupQuestionController@store', 'procedure_id' => $procedure->id)))}}
+                                            {{ Form::open(array('action' => array('QuestionController@store', 'group_question_id' => $groupQuestion->id)))}}
                                             
                                             <div>
                                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
-                                                    {{  Form::label('name', '* Titulo') }}
-                                                    {{  Form::text('name', '',array('class' => 'form-control', 'required', 'placeholder' => 'Nome'))}}
+                                                    {{  Form::label('title', '* Titulo') }}
+                                                    {{  Form::text('title', '',array('class' => 'form-control', 'required', 'placeholder' => 'Nome'))}}
                                                 </div>
 
                                                 <div class="col-lg-3">
                                                     {{  Form::label('name', '* Tipo') }}
-                                                    <select name="type_question" id="type_question" class="form-control">
+                                                    <select name="type" id="type_question" class="form-control">
                                                         <option value="TEXT">Texto</option>
                                                         <option value="BOOLEAN">Lógico</option>
                                                         <option value="NUMERIC">Numérico</option>
@@ -111,7 +111,7 @@
                                                 </div>
 
                                                 <div class="col-lg-3" style="margin-top: 25px;">
-                                                    <button type="button" class="btn btn-block btn-primary">Adicionar</button>
+                                                    <button type="submit" class="btn btn-block btn-primary">Adicionar</button>
                                                 </div>
 
                                             </div>
