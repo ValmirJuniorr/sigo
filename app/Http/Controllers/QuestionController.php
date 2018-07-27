@@ -29,7 +29,7 @@ class QuestionController extends Controller
             $this->question->group_question_id = $request->input('group_question_id');
             $this->question->priority = $this->question->get_last_priority($this->question->group_question_id);
             $this->question->create($this->question);
-                return back();
+            return back();
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
         }

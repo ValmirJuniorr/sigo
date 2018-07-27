@@ -61,7 +61,7 @@ class Question extends Model
         'title' => 'Título',
         'type' => 'Tipo',
         'priority' => 'Prioridade',
-        'procedure_id' => 'Procedimento'
+        'group_question_id' => 'Cabeçalho'
     );
 
     public function inputs($object)
@@ -69,7 +69,8 @@ class Question extends Model
         return [
             'title' => $object->title,
             'priority' => $object->priority,
-            'procedure_id' => $object->procedure_id
+            'type' => $object->type,
+            'group_question_id' => $object->procedure_id
         ];
     }
 
@@ -78,7 +79,8 @@ class Question extends Model
         return [
             'title' => 'required',
             'priority' => 'required',
-            'procedure_id' => 'required|numeric|min:0'
+            'type' => 'requerid',
+            'group_question_id' => 'required|numeric|min:0'
         ];
     }
 }
