@@ -27,7 +27,7 @@
 
                         @foreach($groupQuestions as $groupQuestion)
                             <div id="groups">
-                                    <div class="col-lg-6" style="margin-left: 25%">
+                                    <div class="col-lg-8" style="margin-left: 15%">
                                     <div class="box">
                                         <div class="box-body">
 
@@ -47,28 +47,47 @@
                                                 <tbody>
                                                 <tr>
                                                     <th>Nome</th>
-                                                    <th style="width: 40px;">Tipo</th>
+                                                    <th style="width: 150px">Tipo</th>
                                                     <th style="width: 40px">Editar</th>
                                                     <th style="width: 40px">Excluir</th>
+                                                    <th style="width: 40px">Prioridade</th>
                                                 </tr>
-                                                <tr>
-                                                   @foreach($groupQuestion->questions as $question)
-                                                    <td>{{$question->title}}</td>
-                                                    <td>{{$question->type}}</td>
-                                                    <td>
-                                                        <a class="center">
-                                                            <i class="fa fa-edit" style="margin-left: 15px;"></i>
-                                                        </a>
+                                                @foreach($groupQuestion->questions as $question)
+                                                    <tr>
+                                                        <td>
+                                                            {{--<!--<input class="form-control col-lg-12" value="{{$question->title}}">-->--}}
+                                                            {{$question->title}}
+                                                        </td>
+                                                        <td>
+                                                            {{$question->type}}
+                                                            {{--<!--
+                                                            <select name="type_question" id="type_question" class="form-control">
+                                                                <option value="{{$question->type}}">{{$question->type}}</option>
+                                                                <option value="TEXT">Texto</option>
+                                                                <option value="BOOLEAN">Lógico</option>
+                                                                <option value="NUMERIC">Numérico</option>
+                                                            </select>
+                                                            -->--}}
 
-                                                    </td>
-                                                    <td>
-                                                        <a class="center">
-                                                            <i class="fa fa-remove" style="margin-left: 15px;"></i>
-                                                        </a>
-
-                                                    </td>
-                                                   @endforeach 
-                                                </tr>
+                                                        </td>
+                                                        <td>
+                                                            <a class="center" onclick="question_edit({{$question}})">
+                                                                <i class="fa fa-edit" style="margin-left: 15px;"></i>
+                                                            </a>
+                                                        </td>
+                                                            <td>
+                                                            <a class="center">
+                                                                <i class="fa fa-remove" style="margin-left: 15px;"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-box-tool" style="margin-left: 5px;" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Subir">
+                                                                <i class="fa fa-arrow-up"></i></button>
+                                                            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Descer">
+                                                                <i class="fa fa-arrow-down"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
 
                                                 </tbody>
                                             </table>
@@ -85,9 +104,9 @@
                                                 <div class="col-lg-3">
                                                     {{  Form::label('name', '* Tipo') }}
                                                     <select name="type_question" id="type_question" class="form-control">
-                                                        <option value="1">Texto</option>
-                                                        <option value="2">Lógico</option>
-                                                        <option value="3">Numérico</option>
+                                                        <option value="TEXT">Texto</option>
+                                                        <option value="BOOLEAN">Lógico</option>
+                                                        <option value="NUMERIC">Numérico</option>
                                                     </select>
                                                 </div>
 
