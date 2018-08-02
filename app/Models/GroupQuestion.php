@@ -34,15 +34,25 @@ class GroupQuestion extends Model
     }
 
 
-    public static function change_priority($group_question_one, $group_question_two)
+    /**
+    *@param $increment -1 to increase the priority +1 to decrease the priority
+    */
+    public static function change_priority($group_question, $increment)
     {
-        $group_question_one = GroupQuestion::findorFail($group_question_one->id);
-        $group_question_two = GroupQuestion::findorFail($group_question_two->id);
-        $aux =$group_question_one->priority;
-        $group_question_one->priority = $group_question_two->priority;
-        $group_question_two->priority = $aux;
-        $group_question_one->save();
-        $group_question_two->save();
+        $group_question = GroupQuestion::findorFail($group_question_one->id);
+        $operator = ($increment == 1) "<" : ">";
+        $group_question_temp = GroupQuestion::where('procedure_id', $group_question->procedure_id)
+                                    ->orderBy('priority','ASC')
+                                    ->where('priority' ,$operator,$group_question->priority)->first();
+        if($group_question_temp == null){
+            $msg  = () $operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
+            throw new Exception($msg);            
+        }
+        $aux = $group_question->priority;
+        $group_question->priority = $group_question_temp->priority;
+        $group_question_temp->priority = $aux;
+        $group_question->save();
+        $group_question_temp->save();
     }
 
     public function remove($object, $arguments = [])

@@ -45,12 +45,11 @@ class GroupQuestionController extends Controller
 
     public function change_prioriry(Request $request)
     {
-        $group_question_one = new GroupQuestion();
-        $group_question_two = new GroupQuestion();
+        $group_question = new GroupQuestion();        
         try{
-            $group_question_one->id = $request->input('group_question_id_one');
-            $group_question_two->id = $request->input('group_question_id_two');
-            GroupQuestion::change_priority($group_question_one,$group_question_two);
+            $group_question->id = $request->input('group_question_id');
+            $increment = $request->input('increment');
+            GroupQuestion::change_priority($group_question_one,$increment);
             return back();
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
