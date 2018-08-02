@@ -176,6 +176,21 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Procedure::STORE_PROCEDURE
             ]);
 
+        Route::post('/groupquestion/edit',
+            ['uses' => 'GroupQuestionController@edit',
+                'role' => Procedure::UPDATE_PROCEDURE
+            ]);
+
+        Route::post('/groupquestion/remove',
+            ['uses' => 'GroupQuestionController@remove',
+                'role' => Procedure::DELETE_PROCEDURE
+            ]);
+
+        Route::post('/groupquestion/change_priority',
+            ['uses' => 'GroupQuestionController@change_prioriry',
+                'role' => Procedure::STORE_PROCEDURE
+            ]);
+
         Route::post('/question/store',
             ['uses' => 'QuestionController@store',
                 'role' => Procedure::STORE_PROCEDURE
