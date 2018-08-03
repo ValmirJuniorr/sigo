@@ -70,10 +70,12 @@
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-box-tool" style="margin-left: 5px;" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Subir">
-                                                                <i class="fa fa-arrow-up"></i></button>
-                                                            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Descer">
-                                                                <i class="fa fa-arrow-down"></i></button>
+                                                            <a class="btn-box-tool" style="margin-left: 5px;" data-toggle="tooltip" title="" data-original-title="Subir"
+                                                            href="{{action("QuestionController@change_prioriry",['question_id' => $question->id, 'increment' => -1])}}">
+                                                                <i class="fa fa-arrow-up"></i></a>
+                                                            <a type="button" class="btn-box-tool" data-toggle="tooltip" title="" data-original-title="Descer"
+                                                            href="{{action("QuestionController@change_prioriry",['question_id' => $question->id, 'increment' => -1])}}">
+                                                                <i class="fa fa-arrow-down"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
