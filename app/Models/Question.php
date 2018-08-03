@@ -33,7 +33,7 @@ class Question extends Model
     public static function change_priority($question, $increment)
     {
         $question = Question::findorFail($group_question_one->id);
-        $operator = ($increment == 1) "<" : ">";
+        $operator = ($increment == 1) ? "<" : ">";
 
         $question_temp = Question::where('group_question_id', $question->group_question_id)
                                     ->orderBy('priority','ASC')
