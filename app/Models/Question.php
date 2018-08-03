@@ -39,7 +39,7 @@ class Question extends Model
                                     ->orderBy('priority','ASC')
                                     ->where('priority' ,$operator,$question->priority)->first();
         if($question_temp == null){
-            $msg  = () $operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
+            $msg  = ($operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
             throw new ValidationException($msg);
         }
         $aux = $question->priority;
