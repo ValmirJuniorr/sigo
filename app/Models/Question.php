@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    use SoftDeletes;
 
     public function group_question(){
         return $this->belongsTo(GroupQuestion::class);
