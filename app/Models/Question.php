@@ -29,15 +29,23 @@ class Question extends Model
         }
     }
 
-    public static function change_priority($question_one, $question_two)
+    public static function change_priority($question, $increment)
     {
-        $question_one = Question::findorFail($question_one->id);
-        $question_two = Question::findorFail($question_two->id);
-        $aux =$question_one->priority;
-        $question_one->priority = $question_two->priority;
-        $question_two->priority = $aux;
-        $question_one->save();
-        $question_two->save();
+        $question = Question::findorFail($group_question_one->id);
+        $operator = ($increment == 1) "<" : ">";
+
+        $question_temp = Question::where('group_question_id', $question->group_question_id)
+                                    ->orderBy('priority','ASC')
+                                    ->where('priority' ,$operator,$question->priority)->first();
+        if($question_temp == null){
+            $msg  = () $operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
+            throw new Exception($msg);            
+        }
+        $aux = $question->priority;
+        $question->priority = $question_temp->priority;
+        $question_temp->priority = $aux;
+        $question->save();
+        $question_temp->save();
     }
 
 

@@ -53,10 +53,9 @@ class QuestionController extends Controller
     public function change_prioriry(Request $request)
     {
         try{
-            $
-            $this->question->id = $request->input('id');
-//            Question::change_priority($this->question,)
-//            GroupQuestion::change_priority($group_question_one,$group_question_two);
+            $this->question->id = $request->input('question_id');
+            $increment = $request->input('increment');
+            Question::change_priority($this->groupQuestion,$increment);
             return back();
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
@@ -67,9 +66,8 @@ class QuestionController extends Controller
     public function remove(Request $request)
     {
         try{
-            $this->groupQuestion->id = $request->input('id');
-            $this->groupQuestion->procedure_id = $request->input('procedure_id');
-            $this->groupQuestion->remove($this->groupQuestion);
+            $this->question->id = $request->input('id');
+            $this->question->remove($this->question);
             return back();
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
