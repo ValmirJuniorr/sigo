@@ -31,7 +31,7 @@ class Question extends Model
 
     public static function change_priority($question, $increment)
     {
-        $question = Question::findorFail($group_question_one->id);
+        $question = Question::findorFail($question->id);
         if($increment == 1){
             $operator =  "<";
             $orderBy = "DESC";

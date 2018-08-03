@@ -65,7 +65,8 @@
                                                           </a>
                                                         </td>
                                                             <td>
-                                                            <a class="center">
+                                                            <a class="center"
+                                                            href="{{action("QuestionController@remove",['id' => $question->id])}}">
                                                                 <i class="fa fa-remove" style="margin-left: 15px;"></i>
                                                             </a>
                                                         </td>

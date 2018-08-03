@@ -55,7 +55,7 @@ class QuestionController extends Controller
         try{
             $this->question->id = $request->input('question_id');
             $increment = $request->input('increment');
-            Question::change_priority($this->groupQuestion,$increment);
+            Question::change_priority($this->question,$increment);
             return back();
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
