@@ -40,7 +40,7 @@ class GroupQuestion extends Model
     */
     public static function change_priority($group_question, $increment)
     {
-        $group_question = GroupQuestion::findorFail($group_question_one->id);
+        $group_question = GroupQuestion::findorFail($group_question->id);
         $operator = ($increment == 1) ? "<" : ">";
         $group_question_temp = GroupQuestion::where('procedure_id', $group_question->procedure_id)
                                     ->orderBy('priority','ASC')
