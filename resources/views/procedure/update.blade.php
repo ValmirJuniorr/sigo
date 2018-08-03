@@ -34,13 +34,13 @@
                                             <h4 class="box-title" style="display: inline-block">{{$groupQuestion->title}}</h4>
 
                                             <div class="box-tools pull-right">
-                                                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Subir">
-                                                    <i class="fa fa-arrow-up"></i></button>
-                                                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Descer">
-                                                    <i class="fa fa-arrow-down"></i></button>
+                                                <a type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Subir" {{action('')}}>
+                                                    <i class="fa fa-arrow-up"></i></a>
+                                                <a type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Descer">
+                                                    <i class="fa fa-arrow-down"></i></a>
 
-                                                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Remover">
-                                                    <i class="fa fa-remove"></i></button>
+                                                <a type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Remover">
+                                                    <i class="fa fa-remove"></i></a>
                                             </div>
 
                                             <table class="table table-bordered u-full-width demo">
