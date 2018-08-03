@@ -196,6 +196,21 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Procedure::STORE_PROCEDURE
             ]);
 
+        Route::post('/question/edit',
+            ['uses' => 'QuestionController@edit',
+                'role' => Procedure::UPDATE_PROCEDURE
+            ]);
+
+        Route::post('/question/remove',
+            ['uses' => 'QuestionController@remove',
+                'role' => Procedure::DELETE_PROCEDURE
+            ]);
+
+        Route::post('/question/change_priority',
+            ['uses' => 'QuestionController@change_prioriry',
+                'role' => Procedure::STORE_PROCEDURE
+            ]);
+
         /* Despesas */
 
         Route::get('/expense/index',

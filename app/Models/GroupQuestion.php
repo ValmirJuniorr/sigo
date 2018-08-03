@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Model\Procedure;
 use App\Models\Util\ValidatorModel;
+use App\Exceptions\Util\ValidationException;
 use Illuminate\Database\Eloquent\Model;
 
 class GroupQuestion extends Model
@@ -46,7 +47,7 @@ class GroupQuestion extends Model
                                     ->where('priority' ,$operator,$group_question->priority)->first();
         if($group_question_temp == null){
             $msg  = () $operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
-            throw new Exception($msg);            
+            throw new ValidationException($msg);
         }
         $aux = $group_question->priority;
         $group_question->priority = $group_question_temp->priority;

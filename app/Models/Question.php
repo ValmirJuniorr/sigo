@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Util\ValidatorModel;
+use App\Exceptions\Util\ValidationException;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
@@ -39,7 +40,7 @@ class Question extends Model
                                     ->where('priority' ,$operator,$question->priority)->first();
         if($question_temp == null){
             $msg  = () $operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
-            throw new Exception($msg);            
+            throw new ValidationException($msg);
         }
         $aux = $question->priority;
         $question->priority = $question_temp->priority;
