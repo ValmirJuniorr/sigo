@@ -34,14 +34,15 @@
                                             <h4 class="box-title" style="display: inline-block">{{$groupQuestion->title}}</h4>
 
                                             <div class="box-tools pull-right">
-                                                <a class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Subir"
-                                                href="{{action("GroupQuestionController@change_prioriry",['group_question_id' => $groupQuestion->id, 'increment' => -1])}}">
-                                                    <i class="fa fa-arrow-up"></i></a>
-                                                <a class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Descer"
+                                                <a class="btn-box-tool" data-toggle="tooltip" title="" data-original-title="Subir"
                                                 href="{{action("GroupQuestionController@change_prioriry",['group_question_id' => $groupQuestion->id, 'increment' => 1])}}">
+                                                    <i class="fa fa-arrow-up"></i></a>
+                                                <a class="btn-box-tool" data-toggle="tooltip" title="" data-original-title="Descer"
+                                                href="{{action("GroupQuestionController@change_prioriry",['group_question_id' => $groupQuestion->id, 'increment' => -1])}}">
                                                     <i class="fa fa-arrow-down"></i></a>
 
-                                                <a type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Remover">
+                                                <a class="btn-box-tool" data-toggle="tooltip" title="" data-original-title="Remover"
+                                                href="{{action("GroupQuestionController@remove",['id' => $groupQuestion->id])}}">
                                                     <i class="fa fa-remove"></i></a>
                                             </div>
 
