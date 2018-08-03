@@ -52,6 +52,8 @@
 
 <script src="{{asset('js/procedures/procedure_form.js')}}"></script>
 
+<script src={{asset('js/editable-table/table-edits.min.js')}}></script>
+
 <script>
 
     $('.dropdown-toggle').dropdown();

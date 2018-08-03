@@ -43,7 +43,7 @@
                                                     <i class="fa fa-remove"></i></button>
                                             </div>
 
-                                            <table class="table table-bordered">
+                                            <table class="table table-bordered u-full-width demo">
                                                 <tbody>
                                                 <tr>
                                                     <th>Nome</th>
@@ -53,27 +53,13 @@
                                                     <th style="width: 40px">Prioridade</th>
                                                 </tr>
                                                 @foreach($groupQuestion->questions as $question)
-                                                    <tr>
+                                                    <tr data-id="1">
+                                                        <td data-field="name">{{$question->title}}</td>
+                                                        <td data-field="type">{{__('question_enum.'.$question->type)}}</td>
                                                         <td>
-                                                            {{--<!--<input class="form-control col-lg-12" value="{{$question->title}}">-->--}}
-                                                            {{$question->title}}
-                                                        </td>
-                                                        <td>
-                                                            {{$question->type}}
-                                                            {{--<!--
-                                                            <select name="type_question" id="type_question" class="form-control">
-                                                                <option value="{{$question->type}}">{{$question->type}}</option>
-                                                                <option value="TEXT">Texto</option>
-                                                                <option value="BOOLEAN">Lógico</option>
-                                                                <option value="NUMERIC">Numérico</option>
-                                                            </select>
-                                                            -->--}}
-
-                                                        </td>
-                                                        <td>
-                                                            <a class="center" onclick="question_edit({{$question}})">
-                                                                <i class="fa fa-edit" style="margin-left: 15px;"></i>
-                                                            </a>
+                                                          <a class="button button-small edit" title="Edit">
+                                                            <i class="fa fa-pencil" style="margin-left: 15px"></i>
+                                                          </a>
                                                         </td>
                                                             <td>
                                                             <a class="center">
@@ -94,7 +80,7 @@
 
                                             <!-- Form de cadastro das perguntas -->
                                             {{ Form::open(array('action' => array('QuestionController@store', 'group_question_id' => $groupQuestion->id)))}}
-                                            
+
                                             <div>
                                                 <div class="form-group col-sm-12 col-md-6 col-lg-6">
                                                     {{  Form::label('title', '* Titulo') }}
@@ -124,7 +110,7 @@
                             </div>
                         @endforeach
 
-                        <div class="col-lg-6" style="margin-left: 25%">
+                        <div class="col-lg-8" style="margin-left: 15%">
                             <div class="box">
                                 <div class="box-body">
 
@@ -150,3 +136,51 @@
     </body>
 @endsection
 
+@section('custom-js')
+
+<script>
+  $(function() {
+    var pickers = {};
+
+    $('table tr').editable({
+      dropdowns: {
+        type: ['Texto', 'Lógico','Numérico']
+      },
+      edit: function(values) {
+        $(".edit i", this)
+          .removeClass('fa-pencil')
+          .addClass('fa-save')
+          .attr('title', 'Save');
+
+        pickers[this] = new Pikaday({
+          field: $("td[data-field=birthday] input", this)[0],
+          format: 'MMM D, YYYY'
+        });
+      },
+      save: function(values) {
+        $(".edit i", this)
+          .removeClass('fa-save')
+          .addClass('fa-pencil')
+          .attr('title', 'Edit');
+
+        if (this in pickers) {
+          pickers[this].destroy();
+          delete pickers[this];
+        }
+      },
+      cancel: function(values) {
+        $(".edit i", this)
+          .removeClass('fa-save')
+          .addClass('fa-pencil')
+          .attr('title', 'Edit');
+
+        if (this in pickers) {
+          pickers[this].destroy();
+          delete pickers[this];
+        }
+      }
+    });
+  });
+</script>
+
+@endsection
