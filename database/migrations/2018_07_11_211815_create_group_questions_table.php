@@ -20,7 +20,6 @@ class CreateGroupQuestionsTable extends Migration
             $table->integer('procedure_id')->unsigned();
             $table->foreign('procedure_id')->references('id')->on('procedures');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

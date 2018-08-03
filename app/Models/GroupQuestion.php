@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 class GroupQuestion extends Model
 {
 
-    use SoftDeletes;
 
     public function procedure(){
         return $this->belongsTo(Procedure::class);
