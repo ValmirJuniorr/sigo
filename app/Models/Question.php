@@ -39,7 +39,8 @@ class Question extends Model
             $operator =  ">";
             $orderBy = "ASC";
         }
-        $question_temp = Question::where('group_question_id', $question->group_question_id)
+        return $question;
+        return Question::where('group_question_id', $question->group_question_id)
                                     ->orderBy('priority',$orderBy)
                                     ->where('priority' ,$operator,$question->priority)->first();
         if($question_temp == null){
