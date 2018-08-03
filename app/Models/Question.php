@@ -33,10 +33,15 @@ class Question extends Model
     public static function change_priority($question, $increment)
     {
         $question = Question::findorFail($group_question_one->id);
-        $operator = ($increment == 1) ? "<" : ">";
-
+        if($increment == 1){
+            $operator =  "<";
+            $orderBy = "DESC";
+        }else{
+            $operator =  ">";
+            $orderBy = "ASC";
+        }
         $question_temp = Question::where('group_question_id', $question->group_question_id)
-                                    ->orderBy('priority','ASC')
+                                    ->orderBy('priority',$orderBy)
                                     ->where('priority' ,$operator,$question->priority)->first();
         if($question_temp == null){
             $msg  = ($operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";

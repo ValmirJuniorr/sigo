@@ -41,9 +41,15 @@ class GroupQuestion extends Model
     public static function change_priority($group_question, $increment)
     {
         $group_question = GroupQuestion::findorFail($group_question->id);
-        $operator = ($increment == 1) ? "<" : ">";
+        if($increment == 1){
+            $operator =  "<";
+            $orderBy = "DESC";
+        }else{
+            $operator =  ">";
+            $orderBy = "ASC";
+        }
         $group_question_temp = GroupQuestion::where('procedure_id', $group_question->procedure_id)
-                                    ->orderBy('priority','ASC')
+                                    ->orderBy('priority',$orderBy)
                                     ->where('priority' ,$operator,$group_question->priority)->first();
         if($group_question_temp == null){
             $msg  = ( $operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
