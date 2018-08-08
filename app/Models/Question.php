@@ -70,7 +70,7 @@ class Question extends Model
     public static function get_last_priority($group_question_id)
     {
         $questions =  Question::read_by_group_question($group_question_id);
-        $questions->count() >0 ? $questions->last()->priority+1: 1;
+        return $questions->count() >0 ? $questions->last()->priority+1: 1;
     }
 
     private $attribute = array(
