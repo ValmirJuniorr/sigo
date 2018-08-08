@@ -40,11 +40,12 @@ class QuestionController extends Controller
     public function edit(Request $request)
     {
         try{
+
             $this->question->id = $request->input('id');
             $this->question->title = $request->input('name');
-            $this->question->type = $request->input('type');
+            $this->question->type = __('question_enum.'.$request->input('type'));
             $this->question->edit($this->question);
-            return back();
+            return "Sucess";
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
         }

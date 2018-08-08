@@ -8,4 +8,10 @@ return [
 
     'NUMERIC' => 'Numérico',
 
+    'Texto' => 'TEXT',
+
+    'Lógico' => 'BOOLEAN',
+
+    'Numérico' => 'NUMERIC',
+
 ];

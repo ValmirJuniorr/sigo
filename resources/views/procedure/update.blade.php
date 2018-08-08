@@ -27,7 +27,7 @@
 
                         @foreach($groupQuestions as $groupQuestion)
                             <div id="groups">
-                                    <div class="col-lg-8" style="margin-left: 15%">
+                                    <div class="col-lg-12">
                                     <div class="box">
                                         <div class="box-body">
 
@@ -49,6 +49,7 @@
                                             <table class="table table-bordered u-full-width demo">
                                                 <tbody>
                                                 <tr>
+                                                    <th class="hide">ID</th>
                                                     <th>Nome</th>
                                                     <th style="width: 150px">Tipo</th>
                                                     <th style="width: 40px">Editar</th>
@@ -57,6 +58,7 @@
                                                 </tr>
                                                 @foreach($groupQuestion->questions as $question)
                                                     <tr data-id="1">
+                                                        <td class="hide" data-field="id">{{$question->id}}</td>
                                                         <td data-field="name">{{$question->title}}</td>
                                                         <td data-field="type">{{__('question_enum.'.$question->type)}}</td>
                                                         <td>
@@ -72,7 +74,7 @@
                                                         </td>
                                                         <td>
                                                             <a class="btn-box-tool" style="margin-left: 5px;" data-toggle="tooltip" title="" data-original-title="Subir"
-                                                            href="{{action("QuestionController@change_prioriry",['question_id' => $question->id, 'increment' => -1])}}">
+                                                            href="{{action("QuestionController@change_prioriry",['question_id' => $question->id, 'increment' => 1])}}">
                                                                 <i class="fa fa-arrow-up"></i></a>
                                                             <a type="button" class="btn-box-tool" data-toggle="tooltip" title="" data-original-title="Descer"
                                                             href="{{action("QuestionController@change_prioriry",['question_id' => $question->id, 'increment' => -1])}}">
@@ -116,7 +118,7 @@
                             </div>
                         @endforeach
 
-                        <div class="col-lg-8" style="margin-left: 15%">
+                        <div class="col-lg-12">
                             <div class="box">
                                 <div class="box-body">
 
@@ -150,18 +152,14 @@
 
     $('table tr').editable({
       dropdowns: {
-        type: ['Texto', 'Lógico','Numérico']
+        type: ['Texto', 'Lógico','Numérico'],
+        response: ['TEXT','BOOLEAN','NUMERIC']
       },
       edit: function(values) {
         $(".edit i", this)
           .removeClass('fa-pencil')
           .addClass('fa-save')
           .attr('title', 'Save');
-
-        pickers[this] = new Pikaday({
-          field: $("td[data-field=birthday] input", this)[0],
-          format: 'MMM D, YYYY'
-        });
       },
       save: function(values) {
         $(".edit i", this)
@@ -169,10 +167,17 @@
           .addClass('fa-pencil')
           .attr('title', 'Edit');
 
-        if (this in pickers) {
-          pickers[this].destroy();
-          delete pickers[this];
-        }
+          $.ajax({
+              type: 'GET',
+              url: '/question/edit',
+              data: values,
+              success: function (data) {
+                  console.log(data);
+              },
+              error: function (request, status, error) {
+                  console.log(request.responseText);
+              }
+          });
       },
       cancel: function(values) {
         $(".edit i", this)
@@ -180,10 +185,6 @@
           .addClass('fa-pencil')
           .attr('title', 'Edit');
 
-        if (this in pickers) {
-          pickers[this].destroy();
-          delete pickers[this];
-        }
       }
     });
   });
