@@ -31,9 +31,10 @@
                                     <div class="box">
                                         <div class="box-body">
 
-                                            <h4 class="box-title" style="display: inline-block">{{$groupQuestion->title}}</h4>
+                                            <h4 class="box-title editable" style="display: inline-block">{{$groupQuestion->title}}</h4>
 
                                             <div class="box-tools pull-right">
+
                                                 <a class="btn-box-tool" data-toggle="tooltip" title="" data-original-title="Subir"
                                                 href="{{action("GroupQuestionController@change_prioriry",['group_question_id' => $groupQuestion->id, 'increment' => 1])}}">
                                                     <i class="fa fa-arrow-up"></i></a>
@@ -44,6 +45,8 @@
                                                 <a class="btn-box-tool" data-toggle="tooltip" title="" data-original-title="Remover"
                                                 href="{{action("GroupQuestionController@remove",['id' => $groupQuestion->id])}}">
                                                     <i class="fa fa-remove"></i></a>
+
+
                                             </div>
 
                                             <table class="table table-bordered u-full-width demo">
@@ -107,7 +110,6 @@
                                                 <div class="col-lg-3" style="margin-top: 25px;">
                                                     <button type="submit" class="btn btn-block btn-primary">Adicionar</button>
                                                 </div>
-
                                             </div>
                                             {{ Form::close() }}
                                             <!-- Fim do Form-->
@@ -188,5 +190,58 @@
     });
   });
 </script>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        //Loop through all Labels with class 'editable'.
+        $(".editable").each(function () {
+            //Reference the Label.
+            var label = $(this);
+
+            //Add a TextBox next to the Label.
+            label.after("<input type = 'text'  class = 'form-control'style = 'display:none; width: 300px;' />");
+
+            //Reference the TextBox.
+            var textbox = $(this).next();
+
+            //Set the name attribute of the TextBox.
+            textbox[0].name = this.id.replace("lbl", "txt");
+
+            //Assign the value of Label to TextBox.
+            textbox.val(label.html());
+
+            //When Label is clicked, hide Label and show TextBox.
+            label.click(function () {
+                $(this).hide();
+                $(this).next().show();
+            });
+
+            //When focus is lost from TextBox, hide TextBox and show Label.
+            textbox.focusout(function () {
+                $(this).hide();
+
+                $(this).prev().html($(this).val());
+
+                $(this).prev().show();
+
+                console.log($(this));
+                $.ajax({
+                    type: 'GET',
+                    url: '/groupquestion/edit',
+                    data: {'name' : $(this).val()},
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (request, status, error) {
+                        console.log(request.responseText);
+                    }
+                });
+            });
+        });
+    });
+</script>
+
 
 @endsection
