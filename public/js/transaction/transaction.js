@@ -48,12 +48,11 @@ function update_select_by_id(id_first,url,id_second){
 }
 
 
-function answerTransactionForm(transaction_id) {
-
+function answerTransactionForm(procedure_id) {
         $.ajax({
             type: 'GET',
-            url: '/testeApp',
-            data:  {id:transaction_id},
+            url: '/group_questions/read_group_questions',
+            data:  {procedure_id:procedure_id},
             success: function (data) {
                 var indice_details = 0;
                 var field = "<form>";
@@ -62,44 +61,66 @@ function answerTransactionForm(transaction_id) {
                     var list_question = data[indice_details].questions;
                     var indice_details_question = 0;
 
-                    field +=  data[indice_details].title + "<hr>";
-                      for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question++){
+                    field += "<div class='form-group col-sm-12 col-md-12 col-lg-12' >" + data[indice_details].title + "</div>";
 
-                          field += "<div class='form-group'>" +
-                              "<label for='email'>" + list_question[indice_details_question].title +"</label>" +
-                              "<input type='email' class='form-control' id='email'>" +
-                              "</div>";
+
+                      field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                      for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question++){
+                            if(list_question[indice_details_question].type == "TEXT"){
+                              field += "<div class='form-group col-sm-6 col-md-6 col-lg-6'>" +
+                                  "<label>" + list_question[indice_details_question].title +"</label>" +
+                                  "<input type='textarea' class='form-control'>" +
+                                  "</div>";
+
+                            }/*else if(list_question[indice_details_question].type == "BOOLEAN"){
+                              field += "<div style='height:60px;' class='checkbox col-sm-5 col-md-5 col-lg-5'>" +
+                                 "<label><input type='checkbox' value=''>" + list_question[indice_details_question].title +"</label>" +
+                                 "</div>";
+
+                            }else if(list_question[indice_details_question].type == "NUMERIC"){
+
+                              field += "<div style='height:60px;' class=' col-sm-5 col-md-5 col-lg-5'>" +
+                                 "<label>" + list_question[indice_details_question].title +"</label>" +
+                                 "<input class='form-control' type='number' id=''>" +
+                                 "</div>";
+                            }*/
 
                       }
-                }
+                    field += "</div>";
+                    field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                      for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question++){
+                            if(list_question[indice_details_question].type == "BOOLEAN"){
+                              field += "<div class='checkbox col-sm-3 col-md-3 col-lg-3'>" +
+                                 "<label><input type='checkbox' value=''>" + list_question[indice_details_question].title +"</label>" +
+                                 "</div>";
+                            }
+                      }
+                       field += "</div>";
+field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                      for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question++){
+                            if(list_question[indice_details_question].type == "NUMERIC"){
+                              field += "<div class='form-group col-sm-4 col-md-4 col-lg-4'>" +
+                                  "<label>" + list_question[indice_details_question].title +"</label>" +
+                                  "<input type='number' class='form-control'>" +
+                                  "</div>";
+                            }
+                      }
+field += "</div>";
 
-                 field += "<button type='submit' class='btn btn-default'>Salvar Formulario</button>";
+                  }
+              //   field += "<div class='form-group'><button type='submit' class='btn btn-default'>Salvar Formulario</button></div>";
+
+
+                 field += "<div class='modal-footer'><button type='submit' class='btn btn-primary'>Salvar Alterações</button></div>";
+
+
                  field += "</form>";
                 var jfield = $(field);
-                $('.form_modal_23443').empty();  // Limpa os dados da tabela atual */
-                $('.form_modal_23443').append(jfield);  // atualizar a tabela com os novos registro */
+                $('.form_modal_response').empty();  // Limpa os dados da tabela atual */
+                $('.form_modal_response').append(jfield);  // atualizar a tabela com os novos registro */
             }
         });
 
 
-
-
-
-
-
-
-
-/*
-    $("#modal-form").empty();
-
-
-    $("#modal-form").append('<div class="row col-sm-5 col-md-5 col-lg-5"><input type="text" name="mytext[]"/></div>');
-
-
-
-
-    $("#modal-form").append("<input type=\"radio\" />" + transaction_id);
-
-    $("#modal-form").append("<input type=\"checkbox\" /> test");*/
 
 }

@@ -180,7 +180,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <a href="#"
-                                                                                           onclick="answerTransactionForm('{{$transaction->id}}')"
+                                                                                           onclick="answerTransactionForm('{{$transaction->procedure->id}}')"
                                                                                            data-toggle="modal"
                                                                                            data-target="#modalAsnwerForm">
 
@@ -327,4 +327,3 @@
     @include('transaction.components.modal_asnwer_form')
     </body>
 @endsection
-
