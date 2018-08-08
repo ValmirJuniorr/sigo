@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\Util\ValidationException;
 use App\Models\GroupQuestion;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class GroupQuestionController extends Controller
         try{
             $this->groupQuestion->title = $request->input('name');
             $this->groupQuestion->procedure_id = $request->input('procedure_id');
-            $this->groupQuestion->priority = $this->groupQuestion->get_last_priority($this->groupQuestion->procedure_id);
+            $this->groupQuestion->priority = GroupQuestion::get_last_priority($this->groupQuestion->procedure_id);
             $this->groupQuestion->create($this->groupQuestion);
             return back();
         }catch (ValidationException $e){
@@ -65,5 +66,10 @@ class GroupQuestionController extends Controller
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());
         }
+    }
+
+    public function readAllGroupQuestionsWithQuestions(Request $request){
+        $procedure_id = $request->input('procedure_id');
+        return response()->json(GroupQuestion::read_by_procedure_with_questions($procedure_id),200);
     }
 }

@@ -556,6 +556,9 @@ Route::get('/report/resume_result_expense_transaction', 'ReportController@resume
 
 Route::get('/procedure/get_procedure_by_category', 'ProcedureController@get_procedure_by_category');
 
+
+Route::get('/group_questions/read_group_questions','GroupQuestionController@readAllGroupQuestionsWithQuestions');
+
 Route::get('testeApp', function (){
 
     $group = new \App\Models\GroupQuestion();

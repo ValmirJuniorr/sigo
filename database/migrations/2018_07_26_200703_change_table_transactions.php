@@ -14,7 +14,7 @@ class ChangeTableTransactions extends Migration
     public function up()
     {
         Schema::table('transactions',function ($table){
-            $table->text('procedure_answers')->default(null);;
+            $table->text('procedure_answers')->nullable();
         });
     }
 

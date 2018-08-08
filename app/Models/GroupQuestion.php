@@ -37,8 +37,10 @@ class GroupQuestion extends Model
 
 
     /**
-    *@param $increment -1 to increase the priority +1 to decrease the priority
-    */
+     * @param $group_question
+     * @param $increment -1 to increase the priority +1 to decrease the priority
+     * @throws ValidationException
+     */
     public static function change_priority($group_question, $increment)
     {
         $group_question = GroupQuestion::findorFail($group_question->id);
@@ -68,14 +70,24 @@ class GroupQuestion extends Model
         return GroupQuestion::findorFail($object->id)->delete();
     }
 
-    public function read_by_procedure($procedure_id)
+    public static function read_by_procedure($procedure_id)
     {
         return GroupQuestion::where('procedure_id', $procedure_id)->orderBy('priority','ASC')->get();
     }
 
-    public function get_last_priority($procedure_id)
+    public static function read_by_procedure_with_questions($procedure_id)
     {
-        $groupQuestions = $this->read_by_procedure($procedure_id);
+        return GroupQuestion::where('procedure_id', $procedure_id)
+            ->with(['questions' => function ($query) {
+                $query->orderBy('priority', 'ASC');
+            }])
+            ->orderBy('priority','ASC')
+            ->get();
+    }
+
+    public static function get_last_priority($procedure_id)
+    {
+        $groupQuestions = GroupQuestion::read_by_procedure($procedure_id);
         return $groupQuestions->count() > 0 ? $groupQuestions->last()->priority+1: 1;
     }
 

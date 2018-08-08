@@ -92,7 +92,7 @@ class ProcedureController extends Controller
             $id = base64_decode($request->input('id'));
             $procedure = $this->procedure->read($id);
             $staff_categories = $this->staff_category->read_all()->get();
-            $groupQuestions = $this->group_question->read_by_procedure($id);
+            $groupQuestions = GroupQuestion::read_by_procedure_with_questions($id);
             return view('procedure.update')->with(
                 array(
                     'procedure' => $procedure,

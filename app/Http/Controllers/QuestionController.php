@@ -28,7 +28,7 @@ class QuestionController extends Controller
             $this->question->title = $request->input('title');
             $this->question->type = $request->input('type');
             $this->question->group_question_id = $request->input('group_question_id');
-            $this->question->priority = 1;
+            $this->question->priority = Question::get_last_priority($this->question->group_question_id);
             $this->question->create($this->question);
             return back();
         }catch (ValidationException $e){
@@ -52,10 +52,12 @@ class QuestionController extends Controller
 
     public function change_prioriry(Request $request)
     {
+//        return $request->input();
         try{
             $this->question->id = $request->input('question_id');
             $increment = $request->input('increment');            
-            return Question::change_priority($this->question,$increment);
+//            Question::change_priority($this->question,$increment);
+            Question::change_priority($this->question,$increment);
             return back();
         }catch (ValidationException $e){
             return back()->withErrors($e->getMessage());

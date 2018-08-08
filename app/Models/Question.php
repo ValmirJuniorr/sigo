@@ -6,6 +6,7 @@ use App\Models\Util\ValidatorModel;
 use App\Exceptions\Util\ValidationException;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Question extends Model
 {
     public function group_question(){
@@ -39,10 +40,11 @@ class Question extends Model
             $operator =  ">";
             $orderBy = "ASC";
         }
-        return $question;
-        return Question::where('group_question_id', $question->group_question_id)
+        //return $question;
+        $question_temp = Question::where('group_question_id', $question->group_question_id)
                                     ->orderBy('priority',$orderBy)
                                     ->where('priority' ,$operator,$question->priority)->first();
+
         if($question_temp == null){
             $msg  = ($operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
             throw new ValidationException($msg);
@@ -60,14 +62,14 @@ class Question extends Model
         return Question::findorFail($object->id)->delete();
     }
 
-    public function read_by_group_question($group_question_id)
+    public static function read_by_group_question($group_question_id)
     {
         return Question::where('group_question_id', $group_question_id)->orderBy('priority','ASC')->get();
     }
 
-    public function get_last_priority($group_question_id)
+    public static function get_last_priority($group_question_id)
     {
-        $questions =  $this->read_by_group_question($group_question_id);
+        $questions =  Question::read_by_group_question($group_question_id);
         $questions->count() >0 ? $questions->last()->priority+1: 1;
     }
 
