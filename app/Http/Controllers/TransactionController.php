@@ -94,6 +94,24 @@ class TransactionController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_result_procedure(Request $request){
+        try {
+           return $transaction_id = $request->input('transaction_id');
+            $answers = $request->input();
+            $transaction = new Transaction();
+            return $transaction->get_structure_transaction_result($answers);
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Transaction $transaction

@@ -180,7 +180,7 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <a href="#"
-                                                                                           onclick="answerTransactionForm('{{$transaction->procedure->id}}')"
+                                                                                           onclick="answerTransactionForm('{{$transaction->procedure->id}}',{{$transaction->id}})"
                                                                                            data-toggle="modal"
                                                                                            data-target="#modalAsnwerForm">
 

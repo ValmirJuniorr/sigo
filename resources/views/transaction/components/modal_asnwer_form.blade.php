@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document" style="width: 900px; margin: 80px auto;">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Informação da Transação</h4>
+                <h4 class="modal-title">Formulário de perguntas</h4>
             </div>
             <div class="modal-body">
                 <div class="form_modal_response"></div>

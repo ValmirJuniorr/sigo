@@ -349,6 +349,13 @@ Route::group(['middleware' => ['check_login']], function () {
             ]
         );
 
+        Route::get('/transaction/store_transaction_result_procedure',
+            [
+                'uses' => 'TransactionController@store_result_procedure',
+                'role' => Transaction::STORE_TRANSACTION
+            ]
+        );
+
 
         /*Staffs */
 
