@@ -138,6 +138,10 @@ class Transaction extends Model implements Crud
 
     }
 
+    public function show_transaction($object_id){
+        return Transaction::where('activated',true)->where('id',$object_id)->first();
+    }
+
     public function read_of_customer_with_all_relation($customer_id, $arguments = [])
     {
         $transactions = Transaction::where('activated', true)
@@ -293,7 +297,7 @@ class Transaction extends Model implements Crud
     }
 
 
-    public function get_structure_transaction_result($answers){
+    public function structure_transaction_result($transaction_id,$answers){
         $rowQuestion = array();
         $dataQuestion = new Collection();
         foreach ($answers as $key => $answer){
@@ -306,10 +310,11 @@ class Transaction extends Model implements Crud
             $rowQuestion['group_question_id'] = $question->group_question_id;
             $dataQuestion->push($rowQuestion);
             unset($rowQuestion);
-        }
-      return $data = $this->setStrucutureGroup($dataQuestion->groupBy('group_question_id'));
-
-
+          }
+       $data = $this->setStrucutureGroup($dataQuestion->groupBy('group_question_id'));
+       $transaction = Transaction::findOrFail($transaction_id);
+      $transaction->procedure_answers = $data;
+      return $transaction->save();
     }
 
 

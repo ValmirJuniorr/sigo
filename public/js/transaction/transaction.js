@@ -52,11 +52,11 @@ function answerTransactionForm(procedure_id,transaction_id) {
         $.ajax({
             type: 'GET',
             url: '/group_questions/read_group_questions',
-            data:  {procedure_id:procedure_id},
+            data:  {procedure_id:procedure_id,transaction_id:transaction_id},
             success: function (data) {
                 var indice_details = 0;
                 var field = "<form method='get' action='/transaction/store_transaction_result_procedure'>";
-               // var field = "{{Form::open(array('action' => array('OrderController@create','id'=>$orderProdutions->id)))}}";
+                field += "<input type='hidden' value="+transaction_id+" name='transaction_id'>";
                 for(indice_details = 0; indice_details < data.length; indice_details++) {
                     var list_question = data[indice_details].questions;
                     var indice_details_question = 0;
@@ -68,7 +68,7 @@ function answerTransactionForm(procedure_id,transaction_id) {
                             if(list_question[indice_details_question].type == "TEXT"){
                               field += "<div class='card-body form-group col-sm-6 col-md-6 col-lg-6'>" +
                                   "<p>" + list_question[indice_details_question].title +"</p>" +
-                                  "<input type='textarea' name="+list_question[indice_details_question].id+" class='form-control'>" +
+                                  "<input type='textarea'  name="+list_question[indice_details_question].id+" class='form-control' value= '"+list_question[indice_details_question].answer+"'>" +
                                   "</div>";
                             }
                       }
@@ -78,7 +78,7 @@ function answerTransactionForm(procedure_id,transaction_id) {
                         if(list_question[indice_details_question_numeric].type == "NUMERIC"){
                             field += "<div class='form-group col-sm-2 col-md-2 col-lg-2'>" +
                                 "<p>" + list_question[indice_details_question_numeric].title +"</p>" +
-                                "<input type='number' name="+list_question[indice_details_question_numeric].id+" class='form-control'>" +
+                                "<input type='number' name="+list_question[indice_details_question_numeric].id+" class='form-control' value= '"+list_question[indice_details_question_numeric].answer+"'>" +
                                 "</div>";
                         }
                      }
@@ -87,8 +87,7 @@ function answerTransactionForm(procedure_id,transaction_id) {
                      for(indice_details_question_checkbox = 0; indice_details_question_checkbox < list_question.length; indice_details_question_checkbox ++){
                         if(list_question[indice_details_question_checkbox].type == "BOOLEAN"){
                             field += "<div class='col-sm-2 col-md-2 col-lg-2'>" +
-                                "<p><input type='checkbox' name="+list_question[indice_details_question_checkbox].id+" value='' style='margin:4px 5px'>" + list_question[indice_details_question_checkbox].title +"</p>" +
-                                "</div>";
+                                "<input type='checkbox' name="+list_question[indice_details_question_checkbox].id+ '[]'  +" style='margin:4px 5px'>" + list_question[indice_details_question_checkbox].title + "</div>";
                           }
                         }
                     field += "</div>";
@@ -100,7 +99,4 @@ function answerTransactionForm(procedure_id,transaction_id) {
                 $('.form_modal_response').append(jfield); // atualizar a tabela com os novos registro */
             }
         });
-
-
-
 }

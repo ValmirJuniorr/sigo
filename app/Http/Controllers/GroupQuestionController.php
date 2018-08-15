@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Util\ValidationException;
+use App\Model\Transaction;
 use App\Models\GroupQuestion;
 use Illuminate\Http\Request;
 
@@ -69,7 +70,19 @@ class GroupQuestionController extends Controller
     }
 
     public function readAllGroupQuestionsWithQuestions(Request $request){
-        $procedure_id = $request->input('procedure_id');
-        return response()->json(GroupQuestion::read_by_procedure_with_questions($procedure_id),200);
+        try{
+            $procedure_id = $request->input('procedure_id');
+            $transaction_id = $request->input('transaction_id');
+            $transaction = new Transaction();
+            $transaction_show = $transaction->show_transaction($transaction_id);
+              if(!empty($transaction_show->procedure_answers)){
+                return response()->json(json_decode($transaction_show->procedure_answers),200);
+               }else{
+               return response()->json(GroupQuestion::read_by_procedure_with_questions($procedure_id),200);
+              }
+
+        }catch (ValidationException $e){
+            return back()->withErrors($e->getMessage());
+        }
     }
 }

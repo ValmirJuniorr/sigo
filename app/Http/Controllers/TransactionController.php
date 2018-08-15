@@ -101,10 +101,11 @@ class TransactionController extends Controller
      */
     public function store_result_procedure(Request $request){
         try {
-           return $transaction_id = $request->input('transaction_id');
-            $answers = $request->input();
+            $transaction_id = $request->input('transaction_id');
+            $request->request->remove('transaction_id');
+           return $answers = $request->input();
             $transaction = new Transaction();
-            return $transaction->get_structure_transaction_result($answers);
+            return $transaction->structure_transaction_result($transaction_id,$answers);
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage());
         }
