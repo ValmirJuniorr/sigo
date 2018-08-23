@@ -220,10 +220,11 @@
                                                                             <th>Procedimento</th>
                                                                             <th>Valor</th>
                                                                             <th>Responsável</th>
-                                                                            <th>Situação</th>
                                                                             <th>Status</th>
-                                                                            <th>Excluir</th>
+                                                                            <th>Situação</th>
                                                                             <th>Editar</th>
+                                                                            <th>Excluir</th>
+                                                                            <th>Formulário</th>
                                                                             <th>Imprimir</th>
                                                                         </tr>
                                                                         </thead>
@@ -268,25 +269,38 @@
                                                                                     </td>
                                                                                 @endif
                                                                                 @if(!$transaction->paid or $transaction->transactionStatus->name == \App\Models\Util\Constants::TRANSACTION_STATUS_WARNING)
-                                                                                <td>
-                                                                                    <a title="Remover"
-                                                                                       data-toggle="tooltip"
-                                                                                       href="{{action("TransactionController@delete_transaction", ['id' => $transaction->id])}}"
-                                                                                       onclick="return confirm('Deseja realmente excluir a transação?')">
-                                                                                        <i class="fa fa-trash-o"
-                                                                                           style="font-size: 20px;"></i></a>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <a href="#"
-                                                                                       onclick="updateTransaction('{{$transaction->id}}')"
-                                                                                       data-toggle="modal"
-                                                                                       data-target="#modalTransaction">
-                                                                                        <i title="Editar"
-                                                                                           data-toggle="tooltip"
-                                                                                           class="fa fa-pencil"
-                                                                                           style="font-size: 20px;"></i></a>
-                                                                                </td>
+                                                                                    <td>
+                                                                                        <a href="#"
+                                                                                           onclick="updateTransaction('{{$transaction->id}}')"
+                                                                                           data-toggle="modal"
+                                                                                           data-target="#modalTransaction">
+                                                                                            <i title="Editar"
+                                                                                               data-toggle="tooltip"
+                                                                                               class="fa fa-pencil"
+                                                                                               style="font-size: 20px;"></i></a>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a href="{{action("TransactionController@delete_transaction", ['id' => $transaction->id])}}"
+                                                                                           onclick="return confirm('Deseja realmente excluir a transação?')">
+                                                                                            <i title="Remover"
+                                                                                               data-toggle="tooltip"
+                                                                                               class="fa fa-trash-o"
+                                                                                               style="font-size: 20px;"></i></a>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a href="#"
+                                                                                           onclick="answerTransactionForm('{{$transaction->procedure->id}}','{{$transaction->id}}')"
+                                                                                           data-toggle="modal"
+                                                                                           data-target="#modalAsnwerForm">
+
+                                                                                            <i title="Formulário"
+                                                                                               data-toggle="tooltip"
+                                                                                               class="fa fa-wpforms"
+                                                                                               style="font-size: 20px;"></i>
+                                                                                        </a>
+                                                                                    </td>
                                                                                 @else
+                                                                                    <td>-</td>
                                                                                     <td>-</td>
                                                                                     <td>-</td>
                                                                                 @endif

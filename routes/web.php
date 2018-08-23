@@ -349,6 +349,13 @@ Route::group(['middleware' => ['check_login']], function () {
             ]
         );
 
+        Route::get('/transaction/form_answer_page',
+            [
+                'uses' => 'TransactionController@page_transaction_receipt_form_answer',
+                'role' => Transaction::READ_TRANSACTION
+            ]
+        );
+
         Route::get('/transaction/store_transaction_result_procedure',
             [
                 'uses' => 'TransactionController@store_result_procedure',
@@ -563,8 +570,9 @@ Route::get('/report/resume_result_expense_transaction', 'ReportController@resume
 
 Route::get('/procedure/get_procedure_by_category', 'ProcedureController@get_procedure_by_category');
 
-
 Route::get('/group_questions/read_group_questions','GroupQuestionController@readAllGroupQuestionsWithQuestions');
+
+
 
 Route::get('testeApp', function (){
 

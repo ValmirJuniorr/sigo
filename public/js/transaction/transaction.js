@@ -66,9 +66,10 @@ function answerTransactionForm(procedure_id,transaction_id) {
                     field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
                       for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question ++){
                             if(list_question[indice_details_question].type == "TEXT"){
+                                var value_text =  (list_question[indice_details_question].answer) == null ? '' : list_question[indice_details_question].answer;
                               field += "<div class='card-body form-group col-sm-6 col-md-6 col-lg-6'>" +
                                   "<p>" + list_question[indice_details_question].title +"</p>" +
-                                  "<input type='textarea'  name="+list_question[indice_details_question].id+" class='form-control' value= '"+list_question[indice_details_question].answer+"'>" +
+                                  "<input type='textarea'  name="+list_question[indice_details_question].id+" class='form-control' value= '"+value_text+"'>" +
                                   "</div>";
                             }
                       }
@@ -76,9 +77,10 @@ function answerTransactionForm(procedure_id,transaction_id) {
                     field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
                     for(indice_details_question_numeric = 0; indice_details_question_numeric < list_question.length; indice_details_question_numeric ++){
                         if(list_question[indice_details_question_numeric].type == "NUMERIC"){
+                            var value_number =  (list_question[indice_details_question_numeric].answer) == null ? '' : list_question[indice_details_question_numeric].answer;
                             field += "<div class='form-group col-sm-2 col-md-2 col-lg-2'>" +
                                 "<p>" + list_question[indice_details_question_numeric].title +"</p>" +
-                                "<input type='number' name="+list_question[indice_details_question_numeric].id+" class='form-control' value= '"+list_question[indice_details_question_numeric].answer+"'>" +
+                                "<input type='number' name="+list_question[indice_details_question_numeric].id+" class='form-control' value= '"+value_number+"'>" +
                                 "</div>";
                         }
                      }
@@ -99,4 +101,37 @@ function answerTransactionForm(procedure_id,transaction_id) {
                 $('.form_modal_response').append(jfield); // atualizar a tabela com os novos registro */
             }
         });
+}
+
+
+function answerTransactionFormCustomer(procedure_id,transaction_id) {
+    $.ajax({
+        type: 'GET',
+        url: '/group_questions/read_group_questions',
+        data:  {procedure_id:procedure_id,transaction_id:transaction_id},
+        success: function (data) {
+            var indice_details = 0;
+            var field;
+             for(indice_details = 0; indice_details < data.length; indice_details++) {
+                var list_question = data[indice_details].questions;
+                var indice_details_question = 0;
+                field = "<div class='col-sm-12 col-md-12 col-lg-12' style='margin-top: 15px; margin-bottom: 20px; border-top: 1px solid #ccc'><p style='font-size: 1.3em;'>" + data[indice_details].title + "</p></div>";
+                field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question ++){
+
+                    if(list_question[indice_details_question].type == "TEXT"){
+                        var value_text =  (list_question[indice_details_question].answer) == null ? '' : list_question[indice_details_question].answer;
+                        field += "<div class='card-body form-group col-sm-6 col-md-6 col-lg-6'>" +
+                            "<p>" + list_question[indice_details_question].title +"</p>" +
+                            "<input type='textarea'  name="+list_question[indice_details_question].id+" class='form-control' value= '"+value_text+"'>" +
+                            "</div>";
+                    }
+                }
+                field += "</div>";
+            }
+            var jfield = $(field);
+            $('.form_modal_response_customer').empty(); // Limpa os dados da tabela atual */
+            $('.form_modal_response_customer').append(jfield); // atualizar a tabela com os novos registro */
+        }
+    });
 }

@@ -138,7 +138,7 @@
                                                 <i title="{{$title}}" data-toggle="tooltip" class="{{$class}}" ></i>
                                                 <!--i class="fa fa-money bg-blue"></i-->
                                                 <div class="timeline-item">
-                                                    <span class="date"><i class="fa fa-calendar"></i> {{$transaction->transaction_date}}</span>
+                                                    <span class="date"><i class="fa fa-calendar"></i> {{\App\Models\Util\Calendar::invert_date_to_dd_mm_yyyy($transaction->transaction_date)}}</span>
 
                                                     <h3 class="timeline-header">
                                                         @php
@@ -149,19 +149,24 @@
                                                                 $classIcon = "fa fa-check-circle bg-green icon-circle";
                                                             }
                                                         @endphp
-
                                                         <i title="{{$transaction->transactionStatus->name}}" data-toggle="tooltip" class="{{$classIcon}}" ></i>
 
                                                         <a href="{{action('TransactionController@page_transaction_receipt_print',['id' => $transaction->id])}}"
                                                            target="_blank">
-                                                            {{$transaction->procedure->name}}  {{show_money_mask($transaction->price)}}
+                                                            {{$transaction->procedure->name}}
                                                         </a></h3>
-
                                                     <div class="timeline-body">
+                                                        <a href="#"
+                                                           onclick="answerTransactionFormCustomer('{{$transaction->procedure->id}}','{{$transaction->id}}')"
+                                                           data-toggle="modal"
+                                                           data-target="#modalAsnwerForm">
+                                                            <i title="Formulário"
+                                                               data-toggle="tooltip"
+                                                               class="fa fa-wpforms"> Formulário</i>
 
-                                                        {{$transaction->description}}
+                                                        </a>
+
                                                     </div>
-
                                                     <!--div-- class="timeline-footer">
                                                         <a
                                                            class="btn btn-primary btn-xs" target="_blank">Detalhar</a>
@@ -170,8 +175,6 @@
                                             </li>
                                             <!-- END timeline item -->
                                         @endforeach
-                                        ...
-
                                     </ul>
                                 </div>
 
@@ -185,6 +188,7 @@
             </div>
         </section>
     </div>
+    @include('transaction.components.modal_asnwer_form_customer')
     </body>
 @endsection
 

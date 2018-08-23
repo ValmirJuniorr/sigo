@@ -103,9 +103,14 @@ class TransactionController extends Controller
         try {
             $transaction_id = $request->input('transaction_id');
             $request->request->remove('transaction_id');
-           return $answers = $request->input();
+            $answers = $request->input();
             $transaction = new Transaction();
-            return $transaction->structure_transaction_result($transaction_id,$answers);
+            $transaction_create = $transaction->structure_transaction_result($transaction_id,$answers);
+            if($transaction_create){
+                return redirect()->action('TransactionController@show', ['id' => base64_encode(Transaction::findOrFail($transaction_id)->customer_id)]);
+            }else{
+                return back()->withErrors("Erro Interno");
+            }
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage());
         }
@@ -218,6 +223,21 @@ class TransactionController extends Controller
 
         return view('transaction.page_transaction_receipt')->with(array('transaction' => $transaction));
     }
+
+    public function page_transaction_receipt_form_answer(Request $request){
+
+        try {
+           $id = $request->input('id');
+
+           $transaction = $this->transaction->read_one($id);
+
+           return view('transaction.page_transaction_receipt')->with(array('transaction' => $transaction));
+         } catch (\Exception $e) {
+           return back()->withErrors($e->getMessage());
+       }
+    }
+
+
 
     public function read_group_transaction_by_category(Request $request)
     {

@@ -58,7 +58,7 @@ class Customer extends Model implements Crud
      */
     private $attribute = array(
         'name' => 'Nome',
-        'address' => 'Endereço',
+      /*  'address' => 'Endereço',
         'email' => 'E-mai',
         'cpf' => 'CPF',
         'rg' => 'RG',
@@ -69,7 +69,7 @@ class Customer extends Model implements Crud
         'neighborhood' => 'Bairro',
         'cep' => 'Cep',
         'uf' => 'UF',
-        'gender' => 'Gênero',
+        'gender' => 'Gênero',*/
     );
 
     public function read_all($arguments = [])
@@ -138,7 +138,7 @@ class Customer extends Model implements Crud
     {
         return [
             'name' => $object->name,
-            'address' => $object->address,
+           /* 'address' => $object->address,
             'email' => $object->email,
             'cpf' => $object->cpf,
             'rg' => $object->rg,
@@ -149,7 +149,7 @@ class Customer extends Model implements Crud
             'city' => $object->city,
             'cep' => $object->cep,
             'uf' => $object->uf,
-            'gender' => $object->gender,
+            'gender' => $object->gender,*/
         ];
     }
 
@@ -157,7 +157,7 @@ class Customer extends Model implements Crud
     {
         return [
             'name' => 'required',
-            'address' => 'required|max:200|min:0',
+           /* 'address' => 'required|max:200|min:0',
             'email' => '',
             'cpf' => 'required|unique:customers,cpf,'.$id,
             'rg' => 'required|unique:customers,rg,'.$id,
@@ -168,7 +168,7 @@ class Customer extends Model implements Crud
             'neighborhood' => '',
             'cep' => 'required',
             'uf' => '',
-            'gender' => 'required',
+            'gender' => 'required',*/
         ];
     }
 }
