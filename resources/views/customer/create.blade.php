@@ -32,15 +32,15 @@
                                                 {{  Form::text('name', $value = null,array('class' => 'form-control', 'required', 'placeholder' => 'Nome'))}}
                                             </div>
                                             <div class="form-group has-feedback col-sm-12 col-md-6 col-lg-6">
-                                                {{  Form::label('address', '* Endereço') }}
+                                                {{  Form::label('address', 'Endereço') }}
                                                 {{  Form::text('address', $value = null,array('class' => 'form-control', 'placeholder' => 'Endereço'))}}
                                             </div>
                                             <div class="form-group has-feedback col-sm-12 col-md-3 col-lg-3">
-                                                {{  Form::label('cpf', '* CPF') }}
+                                                {{  Form::label('cpf', 'CPF') }}
                                                 {{  Form::text('cpf', $value = null,array('class' => 'form-control','id' => 'cpf', 'placeholder' => 'CPF'))}}
                                             </div>
                                             <div class="form-group has-feedback col-sm-12 col-md-3 col-lg-3">
-                                                {{  Form::label('rg', '* RG') }}
+                                                {{  Form::label('rg', 'RG') }}
                                                 {{  Form::text('rg', $value = null,array('class' => 'form-control', 'placeholder' => 'RG'))}}
                                             </div>
                                             <div class="form-group has-feedback col-sm-12 col-md-3 col-lg-3">
@@ -56,7 +56,7 @@
                                                 {{  Form::text('email', $value = null,array('class' => 'form-control', 'placeholder' => 'Email'))}}
                                             </div>
                                             <div class="form-group date col-sm-12 col-md-3 col-lg-3">
-                                                {{  Form::label('birth_date', '* Data de Nascimento') }}
+                                                {{  Form::label('birth_date', 'Data de Nascimento') }}
                                                 <div class="input-group date">
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group has-feedback col-sm-12 col-md-3 col-lg-3">
-                                                {{  Form::label('city', '* Cidade') }}
+                                                {{  Form::label('city', 'Cidade') }}
                                                 {{  Form::text('city', $value = null,array('class' => 'form-control', 'placeholder' => 'Cidade'))}}
                                             </div>
                                             <div class="form-group has-feedback col-sm-12 col-md-3 col-lg-3">
@@ -80,7 +80,7 @@
                                                @include('components.select_ufs')
                                             </div>
                                             <div class="form-group col-sm-12 col-md-3 col-lg-3">
-                                                <label>* Género</label>
+                                                <label>Género</label>
                                                 <select name="gender" class="form-control">
                                                     <option disabled selected>Género</option>
                                                     <option value="0">F</option>

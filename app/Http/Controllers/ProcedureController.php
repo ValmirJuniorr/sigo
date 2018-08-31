@@ -6,6 +6,7 @@ use App\Exceptions\Util\ValidationException;
 use App\Model\Procedure;
 use App\Models\Customer;
 use App\Models\StaffCategory;
+use App\Models\GroupQuestion;
 use App\Models\Util\Constants;
 use App\Models\Util\Currency;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class ProcedureController extends Controller
 
     private $procedure;
     private $staff_category;
+    private $group_question;
 
     /**
      * ProcedureController constructor.
@@ -24,6 +26,7 @@ class ProcedureController extends Controller
     {
         $this->procedure = new Procedure();
         $this->staff_category = new StaffCategory();
+        $this->group_question = new GroupQuestion();
     }
 
     /**
@@ -89,7 +92,14 @@ class ProcedureController extends Controller
             $id = base64_decode($request->input('id'));
             $procedure = $this->procedure->read($id);
             $staff_categories = $this->staff_category->read_all()->get();
-            return view('procedure.update')->with(array('procedure' => $procedure,'staff_categories' => $staff_categories));
+            $groupQuestions = GroupQuestion::read_by_procedure_with_questions($id);
+            return view('procedure.update')->with(
+                array(
+                    'procedure' => $procedure,
+                    'staff_categories' => $staff_categories,
+                    'groupQuestions' => $groupQuestions
+                )
+            );
         }catch (\Exception $e){
             return back()->withErrors($e->getMessage());
         }

@@ -171,6 +171,46 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Procedure::UPDATE_PROCEDURE
             ]);
 
+        Route::post('/groupquestion/store',
+            ['uses' => 'GroupQuestionController@store',
+                'role' => Procedure::STORE_PROCEDURE
+            ]);
+
+        Route::post('/groupquestion/edit',
+            ['uses' => 'GroupQuestionController@edit',
+                'role' => Procedure::UPDATE_PROCEDURE
+            ]);
+
+        Route::get('/groupquestion/remove',
+            ['uses' => 'GroupQuestionController@remove',
+                'role' => Procedure::DELETE_PROCEDURE
+            ]);
+
+        Route::get('/groupquestion/change_priority',
+            ['uses' => 'GroupQuestionController@change_prioriry',
+                'role' => Procedure::STORE_PROCEDURE
+            ]);
+
+        Route::post('/question/store',
+            ['uses' => 'QuestionController@store',
+                'role' => Procedure::STORE_PROCEDURE
+            ]);
+
+        Route::get('/question/edit',
+            ['uses' => 'QuestionController@edit',
+                'role' => Procedure::UPDATE_PROCEDURE
+            ]);
+
+        Route::get('/question/remove',
+            ['uses' => 'QuestionController@remove',
+                'role' => Procedure::DELETE_PROCEDURE
+            ]);
+
+        Route::get('/question/change_priority',
+            ['uses' => 'QuestionController@change_prioriry',
+                'role' => Procedure::STORE_PROCEDURE
+            ]);
+
         /* Despesas */
 
         Route::get('/expense/index',
@@ -309,6 +349,20 @@ Route::group(['middleware' => ['check_login']], function () {
             ]
         );
 
+        Route::get('/transaction/form_answer_page',
+            [
+                'uses' => 'TransactionController@page_transaction_receipt_form_answer',
+                'role' => Transaction::READ_TRANSACTION
+            ]
+        );
+
+        Route::get('/transaction/store_transaction_result_procedure',
+            [
+                'uses' => 'TransactionController@store_result_procedure',
+                'role' => Transaction::STORE_TRANSACTION
+            ]
+        );
+
 
         /*Staffs */
 
@@ -384,14 +438,12 @@ Route::group(['middleware' => ['check_login']], function () {
             ]
         );
 
-
         Route::get('/staff_category/update_staff_category',
             [
                 'uses' => 'StaffCategoryController@update_staff_category',
                 'role' => StaffCategory::UPDATE_STAFF_CATEGORY
             ]
         );
-
 
         Route::post('/staff_category/update',
             [
@@ -443,7 +495,6 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => ExpenseCategory::UPDATE_EXPENSE_CATEGORY
             ]
         );
-
 
         /* Telas de Resumo de Receitas e despesas */
 
@@ -505,6 +556,11 @@ Route::get('/transaction/read_group_transaction_by_category', 'TransactionContro
 
 Route::get('/transaction/resume_data_to_stack_collumn', 'TransactionController@resume_data_to_stack_collumn');
 
+Route::get('/report/transaction/dashboard/transaction_by_day','TransactionController@dashboard_report_total_transaction_by_day');
+
+Route::get('/report/transaction/dashboard/transaction_by_category','TransactionController@dashboard_report_trasaction_by_category');
+
+Route::get('/report/transaction/dashboard/transaction_stack_collumn','TransactionController@dashboard_report_trasaction_stack_collumn');
 
 Route::get('/report/expense_transactions', 'ReportController@resume_expense_transactions');
 
@@ -513,3 +569,17 @@ Route::get('/report/report_line_chart_expenses_transactions', 'ReportController@
 Route::get('/report/resume_result_expense_transaction', 'ReportController@resume_result_expense_transaction');
 
 Route::get('/procedure/get_procedure_by_category', 'ProcedureController@get_procedure_by_category');
+
+Route::get('/group_questions/read_group_questions','GroupQuestionController@readAllGroupQuestionsWithQuestions');
+
+
+
+Route::get('testeApp', function (){
+
+    $group = new \App\Models\GroupQuestion();
+
+    $g = $group::find(1);
+
+    return $g::with('questions')->get();
+
+});

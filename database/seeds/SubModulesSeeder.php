@@ -104,7 +104,7 @@ class SubModulesSeeder extends Seeder
                 'id' => 7,
                 'name' => 'Categoria de Funcionários',
                 'url' => 'StaffCategoryController@read_staff_category',
-                'icon' => 'fa fa-sticky-note',
+                'icon' => 'fa fa-clipboard',
                 'module_id' => 4,
                 'sub_module_category_id' => 1
             ]
@@ -118,7 +118,7 @@ class SubModulesSeeder extends Seeder
                 'id' => 8,
                 'name' => 'Centro de Custos',
                 'url' => 'ExpenseCategoryController@read_expense_category',
-                'icon' => 'fa fa-sticky-note',
+                'icon' => 'fa fa-clipboard',
                 'module_id' => 4,
                 'sub_module_category_id' => 1
             ]

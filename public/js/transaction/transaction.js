@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 function updateTransaction(transaction_id) {
     $.ajax({
         type: 'GET',
@@ -25,8 +13,8 @@ function updateTransaction(transaction_id) {
             $('#description_transaction').val(data.description);
         }
     });
-
 }
+
 
 function update_select_by_id(id_first,url,id_second){
     var $selectDropdown =
@@ -55,6 +43,119 @@ function update_select_by_id(id_first,url,id_second){
         },
         error: function (data) {
             $selectDropdown.material_select();
+        }
+    });
+}
+
+
+function answerTransactionForm(procedure_id,transaction_id) {
+        $.ajax({
+            type: 'GET',
+            url: '/group_questions/read_group_questions',
+            data:  {procedure_id:procedure_id,transaction_id:transaction_id},
+            success: function (data) {
+                var indice_details = 0;
+                var field = "<form method='get' action='/transaction/store_transaction_result_procedure'>";
+                field += "<input type='hidden' value="+transaction_id+" name='transaction_id'>";
+                for(indice_details = 0; indice_details < data.length; indice_details++) {
+                    var list_question = data[indice_details].questions;
+                    var indice_details_question = 0;
+                    var indice_details_question_numeric = 0;
+                    var indice_details_question_checkbox = 0;
+                    field += "<div class='col-sm-12 col-md-12 col-lg-12' style='margin-top: 15px; margin-bottom: 20px; border-top: 1px solid #ccc'><p style='font-size: 1.3em;'>" + data[indice_details].title + "</p></div>";
+                    field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                      for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question ++){
+                            if(list_question[indice_details_question].type == "TEXT"){
+                                var value_text =  (list_question[indice_details_question].answer) == null ? '' : list_question[indice_details_question].answer;
+                              field += "<div class='card-body form-group col-sm-6 col-md-6 col-lg-6'>" +
+                                  "<p>" + list_question[indice_details_question].title +"</p>" +
+                                  "<textarea rows='4' cols='50'  name="+list_question[indice_details_question].id+"> "+value_text+"</textarea>"+
+                                  //  "<input type='textarea'  name="+list_question[indice_details_question].id+" class='form-control' value= '"+value_text+"'>" +
+                                  "</div>";
+                            }
+                      }
+                    field += "</div>";
+                    field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                    for(indice_details_question_numeric = 0; indice_details_question_numeric < list_question.length; indice_details_question_numeric ++){
+                        if(list_question[indice_details_question_numeric].type == "NUMERIC"){
+                            var value_number =  (list_question[indice_details_question_numeric].answer) == null ? '' : list_question[indice_details_question_numeric].answer;
+                            field += "<div class='form-group col-sm-2 col-md-2 col-lg-2'>" +
+                                "<p>" + list_question[indice_details_question_numeric].title +"</p>" +
+                                "<input type='number' name="+list_question[indice_details_question_numeric].id+" class='form-control' value= '"+value_number+"'>" +
+                                "</div>";
+                        }
+                     }
+                     field += "</div>";
+                     field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                     for(indice_details_question_checkbox = 0; indice_details_question_checkbox < list_question.length; indice_details_question_checkbox ++){
+                        if(list_question[indice_details_question_checkbox].type == "BOOLEAN"){
+                            field += "<div class='col-sm-2 col-md-2 col-lg-2'>" +
+                                "<input type='checkbox' name="+list_question[indice_details_question_checkbox].id+ '[]'  +" style='margin:4px 5px'>" + list_question[indice_details_question_checkbox].title + "</div>";
+                          }
+                        }
+                    field += "</div>";
+                   }
+                field += "<div class='modal-footer' style='border-top: none'><button type='submit' class='btn btn-primary'>Salvar Alterações</button></div>";
+                field += "</form>";
+                var jfield = $(field);
+                $('.form_modal_response').empty(); // Limpa os dados da tabela atual */
+                $('.form_modal_response').append(jfield); // atualizar a tabela com os novos registro */
+            }
+        });
+}
+
+
+function answerTransactionFormCustomer(procedure_id,transaction_id) {
+    $.ajax({
+        type: 'GET',
+        url: '/group_questions/read_group_questions',
+        data:  {procedure_id:procedure_id,transaction_id:transaction_id},
+        success: function (data) {
+            var indice_details = 0;
+            var field;
+            for(indice_details = 0; indice_details < data.length; indice_details++) {
+                var list_question = data[indice_details].questions;
+                var indice_details_question = 0;
+                var indice_details_question_numeric = 0;
+                var indice_details_question_checkbox = 0;
+                field = "<div class='col-sm-12 col-md-12 col-lg-12' style='margin-top: 15px; margin-bottom: 20px; border-top: 1px solid #ccc'><p style='font-size: 1.3em;'>" + data[indice_details].title + "</p></div>";
+                field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                for(indice_details_question = 0; indice_details_question < list_question.length; indice_details_question ++){
+                    if(list_question[indice_details_question].type == "TEXT"){
+                        var value_text =  (list_question[indice_details_question].answer) == null ? '' : list_question[indice_details_question].answer;
+                        field += "<div class='card-body form-group col-sm-6 col-md-6 col-lg-6'>" +
+                            "<p>" + list_question[indice_details_question].title +"</p>" +
+                            "<textarea rows='4' cols='50'  name="+list_question[indice_details_question].id+"> "+value_text+"</textarea>"+
+                           // "<input type='textarea' disabled style=''  name="+list_question[indice_details_question].id+" class='form-control ' value= '"+value_text+"'>" +
+                            "</div>";
+                    }
+                }
+                field += "</div>";
+                field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                for(indice_details_question_numeric = 0; indice_details_question_numeric < list_question.length; indice_details_question_numeric ++){
+                    if(list_question[indice_details_question_numeric].type == "NUMERIC"){
+                        var value_number =  (list_question[indice_details_question_numeric].answer) == null ? '' : list_question[indice_details_question_numeric].answer;
+                        field += "<div class='form-group col-sm-2 col-md-2 col-lg-2'>" +
+                            "<p>" + list_question[indice_details_question_numeric].title +"</p>" +
+                            "<input type='number' disabled name="+list_question[indice_details_question_numeric].id+" class='form-control' value= '"+value_number+"'>" +
+                            "</div>";
+                    }
+                }
+                field += "</div>";
+                field += "<div class='col-sm-12 col-md-12 col-lg-12'>";
+                for(indice_details_question_checkbox = 0; indice_details_question_checkbox < list_question.length; indice_details_question_checkbox ++){
+                    if(list_question[indice_details_question_checkbox].type == "BOOLEAN"){
+                        field += "<div class='col-sm-2 col-md-2 col-lg-2'>" +
+                            "<input type='checkbox' name="+list_question[indice_details_question_checkbox].id+ '[]'  +" style='margin:4px 5px'>" + list_question[indice_details_question_checkbox].title + "</div>";
+                    }
+                }
+                field += "</div>";
+            }
+            field += "<div class='modal-footer' style='border-top: none'></div>";
+
+            var jfield = $(field);
+            $('.form_modal_response_customer').empty(); // Limpa os dados da tabela atual */
+            $('.form_modal_response_customer').append(jfield); // atualizar a tabela com os novos registro */
         }
     });
 }

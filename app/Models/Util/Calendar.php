@@ -19,6 +19,11 @@ class Calendar
             return Carbon::parse($date)->format('Y-m-d');
     }
 
+    public static function invert_date_to_dd_mm_yyyy($date){
+        if(!empty($date))
+            return Carbon::parse($date)->format('d-m-Y');
+    }
+
 
     public static function before_today($date){
         return $date < Carbon::now()->format('Y-m-d');

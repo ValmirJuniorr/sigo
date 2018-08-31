@@ -224,8 +224,6 @@ class ExpenseController extends Controller
                 return $query->whereIn('expense_category_id',$expense_category_ids);
             })->get();
 
-
-
         $total_price = $expenses->sum('price');
         return array("expenses"=>$expenses,"total_price" =>$total_price);
     }

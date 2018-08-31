@@ -96,6 +96,7 @@ class User extends Authenticatable implements Crud
         $user->name = $object->name;
         $user->username = $object->username;
         $user->email = $object->email;
+        $user->password = $object->password;
         if(ValidatorModel::validation($this->inputs($user),$this->rules($user->id),$this->attribute)){
             if($user->save()){
                 if($arguments['roles'])

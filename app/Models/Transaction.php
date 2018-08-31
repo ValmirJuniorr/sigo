@@ -3,6 +3,8 @@
 namespace App\Model;
 
 use App\Models\Customer;
+use App\Models\GroupQuestion;
+use App\Models\Question;
 use App\Models\Staff;
 use App\Models\TransactionStatus;
 use App\Models\Util\Constants;
@@ -66,6 +68,8 @@ class Transaction extends Model implements Crud
 
 
     const STORE_TRANSACTION = 'store_transaction';
+
+    const STORE_TRANSACTION_PROCEDURE = 'store_transaction_procedure';
 
     const UPDATE_TRANSACTION = 'update_transaction';
 
@@ -133,6 +137,11 @@ class Transaction extends Model implements Crud
         return $transaction_show;
 
     }
+
+    public function show_transaction($object_id){
+        return Transaction::where('activated',true)->where('id',$object_id)->first();
+    }
+
     public function read_of_customer_with_all_relation($customer_id, $arguments = [])
     {
         $transactions = Transaction::where('activated', true)
@@ -147,7 +156,6 @@ class Transaction extends Model implements Crud
         $transaction = Transaction::where('activated', true)->where('id', $object_id)->first();
         return $transaction;
     }
-
 
     public function read_of_customer($customer_id, $arguments = [])
     {
@@ -200,7 +208,7 @@ class Transaction extends Model implements Crud
             });
     }
 
-    public function read_group_transaction_by_cateogry($start_date, $end_date, $procedure_ids = null, $status_id = null,$staff_id = null)
+    public function read_group_transaction_by_category($start_date, $end_date, $procedure_ids = null, $status_id = null, $staff_id = null)
     {
         $result = $this->filter_transactions($start_date, $end_date, $procedure_ids,$status_id,$staff_id);
 
@@ -288,6 +296,39 @@ class Transaction extends Model implements Crud
 
     }
 
+
+    public function structure_transaction_result($transaction_id,$answers){
+        $rowQuestion = array();
+        $dataQuestion = new Collection();
+        foreach ($answers as $key => $answer){
+            $question = Question::findOrFail($key);
+            $rowQuestion['id'] = $question->id;
+            $rowQuestion['title'] = $question->title;
+            $rowQuestion['answer'] = $answer;
+            $rowQuestion['type'] = $question->type;
+            $rowQuestion['priority'] = $question->priority;
+            $rowQuestion['group_question_id'] = $question->group_question_id;
+            $dataQuestion->push($rowQuestion);
+            unset($rowQuestion);
+          }
+       $data = $this->setStrucutureGroup($dataQuestion->groupBy('group_question_id'));
+       $transaction = Transaction::findOrFail($transaction_id);
+      $transaction->procedure_answers = $data;
+      return $transaction->save();
+    }
+
+
+    public function setStrucutureGroup($questions){
+        $groupQuestion = new Collection();
+        foreach ($questions as $key => $value){
+            $group = GroupQuestion::findOrFail($key);
+            $group->questions = $value;
+            $groupQuestion->push($group);
+        }
+        return $groupQuestion;
+    }
+
+
     public function inputs($object)
     {
         return [
@@ -329,4 +370,5 @@ class Transaction extends Model implements Crud
             'description' => '',
         ];
     }
+
 }

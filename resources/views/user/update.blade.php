@@ -58,11 +58,7 @@
                                     </div>
                                     <div class="form-group has-feedback">
                                         {{ Form::label('password', 'Senha') }}
-                                        {{ Form::password('password',array('class' => 'form-control', 'disabled' => 'disabled', 'placeholder' => 'Senha')) }}
-                                    </div>
-                                    <div class="form-group has-feedback">
-                                        {{ Form::label('password-confirm', 'Confirmação de Senha') }}
-                                        {{ Form::password('password-confirm',array('class' => 'form-control', 'disabled' => 'disabled','placeholder' => 'Confirmação de Senha')) }}
+                                        {{ Form::password('password',array('class' => 'form-control', 'placeholder' => 'Senha')) }}
                                     </div>
                                     <div class="form-group has-feedback">
                                         {{  Form::label('username', 'Nome de Usuário') }}

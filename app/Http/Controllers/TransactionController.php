@@ -10,6 +10,7 @@ use App\Models\Util\Calendar;
 use App\Models\Staff;
 use App\Models\StaffCategory;
 use App\Models\Util\Constants;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Exceptions\Util\ValidationException;
 
@@ -22,6 +23,8 @@ class TransactionController extends Controller
     private $staff;
     private $customer;
     private $procedure;
+    const DASHBOARD_NUMBER_DAYS = 55;
+
 
 
     /**
@@ -89,6 +92,30 @@ class TransactionController extends Controller
             return back()->withErrors($e->getMessage());
         }
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_result_procedure(Request $request){
+        try {
+            $transaction_id = $request->input('transaction_id');
+            $request->request->remove('transaction_id');
+            $answers = $request->input();
+            $transaction = new Transaction();
+            $transaction_create = $transaction->structure_transaction_result($transaction_id,$answers);
+            if($transaction_create){
+                return redirect()->action('TransactionController@show', ['id' => base64_encode(Transaction::findOrFail($transaction_id)->customer_id)]);
+            }else{
+                return back()->withErrors("Erro Interno");
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
+    }
+
 
     /**
      * Display the specified resource.
@@ -188,7 +215,6 @@ class TransactionController extends Controller
         }
     }
 
-
     public function page_transaction_receipt_print(Request $request){
 
         $id = $request->input('id');
@@ -198,6 +224,21 @@ class TransactionController extends Controller
         return view('transaction.page_transaction_receipt')->with(array('transaction' => $transaction));
     }
 
+    public function page_transaction_receipt_form_answer(Request $request){
+
+        try {
+           $id = $request->input('id');
+
+           $transaction = $this->transaction->read_one($id);
+
+           return view('transaction.page_transaction_receipt')->with(array('transaction' => $transaction));
+         } catch (\Exception $e) {
+           return back()->withErrors($e->getMessage());
+       }
+    }
+
+
+
     public function read_group_transaction_by_category(Request $request)
     {
         $start_date = Calendar::invert_date_to_yyyy_mm_dd($request->input('start_date'));
@@ -205,7 +246,7 @@ class TransactionController extends Controller
         $status_id = $request->input('status_id');
         $staff_id = $request->input('staff_id');
 
-        return $this->transaction->read_group_transaction_by_cateogry($start_date, $end_date, null, $status_id, $staff_id);
+        return $this->transaction->read_group_transaction_by_category($start_date, $end_date, null, $status_id, $staff_id);
     }
 
     public function resume_data_to_stack_collumn(Request $request)
@@ -241,5 +282,29 @@ class TransactionController extends Controller
         $procedure_ids = $request->input('procedure_ids');
         return $this->transaction->resume_transactions_report($start_date, $end_date, $procedure_ids, $status_id, $staff_id);
     }
+
+    public function dashboard_report_total_transaction_by_day(Request $request){
+        $start_date = Carbon::now()->subDays(self::DASHBOARD_NUMBER_DAYS)->format('Y-m-d');
+        $today = Carbon::now()->format('Y-m-d');
+
+        $transactions_total = $this->transaction->transactions_by_day_total_value($start_date,$today);
+
+        $transactions_parcial = $this->transaction->transactions_by_day_parcial_value($start_date,$today);
+
+        return array('transactions_total' => $transactions_total, 'transactions_parcial' => $transactions_parcial);
+    }
+
+    public function dashboard_report_trasaction_by_category(){
+        $start_date = Carbon::now()->subDays(self::DASHBOARD_NUMBER_DAYS)->format('Y-m-d');
+        $today = Carbon::now()->format('Y-m-d');
+        return $this->transaction->read_group_transaction_by_category($start_date, $today);
+    }
+
+    public function dashboard_report_trasaction_stack_collumn(){
+        $start_date = Carbon::now()->subDays(self::DASHBOARD_NUMBER_DAYS)->format('Y-m-d');
+        $today = Carbon::now()->format('Y-m-d');
+        return $this->transaction->resume_data_to_stack_collumn($start_date, $today);
+    }
+
 
 }

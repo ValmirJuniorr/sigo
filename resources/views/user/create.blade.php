@@ -63,10 +63,6 @@
                                         {{ Form::password('password',array('class' => 'form-control', 'required' => "required",'placeholder' => 'Senha')) }}
                                     </div>
                                     <div class="form-group has-feedback">
-                                        {{ Form::label('password-confirm', 'Confirmação de Senha') }}
-                                        {{ Form::password('password-confirm',array('class' => 'form-control', 'required' => "required",'placeholder' => 'Confirmação de Senha')) }}
-                                    </div>
-                                    <div class="form-group has-feedback">
                                         {{  Form::label('username', 'Nome de Usuário') }}
                                         {{  Form::text('username', $value = null,array('class' => 'form-control', 'placeholder' => 'Nome de Usuário'))}}
                                     </div>

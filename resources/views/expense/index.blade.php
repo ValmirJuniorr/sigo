@@ -21,7 +21,7 @@
                             <div class="box-tools pull-right">
                                 @role('store_expense')
                                 <a href="{{ action('ExpenseController@create_expense') }}" class="btn btn-success btn-sm ad-click-event">
-                                    Cadastrar de Despesa
+                                    {{Lang::get('crud.new')}}
                                 </a>
                                 @endrole
                                 <a href="{{ action('ExpenseController@index_routine_expenses') }}" class="btn btn-primary btn-sm ad-click-event">
