@@ -8,6 +8,9 @@
             <div class="modal-body">
                 <div class="form_modal_response_customer"></div>
             </div>
+            <div class="modal-footer">
+                <button style="background-color: #0b58a2; color:white;" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
         </div>
     </div>
 </div>

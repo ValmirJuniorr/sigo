@@ -99,7 +99,7 @@
                                                     {{  Form::label('name', '* Tipo') }}
                                                     <select name="type" id="type_question" class="form-control">
                                                         <option value="TEXT">Texto</option>
-                                                        <option value="BOOLEAN">Lógico</option>
+                                                       <!-- <option value="BOOLEAN">Lógico</option> -->
                                                         <option value="NUMERIC">Numérico</option>
                                                     </select>
                                                 </div>
@@ -111,7 +111,6 @@
                                             </div>
                                             {{ Form::close() }}
                                             <!-- Fim do Form-->
-
                                         </div>
                                     </div>
                                 </div>

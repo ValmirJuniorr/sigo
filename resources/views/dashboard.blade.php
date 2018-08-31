@@ -15,11 +15,7 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title">Dashboard</h3>
-
-
                             <small>Últimos 15 dias</small>
-
-
                         </div>
                         <div class="box-body">
 
