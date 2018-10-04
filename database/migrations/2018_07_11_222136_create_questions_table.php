@@ -17,7 +17,6 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('type');
-            $table->integer('priority');
             $table->integer('group_question_id')->unsigned();
             $table->foreign('group_question_id')->references('id')->on('group_questions')->onDelete('cascade');
             $table->timestamps();

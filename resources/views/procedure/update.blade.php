@@ -57,7 +57,6 @@
                                                     <th style="width: 150px">Tipo</th>
                                                     <th style="width: 40px">Editar</th>
                                                     <th style="width: 40px">Excluir</th>
-                                                    <th style="width: 40px">Prioridade</th>
                                                 </tr>
                                                 @foreach($groupQuestion->questions as $question)
                                                     <tr data-id="1">
@@ -74,14 +73,6 @@
                                                             href="{{action("QuestionController@remove",['id' => $question->id])}}">
                                                                 <i class="fa fa-remove" style="margin-left: 15px;"></i>
                                                             </a>
-                                                        </td>
-                                                        <td>
-                                                            <a class="btn-box-tool" style="margin-left: 5px;" data-toggle="tooltip" title="" data-original-title="Subir"
-                                                            href="{{action("QuestionController@change_prioriry",['question_id' => $question->id, 'increment' => 1])}}">
-                                                                <i class="fa fa-arrow-up"></i></a>
-                                                            <a type="button" class="btn-box-tool" data-toggle="tooltip" title="" data-original-title="Descer"
-                                                            href="{{action("QuestionController@change_prioriry",['question_id' => $question->id, 'increment' => -1])}}">
-                                                                <i class="fa fa-arrow-down"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
