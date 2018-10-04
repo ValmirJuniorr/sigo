@@ -94,7 +94,6 @@ class Question extends Model
     {
         return [
             'title' => 'required',
-            'priority' => 'required',
             'type' => 'required',
             'group_question_id' => 'required'
         ];
