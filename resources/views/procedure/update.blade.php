@@ -93,7 +93,8 @@
                                                     {{  Form::label('name', '* Tipo') }}
                                                     <select name="type" id="type_question" class="form-control">
                                                         <option value="TEXT">Texto</option>
-                                                       <!-- <option value="BOOLEAN">Lógico</option> -->
+                                                        <option value="BIGTEXT">Texto Grande</option>
+                                                        <option value="BOOLEAN">Lógico</option>
                                                         <option value="NUMERIC">Numérico</option>
                                                     </select>
                                                 </div>
@@ -144,8 +145,8 @@
 
     $('table tr').editable({
       dropdowns: {
-        type: ['Texto', 'Lógico','Numérico'],
-        response: ['TEXT','BOOLEAN','NUMERIC']
+        type: ['Texto', 'Lógico','Numérico','Texto Grande'],
+        response: ['TEXT','BOOLEAN','NUMERIC','BIGTEXT']
       },
       edit: function(values) {
         $(".edit i", this)
