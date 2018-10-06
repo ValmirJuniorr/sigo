@@ -176,7 +176,7 @@ Route::group(['middleware' => ['check_login']], function () {
                 'role' => Procedure::STORE_PROCEDURE
             ]);
 
-        Route::post('/groupquestion/edit',
+        Route::get('/groupquestion/edit',
             ['uses' => 'GroupQuestionController@edit',
                 'role' => Procedure::UPDATE_PROCEDURE
             ]);

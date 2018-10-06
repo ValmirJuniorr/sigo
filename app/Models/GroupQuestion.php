@@ -78,9 +78,7 @@ class GroupQuestion extends Model
     public static function read_by_procedure_with_questions($procedure_id)
     {
         return GroupQuestion::where('procedure_id', $procedure_id)
-            ->with(['questions' => function ($query) {
-                $query->orderBy('priority', 'ASC');
-            }])
+            ->with('questions')
             ->orderBy('priority','ASC')
             ->get();
     }

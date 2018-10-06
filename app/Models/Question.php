@@ -7,8 +7,13 @@ use App\Exceptions\Util\ValidationException;
 use Illuminate\Database\Eloquent\Model;
 
 
+/**
+ * @property string title
+ * @property int group_question_id
+ */
 class Question extends Model
 {
+
     public function group_question(){
         return $this->belongsTo(GroupQuestion::class);
     }
@@ -30,31 +35,31 @@ class Question extends Model
         }
     }
 
-    public static function change_priority($question, $increment)
-    {
-        $question = Question::findorFail($question->id);
-        if($increment == 1){
-            $operator =  "<";
-            $orderBy = "DESC";
-        }else{
-            $operator =  ">";
-            $orderBy = "ASC";
-        }
-        //return $question;
-        $question_temp = Question::where('group_question_id', $question->group_question_id)
-                                    ->orderBy('priority',$orderBy)
-                                    ->where('priority' ,$operator,$question->priority)->first();
-
-        if($question_temp == null){
-            $msg  = ($operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
-            throw new ValidationException($msg);
-        }
-        $aux = $question->priority;
-        $question->priority = $question_temp->priority;
-        $question_temp->priority = $aux;
-        $question->save();
-        $question_temp->save();
-    }
+//    public static function change_priority($question, $increment)
+//    {
+//        $question = Question::findorFail($question->id);
+//        if($increment == 1){
+//            $operator =  "<";
+//            $orderBy = "DESC";
+//        }else{
+//            $operator =  ">";
+//            $orderBy = "ASC";
+//        }
+//        //return $question;
+//        $question_temp = Question::where('group_question_id', $question->group_question_id)
+//                                    ->orderBy('priority',$orderBy)
+//                                    ->where('priority' ,$operator,$question->priority)->first();
+//
+//        if($question_temp == null){
+//            $msg  = ($operator == '<' ) ? "Não pode aumentar a prioridade do  primeiro" : "Não pode diminuir a prioridade do  ultimo";
+//            throw new ValidationException($msg);
+//        }
+//        $aux = $question->priority;
+//        $question->priority = $question_temp->priority;
+//        $question_temp->priority = $aux;
+//        $question->save();
+//        $question_temp->save();
+//    }
 
 
     public function remove($object, $arguments = [])
@@ -62,21 +67,20 @@ class Question extends Model
         return Question::findorFail($object->id)->delete();
     }
 
-    public static function read_by_group_question($group_question_id)
-    {
-        return Question::where('group_question_id', $group_question_id)->orderBy('priority','ASC')->get();
-    }
-
-    public static function get_last_priority($group_question_id)
-    {
-        $questions =  Question::read_by_group_question($group_question_id);
-        return $questions->count() >0 ? $questions->last()->priority+1: 1;
-    }
+//    public static function read_by_group_question($group_question_id)
+//    {
+//        return Question::where('group_question_id', $group_question_id)->orderBy('priority','ASC')->get();
+//    }
+//
+//    public static function get_last_priority($group_question_id)
+//    {
+//        $questions =  Question::read_by_group_question($group_question_id);
+//        return $questions->count() >0 ? $questions->last()->priority+1: 1;
+//    }
 
     private $attribute = array(
         'title' => 'Título',
         'type' => 'Tipo',
-        'priority' => 'Prioridade',
         'group_question_id' => 'Cabeçalho'
     );
 
@@ -84,7 +88,6 @@ class Question extends Model
     {
         return [
             'title' => $object->title,
-            'priority' => $object->priority,
             'type' => $object->type,
             'group_question_id' => $object->group_question_id
         ];
@@ -94,7 +97,6 @@ class Question extends Model
     {
         return [
             'title' => 'required',
-            'priority' => 'required',
             'type' => 'required',
             'group_question_id' => 'required'
         ];
