@@ -5,7 +5,7 @@ namespace App\Models\Expensive;
 use App\Models\Util\Crud;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Util\ValidatorModel;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ExpenseCategory extends Model implements Crud
 {
@@ -19,6 +19,10 @@ class ExpenseCategory extends Model implements Crud
     const READ_EXPENSE_CATEGORY = 'read_expense_category';
 
     const LOG_NAME = "Categoria de Gastos";
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     protected $fillable = array(
         'name'
@@ -43,8 +47,7 @@ class ExpenseCategory extends Model implements Crud
     public function remove($object_id, $arguments = [])
     {
         $expense_category = ExpenseCategory::findOrFail($object_id);
-        $expense_category->actvated = true;
-        return $expense_category->save();
+        return $expense_category->delete();
     }
 
     public function edit($object, $arguments = [])
@@ -60,7 +63,7 @@ class ExpenseCategory extends Model implements Crud
 
     public function read($object_id, $arguments = [])
     {
-        return ExpenseCategory::where('activated',true)->where('id',$object_id)->first();
+        return ExpenseCategory::where('id',$object_id)->first();
     }
 
     public function read_all($arguments = [])

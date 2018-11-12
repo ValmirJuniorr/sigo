@@ -38,7 +38,7 @@
             }
 
             tr:nth-child(even) {
-                background-color: #dddddd;
+                background-color: #eee;
             }
 
             .asign {
@@ -46,24 +46,21 @@
                 margin-top: 100px;
             }
         </style>
-
-
     </head>
 
     <body>
 
-        <img src="{{asset('img/teeth.png')}}" alt="" class="" style="margin-top: 15px;" width="72px" height="72px"/>
+        <img src="{{asset('img/teeth.png')}}" alt="" class="" style="margin-top: 5px;" width="auto" height="72px"/>
 
         <span style=" position: absolute; margin-left: 20px;">
-            <h1>SIG - Sistema Integrado de Gestão</h1>
-            <h3>Empresa : Clinica de Olhos Dr. José Lima. CNPJ | CPF: 165.186.0001-57</h3>
-            <h3>Endereço : Rua. Dr João Leito de Barreto, 350, Centro, Crato - CE</h3>
-            <h3>Telefone : (88) 9.9775-7248 | (88) 9.9775-7248</h3>
+            <h1>SIG - CLINIFÁCIL CARIRI</h1>
+            <h3>Endereço : Av. Ailton Gomes, 1010, Franciscanos, Juazeiro do Norte - CE</h3>
+            <h3>Telefone : (88) 3587-2001 | (88) 9.9996-0353</h3>
         </span>
 
         <hr>
 
-        <table>
+        <table style="width: 50%; position: absolute">
 
             <tr>
                 <th>Data</th>
@@ -78,11 +75,11 @@
                 <th>{{show_money_mask($transaction->price)}}</th>
             </tr>
             <tr>
-                <th>Responsável</th>
+                <th>Médico</th>
                 <th>{{$transaction->staff->name or "-"}}</th>
             </tr>
             <tr>
-                <th>Descrição</th>
+                <th>Tipo de Cadastro</th>
                 <th>{{$transaction->description or "-"}}</th>
             </tr>
             <tr>
@@ -95,6 +92,43 @@
             </tr>
 
         </table>
+
+        <table style="width: 50%; margin-left: 50%">
+
+            <tr>
+                <th>Paciente</th>
+                <th>{{$transaction->customer->name or "-"}}</th>
+            </tr>
+            
+            <tr>
+                <th>Telefone</th>
+                <th>{{$transaction->customer->phone or "-"}}</th>
+            </tr>
+            <tr>
+                <th>RG</th>
+                <th>{{$transaction->customer->rg or "-"}}</th>
+            </tr>
+            <tr>
+                <th>CPF</th>
+                <th>{{$transaction->customer->cpf or "-"}}</th>
+            </tr>
+            <tr>
+                <th>Nascimento</th>
+                <th>{{date('d-m-Y', strtotime($transaction->customer->birth_date))}}</th>
+            </tr>
+            
+            <tr>
+                <th>Sexo</th>
+                <th>{{$transaction->customer->gender == 1 ? 'Masculino' : 'Feminino'}}</th>
+            </tr>
+
+            <tr>
+                <th>Endereço</th>
+                <th>{{$transaction->customer->fullAddress() }}</th>
+            </tr>
+
+        </table>
+
 
         <hr>
 

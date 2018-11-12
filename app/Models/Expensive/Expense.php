@@ -10,12 +10,13 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+
 class Expense extends Model implements Crud
 {
 
     const STORE_EXPENSE = 'store_expense';
 
-    const UPDATE_EXPENSE = '';
+    const UPDATE_EXPENSE = 'update_expense';
 
     const DELETE_EXPENSE = 'delete_expense';
 
@@ -62,7 +63,7 @@ class Expense extends Model implements Crud
     );
 
     public function expense_category(){
-        return $this->belongsTo(ExpenseCategory::class);
+        return $this->belongsTo(ExpenseCategory::class)->withTrashed();
     }
 
     public function create($object, $arguments = [])
