@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+
+  db:
+    container_name: sigo-db
+    image: mysql:8.0
+    restart: unless-stopped
+    tty: true
+    environment:
+      MYSQL_DATABASE: sigo
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - sigo
+
+  web:
+    container_name: sigo-web
+    image: bitnami/laravel:8.6.10 
+    working_dir: /sigo
+    volumes:
+      - .:/sigo      
+    command: /bin/sh
+    tty: true
+    ports:
+      - "8000:8000"
+    networks:
+      - sigo
+
+volumes:
+  bundle_data:
+  db_data:
+
+networks:
+  sigo:
+    driver: bridge
