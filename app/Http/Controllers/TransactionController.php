@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Procedure;
-use App\Model\Transaction;
+use App\Models\Procedure;
+use App\Models\Transaction;
 use App\Models\Customer;
 use App\Models\TransactionStatus;
 use App\Models\Util\Calendar;

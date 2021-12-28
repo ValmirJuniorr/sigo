@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Model\Procedure;
+use App\Models\Procedure;
 use App\Models\Util\ValidatorModel;
 use App\Exceptions\Util\ValidationException;
 use Illuminate\Database\Eloquent\Model;

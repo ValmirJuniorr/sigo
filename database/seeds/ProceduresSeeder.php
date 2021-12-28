@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\Procedure;
+use App\Models\Procedure;
 use Illuminate\Database\Seeder;
 
 class ProceduresSeeder extends Seeder

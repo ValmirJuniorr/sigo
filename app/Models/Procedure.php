@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use App\Models\StaffCategory;
 use App\Models\Util\Crud;
@@ -20,8 +20,8 @@ class Procedure extends Model implements Crud
 
     private $attribute = array(
         'name' => 'Nome',
-        'price' => 'Preço',
-        'cost_price' =>'Preço de Custo',
+        'price' => 'Preï¿½o',
+        'cost_price' =>'Preï¿½o de Custo',
         'procedure_time' => 'Tempo',
         'staff_category_id' => 'Categoria'
     );

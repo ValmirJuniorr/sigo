@@ -12,8 +12,8 @@
 */
 
 
-use App\Model\Procedure;
-use App\Model\Transaction;
+use App\Models\Procedure;
+use App\Models\Transaction;
 use App\Models\Customer;
 use App\Models\Expensive\Expense;
 use App\Models\Expensive\ExpenseCategory;

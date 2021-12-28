@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\Transaction;
+use App\Models\Transaction;
 use App\Models\TransactionStatus;
 use Illuminate\Database\Seeder;
 

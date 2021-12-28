@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Util\ValidationException;
-use App\Model\Procedure;
+use App\Models\Procedure;
 use App\Models\Customer;
 use App\Models\StaffCategory;
 use App\Models\GroupQuestion;
@@ -83,7 +83,7 @@ class ProcedureController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Procedure  $procedure
+     * @param  \App\Models\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
     public function show_procedure(Request $request)
@@ -108,7 +108,7 @@ class ProcedureController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Procedure  $procedure
+     * @param  \App\Models\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
     public function edit_procedure(Request $request)
@@ -130,7 +130,7 @@ class ProcedureController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Procedure  $procedure
+     * @param  \App\Models\Procedure  $procedure
      * @return \Illuminate\Http\Response
      */
     public function delete_procedure(Request $request)

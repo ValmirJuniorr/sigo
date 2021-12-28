@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Util\ValidationException;
-use App\Model\Transaction;
+use App\Models\Transaction;
 use App\Models\GroupQuestion;
 use Illuminate\Http\Request;
 

@@ -31,7 +31,6 @@ services:
       - sigo
 
 volumes:
-  bundle_data:
   db_data:
 
 networks:

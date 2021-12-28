@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Model\Transaction;
+use App\Models\Transaction;
 use App\Models\Util\Crud;
 use Illuminate\Database\Eloquent\Model;
 
